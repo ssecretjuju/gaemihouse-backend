@@ -1,4 +1,4 @@
-package com.ohgiraffers.springbootrestapi.exception.dto;
+package secretjuju.gaemihouse.exception.dto;
 
 import org.springframework.http.HttpStatus;
 

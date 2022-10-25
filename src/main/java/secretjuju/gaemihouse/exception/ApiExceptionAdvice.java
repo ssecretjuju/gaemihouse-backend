@@ -1,6 +1,6 @@
 package secretjuju.gaemihouse.exception;
 
-import com.ohgiraffers.springbootrestapi.exception.dto.ApiExceptionDTO;
+import secretjuju.gaemihouse.exception.dto.ApiExceptionDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
