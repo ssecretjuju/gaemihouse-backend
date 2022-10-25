@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="secretjuju.gaemihouse.member.dao.MemberMapper">
+
+    <select id="selectByMemberId" resultType="MemberDTO">
+        SELECT
+            MEMBER_CODE
+             ,  MEMBER_ID
+             ,  MEMBER_NAME
+             ,  MEMBER_PASSWORD
+             ,  MEMBER_ROLE
+             ,  MEMBER_EMAIL
+        FROM TBL_MEMBER
+        WHERE MEMBER_ID = #{memberId}
+    </select>
+
+    <select id="selectByEmail" resultType="MemberDTO">
+        SELECT
+                MEMBER_CODE
+             ,  MEMBER_ID
+             ,  MEMBER_NAME
+             ,  MEMBER_PASSWORD
+             ,  MEMBER_ROLE
+             ,  MEMBER_EMAIL
+        FROM TBL_MEMBER
+        WHERE MEMBER_EMAIL = #{email}
+    </select>
+
+    <select id="findByEmail" resultType="MemberDTO">
+        SELECT
+                MEMBER_CODE
+             ,  MEMBER_ID
+             ,  MEMBER_NAME
+             ,  MEMBER_PASSWORD
+             ,  MEMBER_ROLE
+             ,  MEMBER_EMAIL
+        FROM TBL_MEMBER
+        WHERE MEMBER_EMAIL = #{email}
+    </select>
+
+    <select id="findByMemberId" resultType="MemberDTO">
+        SELECT
+                MEMBER_CODE
+             ,  MEMBER_ID
+             ,  MEMBER_NAME
+             ,  MEMBER_PASSWORD
+             ,  MEMBER_ROLE
+             ,  MEMBER_EMAIL
+        FROM TBL_MEMBER
+        WHERE MEMBER_ID = #{memberId}
+    </select>
+
+    <insert id="insertMember" parameterType="MemberDTO">
+        INSERT INTO TBL_MEMBER
+        (
+            MEMBER_CODE,
+            MEMBER_ID,
+            MEMBER_NAME,
+            MEMBER_PASSWORD,
+            MEMBER_EMAIL
+        )
+        VALUES
+        (
+            SEQ_MEMBER_CODE.NEXTVAL,
+            #{memberId},
+            #{memberName},
+            #{memberPassword},
+            #{memberEmail}
+        )
+    </insert>
+
+</mapper>
