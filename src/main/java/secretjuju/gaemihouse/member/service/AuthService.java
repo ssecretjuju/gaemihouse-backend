@@ -31,9 +31,9 @@ public class AuthService {
         log.info("[AuthService] Signup Start ===================================");
         log.info("[AuthService] MemberRequestDto {}", MemberDTO);
 
-        if(memberMapper.selectByEmail(MemberDTO.getMemberEmail()) != null) {
-            log.info("[AuthService] 이메일이 중복됩니다.");
-            throw new DuplicatedUsernameException("이메일이 중복됩니다.");
+        if(memberMapper.selectById(MemberDTO.getMemberId()) != null) {
+            log.info("[AuthService] 아이디가 중복됩니다.");
+            throw new DuplicatedUsernameException("아이디가 중복됩니다.");
         }
 
         log.info("[AuthService] Member Signup Start ==============================");

@@ -23,7 +23,7 @@ import java.util.Optional;
 @Mapper
 public interface MemberMapper {
 
-    MemberDTO selectByEmail(String email);
+    MemberDTO selectById(String id);
 
     int insertMember(MemberDTO member);
 
