@@ -44,7 +44,6 @@
             MEMBER_ID,
             MEMBER_NAME,
             MEMBER_PASSWORD,
-            MEMBER_ROLE,
             MEMBER_SEX,
             MEMBER_BIRTH,
             STOCK_FIRM,
@@ -52,27 +51,22 @@
             APP_KEY,
             APP_SECRET,
             APP_KEY_EXPIRESIN,
-            TERMS_AGREEMENT_YN,
-            REPORT_COUNT,
-            BLACKLIST_YN
+            TERMS_AGREEMENT_YN
         )
         VALUES
         (
-            #{memberCode},
+            SEQ_MEMBER_CODE.NEXTVAL,
             #{memberId},
             #{memberName},
             #{memberPassword},
-            #{memberRole},
             #{memberSex},
             #{memberBirth},
             #{stockFirm},
             #{accountNum},
             #{appKey},
             #{appSecret},
-            #{appKeyExpiresin},
-            #{termsAgreementYn},
-            #{reportCount},
-            #{blacklistYn}
+            SYSDATE + 365,
+            #{termsAgreementYn}
         )
     </insert>
 
