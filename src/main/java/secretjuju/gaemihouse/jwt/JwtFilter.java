@@ -3,7 +3,7 @@ package secretjuju.gaemihouse.jwt;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ohgiraffers.springbootrestapi.exception.dto.ApiExceptionDTO;
+import secretjuju.gaemihouse.exception.dto.ApiExceptionDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
