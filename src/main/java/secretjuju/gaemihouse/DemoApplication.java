@@ -1,4 +1,4 @@
-package src.main.java.secretjuju.gaemihouse.demo;
+package secretjuju.gaemihouse;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
