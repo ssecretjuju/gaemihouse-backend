@@ -12,6 +12,8 @@ import secretjuju.gaemihouse.member.dao.MemberMapper;
 import secretjuju.gaemihouse.member.dto.MemberDTO;
 import secretjuju.gaemihouse.member.dto.TokenDTO;
 
+
+
 @Service
 public class AuthService {
 
@@ -49,12 +51,11 @@ public class AuthService {
         return MemberDTO;
     }
 
-
     @Transactional
     public TokenDTO login(MemberDTO MemberDTO) {
         log.info("[AuthService] Login Start ===================================");
-        log.info("[AuthService] {}", MemberDTO);
 
+        System.out.println("[AuthService] {} ! ! "+ MemberDTO);
 
         // 1. 아이디 조회
         //findByMemberId
@@ -68,12 +69,11 @@ public class AuthService {
         }
 
         // 3. 토큰 발급
-        TokenDTO TokenDTO = tokenProvider.generateTokenDTO(member);
-        log.info("[AuthService] TokenDTO {}", TokenDTO);
+        TokenDTO tokenDTO = tokenProvider.generateTokenDTO(member);
+        System.out.println("[AuthService] TokenDTO {} ! ! " + tokenDTO);
 
         log.info("[AuthService] Login End ===================================");
 
-        return TokenDTO;
+        return tokenDTO;
     }
-
 }

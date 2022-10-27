@@ -28,6 +28,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         log.info("[CustomUserDetailsService] ===================================");
         log.info("[CustomUserDetailsService] loadUserByUsername {}", memberId);
 
+        System.out.println("UserDetails에 대한 설정을 진행 @ @ @");
+
         return mapper.findByMemberId(memberId)
                 .map(user -> addAuthorities(user))
                 .orElseThrow(() -> new UserNotFoundException(memberId + "> 찾을 수 없습니다."));

@@ -102,7 +102,7 @@ public class MemberDTO implements UserDetails {
     public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {this.authorities = authorities;}
     private Collection<? extends GrantedAuthority> authorities;
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {return null;}
+    public Collection<? extends GrantedAuthority> getAuthorities() {return this.authorities;}
     @Override
     public String getPassword() {return null;}
     @Override
