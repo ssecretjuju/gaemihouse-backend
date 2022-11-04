@@ -9,5 +9,5 @@ public interface AvatarRepository extends Repository<Avatar, Integer> {
 
     void save(Avatar avatar);
 
-//    void update(Avatar avatar);
+    void deleteByMemberCode(int memberCode);
 }
