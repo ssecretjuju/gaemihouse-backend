@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="secretjuju.gaemihouse.community.dao.CommunityMapper">
+    <select id="selectCommunityList" resultType="CommunityDTO">
+        SELECT *
+          FROM TBL_COMMUNITY
+    </select>
+
+    <insert id="insertCommunity" parameterType="CommunityDTO">
+        INSERT INTO TBL_COMMUNITY
+        VALUES
+        (
+         SEQ_COMMUNITY_CODE.NEXTVAL,
+         #{communityTitle},
+         #{communityContent},
+         SYSDATE,
+         #{memberCode},
+         #{shareholderRoomCode}
+        )
+    </insert>
+
+    <update id="updateCommunity">
+        UPDATE TBL_COMMUNITY
+           SET COMMUNITY_TITLE = #{communityTitle},
+               COMMUNITY_CONTENT = #{communityContent}
+         WHERE COMMUNITY_CODE = #{communityCode} AND MEMBER_CODE = #{memberCode}
+    </update>
+    
+    <delete id="deleteCommunity">
+        DELETE FROM TBL_COMMUNITY
+         WHERE COMMUNITY_CODE = #{communityCode}
+    </delete>
+</mapper>
