@@ -58,4 +58,26 @@ public class AvatarController {
                         insertResult));
     }
 
+    @PutMapping("/avatar")
+    public ResponseEntity<ResponseDTO> updateAvatarByMemberCode(@RequestBody Map<String, Object> requestBody) {
+
+        Avatar avatar = new Avatar((int) requestBody.get("avatarId"), (int) requestBody.get("memberCode"));
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+        boolean updateResult = avatarService.updateAvatarByMemberCode(avatar);
+
+        if (updateResult) {
+            return ResponseEntity
+                    .created(URI.create("/avatar"))
+                    .body(new ResponseDTO(HttpStatus.CREATED, "Update avatar successfully", true));
+
+        } else {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new ResponseDTO(HttpStatus.BAD_REQUEST, "Fail to update avatar", false));
+        }
+    }
+
 }
