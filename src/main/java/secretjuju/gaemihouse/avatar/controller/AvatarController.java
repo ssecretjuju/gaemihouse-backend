@@ -40,4 +40,22 @@ public class AvatarController {
                 .body(new ResponseDTO(HttpStatus.OK, "successful", avatarDTO));
     }
 
+    @PostMapping("/avatar")
+    public ResponseEntity<ResponseDTO> insertAvatarByMemberCode(@RequestBody Map<String, Object> requestBody) {
+
+        Avatar avatar = new Avatar((int) requestBody.get("avatarId"), (int) requestBody.get("memberCode"));
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+        boolean insertResult = avatarService.insertAvatarByMemberCode(avatar);
+
+
+        return ResponseEntity
+                .created(URI.create("/avatar"))
+                .body(new ResponseDTO(HttpStatus.CREATED,
+                        insertResult? "Generate avatar successfully" : "Already avatar exists",
+                        insertResult));
+    }
+
 }
