@@ -24,6 +24,15 @@ spring:
       static-locations: classpath:/productimgs/
   main:
     allow-circular-references: true
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+    generate-ddl: false
+    database: oracle
 
 # ??? ??? ??? ??? ? ??? ?? ??
 image:
@@ -51,3 +60,4 @@ mybatis:
 logging:
   level:
     root: info
+
