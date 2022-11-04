@@ -1,4 +1,4 @@
-package secretjuju.gaemihouse.config;
+package secretjuju.gaemihouse.configuration;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan(basePackages = "secretjuju.gaemihouse")
-public class BeanConfiguration {
+public class BeanConfig {
 
     @Bean
     public ModelMapper modelMapper() {
