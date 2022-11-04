@@ -80,4 +80,25 @@ public class AvatarController {
         }
     }
 
+    @DeleteMapping("/avatar")
+    public ResponseEntity<ResponseDTO> deleteAvatarByMemberCode(@RequestBody Map<String, Object> requestBody) {
+
+        Avatar avatar = new Avatar((int) requestBody.get("avatarId"), (int) requestBody.get("memberCode"));
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+        boolean deleteResult = avatarService.deleteAvatarByMemberCode(avatar);
+
+        if (deleteResult) {
+            return ResponseEntity
+                    .noContent()
+                    .build();
+
+        } else {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new ResponseDTO(HttpStatus.BAD_REQUEST, "Delete failed", false));
+        }
+    }
 }
