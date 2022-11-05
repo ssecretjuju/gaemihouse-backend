@@ -37,16 +37,16 @@ public class WorldService {
 
     public Object insertWorld(WorldDTO worldDTO) {
         int insertWorld = worldMapper.insertWorld(worldDTO);
-        return (insertWorld > 0) ? "공지사항 입력 성공!" : "공지사항 입력 실패 ㅜ";
+        return (insertWorld > 0) ? "월드 입력 성공!" : "월드 입력 실패 ㅜ";
     }
 
     public Object updateWorld(WorldDTO worldDTO) {
         int updateWorld = worldMapper.updateWorld(worldDTO);
-        return (updateWorld > 0) ? "공지사항 수정 성공!" : "공지사항 수정 실패 ㅜ";
+        return (updateWorld > 0) ? "월드 수정 성공!" : "월드 수정 실패 ㅜ";
     }
 
     public Object deleteWorld(WorldDTO worldDTO) {
         int deleteWorld = worldMapper.deleteWorld(worldDTO);
-        return (deleteWorld > 0) ? "공지사항 삭제 성공!" : "공지사항 삭제 실패 ㅠ";
+        return (deleteWorld > 0) ? "월드 삭제 성공!" : "월드 삭제 실패 ㅠ";
     }
 }

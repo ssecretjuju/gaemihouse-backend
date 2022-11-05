@@ -34,24 +34,24 @@ public class worldController {
 
     @GetMapping("/select")
     public ResponseEntity<ResponseDTO> worldList() {
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "공지사항 리스트 조회 성공", worldService.selectWorldList()));
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "월드 리스트 조회 성공", worldService.selectWorldList()));
     }
 
     @PostMapping("/insert")
     public ResponseEntity<ResponseDTO> insertWorld(@RequestBody WorldDTO worldDTO) {
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK,"공지사항 작성 성공", worldService.insertWorld(worldDTO)));
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK,"월드 작성 성공", worldService.insertWorld(worldDTO)));
 
     }
 
     @PostMapping("/update")
     public ResponseEntity<ResponseDTO> updateWorld(@RequestBody WorldDTO worldDTO) {
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK,"공지사항 수정 성공", worldService.updateWorld(worldDTO)));
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK,"월드 수정 성공", worldService.updateWorld(worldDTO)));
 
     }
 
     @PostMapping("/delete")
     public ResponseEntity<ResponseDTO> deleteWorld(@RequestBody WorldDTO worldDTO) {
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK,"공지사항 삭제 성공", worldService.deleteWorld(worldDTO)));
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK,"월드 삭제 성공", worldService.deleteWorld(worldDTO)));
 
     }
 
