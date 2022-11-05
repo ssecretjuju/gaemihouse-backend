@@ -1,6 +1,5 @@
 package secretjuju.gaemihouse.jwt;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import secretjuju.gaemihouse.member.dto.MemberDTO;
 import secretjuju.gaemihouse.member.dto.TokenDTO;
 import secretjuju.gaemihouse.exception.TokenException;
@@ -64,7 +63,7 @@ public class TokenProvider {
                 .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
 
-        return new TokenDTO(BEARER_TYPE, member.getMemberName(), accessToken, accessTokenExpiresIn.getTime());
+        return new TokenDTO(BEARER_TYPE, member.getMemberName(), accessToken, accessTokenExpiresIn.getTime(), member.getMemberCode());
     }
 
     public String getUserId(String accessToken) {

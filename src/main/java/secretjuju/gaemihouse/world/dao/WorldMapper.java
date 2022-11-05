@@ -1,7 +1,7 @@
-package secretjuju.gaemihouse.notice.dao;
+package secretjuju.gaemihouse.world.dao;
 
 import org.apache.ibatis.annotations.Mapper;
-import secretjuju.gaemihouse.notice.dto.NoticeDTO;
+import secretjuju.gaemihouse.world.dto.WorldDTO;
 
 import java.util.List;
 
@@ -21,12 +21,12 @@ import java.util.List;
  * @see (참고할 class 또는 외부 url)
  */
 @Mapper
-public interface NoticeMapper {
-    List<NoticeDTO> selectNoticeList();
+public interface WorldMapper {
+    List<WorldDTO> selectWorldList();
 
-    int insertNotice(NoticeDTO noticeDTO);
+    int insertWorld(WorldDTO worldDTO);
 
-    int updateNotice(NoticeDTO noticeDTO);
+    int updateWorld(WorldDTO worldDTO);
 
-    int deleteNotice(NoticeDTO noticeDTO);
+    int deleteWorld(WorldDTO worldDTO);
 }
