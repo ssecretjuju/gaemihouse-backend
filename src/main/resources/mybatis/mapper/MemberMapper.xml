@@ -61,7 +61,6 @@
             #{memberPassword},
             #{memberNickname},
             #{memberName},
-
             #{stockFirm},
             #{accountNum},
             #{appKey},
@@ -71,5 +70,18 @@
             #{stockCareer}
         )
     </insert>
+
+    <update id="updateMember" parameterType="MemberDTO">
+        UPDATE TBL_MEMBER
+        SET MEMBER_NICKNAME = #{memberNickname},
+            STOCK_CAREER = #{stockCareer}
+        WHERE MEMBER_CODE = #{memberCode}
+    </update>
+
+    <update id="withdrawMember" parameterType="MemberDTO">
+        UPDATE TBL_MEMBER
+        SET WITHDRAW_YN = #{withdrawYn}
+        WHERE MEMBER_CODE = #{memberCode}
+    </update>
 
 </mapper>

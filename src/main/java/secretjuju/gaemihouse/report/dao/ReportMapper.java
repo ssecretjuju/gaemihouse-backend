@@ -1,6 +1,7 @@
 package secretjuju.gaemihouse.report.dao;
 
 import org.apache.ibatis.annotations.Mapper;
+import secretjuju.gaemihouse.member.dto.MemberDTO;
 import secretjuju.gaemihouse.report.dto.ReportDTO;
 
 import java.util.List;
@@ -24,4 +25,5 @@ import java.util.List;
 public interface ReportMapper {
     int insertReport(ReportDTO reportDTO);
     int updateReportCount(ReportDTO reportDTO);
+    int reportCount(MemberDTO memberDTO);
 }

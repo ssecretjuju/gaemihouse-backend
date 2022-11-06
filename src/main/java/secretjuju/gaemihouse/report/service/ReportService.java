@@ -1,6 +1,7 @@
 package secretjuju.gaemihouse.report.service;
 
 import org.springframework.stereotype.Service;
+import secretjuju.gaemihouse.member.dto.MemberDTO;
 import secretjuju.gaemihouse.report.dao.ReportMapper;
 import secretjuju.gaemihouse.report.dto.ReportDTO;
 
@@ -33,7 +34,7 @@ public class ReportService {
     public Object insertReport(ReportDTO reportDTO) {
         int insertReport = reportMapper.insertReport(reportDTO);
         int updateReportCount = reportMapper.updateReportCount(reportDTO);
-        System.out.println("신고 내역 1 증가 시키는데 성공 했는지?" + updateReportCount );
+
         return (insertReport > 0) ? "신고 내역 입력 성공!" : "신고 내역 입력 실패 ㅜ";
     }
 

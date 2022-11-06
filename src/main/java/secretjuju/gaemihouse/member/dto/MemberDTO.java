@@ -23,13 +23,14 @@ public class MemberDTO implements UserDetails {
     private int reportCount;
     private String blacklistYn;
     private String stockCareer;
+    private String withdrawYn;
 
     public MemberDTO() {}
 
     public MemberDTO(int memberCode, String memberId, String memberPassword, String memberRole,
                      String memberNickname, String memberName, String stockFirm, String accountNum,
                      String appKey, String appSecret, Date appKeyExpiresin, String termsAgreementYn,
-                     int reportCount, String blacklistYn, String stockCareer,
+                     int reportCount, String blacklistYn, String stockCareer, String withdrawYn,
                      Collection<? extends GrantedAuthority> authorities) {
         this.memberCode = memberCode;
         this.memberId = memberId;
@@ -46,6 +47,7 @@ public class MemberDTO implements UserDetails {
         this.reportCount = reportCount;
         this.blacklistYn = blacklistYn;
         this.stockCareer = stockCareer;
+        this.withdrawYn = withdrawYn;
         this.authorities = authorities;
     }
 
@@ -67,6 +69,7 @@ public class MemberDTO implements UserDetails {
                 ", reportCount=" + reportCount +
                 ", blacklistYn='" + blacklistYn + '\'' +
                 ", stockCareer='" + stockCareer + '\'' +
+                ", withdrawYn='" + withdrawYn + '\'' +
                 ", authorities=" + authorities +
                 '}';
     }
@@ -187,9 +190,15 @@ public class MemberDTO implements UserDetails {
         return stockCareer;
     }
 
+    public String getWithdrawYn() {
+        return withdrawYn;
+    }
+
     public void setStockCareer(String stockCareer) {
         this.stockCareer = stockCareer;
     }
+
+    public void setWithdrawYn(String withdrawYn) {this.withdrawYn = withdrawYn;}
 
     public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {this.authorities = authorities;}
     private Collection<? extends GrantedAuthority> authorities;
