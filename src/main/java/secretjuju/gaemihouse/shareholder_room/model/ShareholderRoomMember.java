@@ -22,7 +22,7 @@ public class ShareholderRoomMember {
     private int roomMemberCode;
 
     @Column(name = "ROOM_MEMBER_YIELD")
-    private int roomMemberYield;
+    private double roomMemberYield;
 
     @Column(name = "JOIN_EVALUATE_PROPERTY")
     private int joinEvaluateProperty;
@@ -36,14 +36,14 @@ public class ShareholderRoomMember {
     public ShareholderRoomMember() {
     }
 
-    public ShareholderRoomMember(int roomMemberYield, int joinEvaluateProperty, int memberCode, int roomCode) {
+    public ShareholderRoomMember(double roomMemberYield, int joinEvaluateProperty, int memberCode, int roomCode) {
         this.roomMemberYield = roomMemberYield;
         this.joinEvaluateProperty = joinEvaluateProperty;
         this.memberCode = memberCode;
         this.roomCode = roomCode;
     }
 
-    public ShareholderRoomMember(int roomMemberCode, int roomMemberYield, int joinEvaluateProperty, int memberCode, int roomCode) {
+    public ShareholderRoomMember(int roomMemberCode, double roomMemberYield, int joinEvaluateProperty, int memberCode, int roomCode) {
         this.roomMemberCode = roomMemberCode;
         this.roomMemberYield = roomMemberYield;
         this.joinEvaluateProperty = joinEvaluateProperty;
@@ -55,7 +55,7 @@ public class ShareholderRoomMember {
         return roomMemberCode;
     }
 
-    public int getRoomMemberYield() {
+    public double getRoomMemberYield() {
         return roomMemberYield;
     }
 

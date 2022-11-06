@@ -1,18 +1,16 @@
 package secretjuju.gaemihouse.shareholder_room.dto;
 
-import javax.persistence.Column;
-
-public class shareholderRoomMemberDTO {
+public class ShareholderRoomMemberDTO {
 
     private int roomMemberCode;
-    private int roomMemberYield;
+    private double roomMemberYield;
     private int joinEvaluateProperty;
     private int memberCode;
     private int roomCode;
-    public shareholderRoomMemberDTO() {
+    public ShareholderRoomMemberDTO() {
     }
 
-    public shareholderRoomMemberDTO(int roomMemberCode, int roomMemberYield, int joinEvaluateProperty, int memberCode, int roomCode) {
+    public ShareholderRoomMemberDTO(int roomMemberCode, double roomMemberYield, int joinEvaluateProperty, int memberCode, int roomCode) {
         this.roomMemberCode = roomMemberCode;
         this.roomMemberYield = roomMemberYield;
         this.joinEvaluateProperty = joinEvaluateProperty;
@@ -28,11 +26,11 @@ public class shareholderRoomMemberDTO {
         this.roomMemberCode = roomMemberCode;
     }
 
-    public int getRoomMemberYield() {
+    public double getRoomMemberYield() {
         return roomMemberYield;
     }
 
-    public void setRoomMemberYield(int roomMemberYield) {
+    public void setRoomMemberYield(double roomMemberYield) {
         this.roomMemberYield = roomMemberYield;
     }
 
