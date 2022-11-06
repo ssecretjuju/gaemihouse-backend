@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="secretjuju.gaemihouse.report.dao.ReportMapper">
+
+    <insert id="insertReport" parameterType="ReportDTO">
+        INSERT INTO TBL_REPORT_DETAILS
+        VALUES
+            (
+                SEQ_REPORT_CODE.NEXTVAL,
+                #{reporterId},
+                #{reportedUserId},
+                #{reportDetails}
+            )
+    </insert>
+
+    <update id="updateReportCount" parameterType="ReportDTO" >
+        UPDATE TBL_MEMBER
+           SET REPORT_COUNT = REPORT_COUNT + 1
+         WHERE MEMBER_ID = #{reportedUserId}
+    </update>
+
+
+</mapper>
