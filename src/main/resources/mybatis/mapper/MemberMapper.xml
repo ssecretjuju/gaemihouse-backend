@@ -45,7 +45,7 @@
             MEMBER_PASSWORD,
             MEMBER_NICKNAME,
             MEMBER_NAME,
-            MEMBER_ROLE,
+
             STOCK_FIRM,
             ACCOUNT_NUM,
             APP_KEY,
@@ -61,7 +61,7 @@
             #{memberPassword},
             #{memberNickname},
             #{memberName},
-            #{memberRole},
+
             #{stockFirm},
             #{accountNum},
             #{appKey},
