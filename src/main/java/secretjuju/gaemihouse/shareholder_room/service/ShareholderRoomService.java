@@ -2,11 +2,15 @@ package secretjuju.gaemihouse.shareholder_room.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import secretjuju.gaemihouse.avatar.dto.AvatarDTO;
 import secretjuju.gaemihouse.avatar.repository.AvatarRepository;
 import secretjuju.gaemihouse.shareholder_room.dto.ShareholderRoomDTO;
 import secretjuju.gaemihouse.shareholder_room.model.ShareholderRoom;
 import secretjuju.gaemihouse.shareholder_room.repository.ShareholderRoomRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ShareholderRoomService {
@@ -19,10 +23,22 @@ public class ShareholderRoomService {
         this.modelMapper = modelMapper;
     }
 
-    public ShareholderRoomDTO selectShareholderRoomByMapCode(int internalMapCode) {
+    public List<ShareholderRoomDTO> selectShareholderRoomByMapCode(int mapcode) {
 
-        ShareholderRoom shareholderRoom = shareholderRoomRepository.findShareholderRoomByMapCode(internalMapCode);
+        List<ShareholderRoom> shareholderRooms = shareholderRoomRepository.findShareholderRoomByMapCode(mapcode);
+        List<ShareholderRoomDTO> shareholderRoomDTOS = new ArrayList<>();
+        for (int i = 0; i < shareholderRooms.size(); i++) {
+            shareholderRoomDTOS.add(modelMapper.map(shareholderRooms.get(i), ShareholderRoomDTO.class));
+        }
 
-        return modelMapper.map(shareholderRoom, ShareholderRoomDTO.class);
+        return shareholderRoomDTOS;
     }
+
+    @Transactional
+    public void insertShareholderRoom(ShareholderRoom shareholderRoom) {
+
+        shareholderRoomRepository.save(shareholderRoom);
+    }
+
+
 }
