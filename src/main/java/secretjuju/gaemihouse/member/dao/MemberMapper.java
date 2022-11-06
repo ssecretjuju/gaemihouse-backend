@@ -30,4 +30,8 @@ public interface MemberMapper {
     Optional<MemberDTO> findByMemberId(String memberId);
 
     MemberDTO selectByMemberId(String memberId);
+
+    int updateMember(MemberDTO memberDTO);
+
+    int withdrawMember(MemberDTO memberDTO);
 }

@@ -4,11 +4,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import secretjuju.gaemihouse.common.ResponseDTO;
+import secretjuju.gaemihouse.member.dto.MemberDTO;
 import secretjuju.gaemihouse.member.service.MemberService;
+import secretjuju.gaemihouse.notice.dto.NoticeDTO;
 
 /**
  * <pre>
@@ -38,6 +38,17 @@ public class MemberController {
     @GetMapping("/{memberId}")
     public ResponseEntity<ResponseDTO> selectMyMemberInfo(@PathVariable String memberId) {
         System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", memberService.selectMyInfo(memberId)));
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "회원 조회 성공", memberService.selectMyInfo(memberId)));
     }
+
+    @PostMapping("/update")
+    public ResponseEntity<ResponseDTO> updateMember(@RequestBody MemberDTO memberDTO) {
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK,"회원 정보 수정 성공", memberService.updateMember(memberDTO)));
+    }
+
+    @PostMapping("/withdraw")
+    public ResponseEntity<ResponseDTO> withdrawMember(@RequestBody MemberDTO memberDTO) {
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK,"회원 정보 수정 성공", memberService.withdrawMember(memberDTO)));
+    }
+
 }

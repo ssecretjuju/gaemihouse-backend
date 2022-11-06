@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import secretjuju.gaemihouse.common.ResponseDTO;
+import secretjuju.gaemihouse.member.dto.MemberDTO;
 import secretjuju.gaemihouse.report.dto.ReportDTO;
 import secretjuju.gaemihouse.report.service.ReportService;
 
@@ -34,7 +35,6 @@ public class ReportController {
 
     @PostMapping("/details")
     public ResponseEntity<ResponseDTO> insertReport(@RequestBody ReportDTO reportDTO) {
-
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK,"신고내역 접수 성공", reportService.insertReport(reportDTO)));
     }
 

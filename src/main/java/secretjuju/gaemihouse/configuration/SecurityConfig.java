@@ -68,7 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .authorizeRequests()
 //                    .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                     .antMatchers("/auth/**").permitAll()
-                    .antMatchers("/member/**").hasAnyRole("USER")  // 나머지 API 는 전부 인증 필요
+//                    .antMatchers("/member/**").hasAnyRole("USER")  // 나머지 API 는 전부 인증 필요
 
                 .and()
                 .cors()

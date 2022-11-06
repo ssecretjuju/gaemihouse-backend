@@ -42,4 +42,15 @@ public class MemberService {
 
         return member;
     }
+
+
+    public Object updateMember(MemberDTO memberDTO) {
+        int updateMember = memberMapper.updateMember(memberDTO);
+        return (updateMember > 0) ? "회원 정보 수정 성공 !" : "회원 정보 수정 실패 ㅜ";
+    }
+
+    public Object withdrawMember(MemberDTO memberDTO) {
+        int withdrawMember = memberMapper.withdrawMember(memberDTO);
+        return (withdrawMember > 0) ? "회원 탈퇴 성공 !" : "회원 탈퇴 실패 ㅜ";
+    }
 }
