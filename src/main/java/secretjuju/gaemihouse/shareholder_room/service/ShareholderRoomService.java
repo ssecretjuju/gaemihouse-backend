@@ -40,5 +40,9 @@ public class ShareholderRoomService {
         shareholderRoomRepository.save(shareholderRoom);
     }
 
+    @Transactional
+    public void deleteShareholderRoom(int roomCode) {
 
+        shareholderRoomRepository.deleteByRoomCode(roomCode);
+    }
 }

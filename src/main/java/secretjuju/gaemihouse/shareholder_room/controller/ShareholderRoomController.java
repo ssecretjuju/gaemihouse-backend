@@ -57,5 +57,15 @@ public class ShareholderRoomController {
                 .body(new ResponseDTO(HttpStatus.CREATED, "successful", true));
     }
 
+    @DeleteMapping("/shareholder-room")
+    public ResponseEntity<ResponseDTO> deleteShareholderRoom(@RequestBody Map<String, Object> requestBody) {
 
+        int roomCode = (int) requestBody.get("roomCode");
+
+        shareholderRoomService.deleteShareholderRoom(roomCode);
+
+        return ResponseEntity
+                .noContent()
+                .build();
+    }
 }
