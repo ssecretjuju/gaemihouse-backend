@@ -45,4 +45,19 @@ public class ShareholderRoomMemberService {
 
         return shareholderRoomMemberDTOS;
     }
+
+    public double findShareholderRoomYieldByRoomCode(int roomCode) {
+        List<ShareholderRoomMemberDTO> shareholderRoomMemberDTOS = findShareholderRoomMemberAllByRoomCode(roomCode);
+
+        int shareholderRoomStartProperty = 0;
+        int shareholderRoomEndProperty = 0;
+        int joinEvaluateProperty = 0;
+        for(int i = 0; i < shareholderRoomMemberDTOS.size(); i++) {
+            joinEvaluateProperty = shareholderRoomMemberDTOS.get(i).getJoinEvaluateProperty();
+            shareholderRoomStartProperty += joinEvaluateProperty;
+            shareholderRoomEndProperty += joinEvaluateProperty * (1 + shareholderRoomMemberDTOS.get(i).getRoomMemberYield() / 100.0);
+        }
+
+        return Math.round((shareholderRoomEndProperty - shareholderRoomStartProperty) / (double) shareholderRoomStartProperty * 100 * 100) / 100.0;
+    }
 }
