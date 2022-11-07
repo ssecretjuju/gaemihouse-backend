@@ -74,7 +74,7 @@ public class ShareholderRoomController {
     }
 
     @GetMapping("/shareholder-room/members")
-    public ResponseEntity<ResponseDTO> getShareholderRoomYield(/* roomCode */) {
+    public ResponseEntity<ResponseDTO> getShareholderRoomMembers(/* roomCode */) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
@@ -88,5 +88,22 @@ public class ShareholderRoomController {
                 .ok()
                 .headers(headers)
                 .body(new ResponseDTO(HttpStatus.OK, "successful", shareholderRoomMembers));
+    }
+
+    @GetMapping("/shareholder-room/yield")
+    public ResponseEntity<ResponseDTO> getShareholderRoomYield(/* roomCode */) {
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+        int roomCode = 1;
+
+        double shareholderRoomYield =
+                shareholderRoomMemberService.findShareholderRoomYieldByRoomCode(roomCode);
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .body(new ResponseDTO(HttpStatus.OK, "successful", shareholderRoomYield));
     }
 }
