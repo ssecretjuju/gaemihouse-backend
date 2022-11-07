@@ -56,7 +56,7 @@ public class ShareholderRoomMemberController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
-        int memberCode = 1;
+        int memberCode = 2;
         int roomCode = 1;
         int currentEvaluateProperty = koreaInvestmentService.getCurrentEvaluateProperty(/*memberCode*/);
 
@@ -77,9 +77,9 @@ public class ShareholderRoomMemberController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
-        int memberCode = 1;
+        int memberCode = 2;
         int roomCode = 1;
-        int roomMemberCode = shareholderRoomMemberService.findShareholderRoomMember(memberCode).getMemberCode();
+        int roomMemberCode = shareholderRoomMemberService.findShareholderRoomMember(memberCode).getRoomMemberCode();
         int currentEvaluateProperty = koreaInvestmentService.getCurrentEvaluateProperty(/*memberCode*/);
         int joinEvaluateProperty = shareholderRoomMemberService.findShareholderRoomMember(memberCode).getJoinEvaluateProperty();
 
