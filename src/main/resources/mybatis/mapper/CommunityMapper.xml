@@ -30,6 +30,6 @@
     
     <delete id="deleteCommunity">
         DELETE FROM TBL_COMMUNITY
-         WHERE COMMUNITY_CODE = #{communityCode}
+         WHERE COMMUNITY_CODE = #{communityCode} AND MEMBER_CODE = #{memberCode}
     </delete>
 </mapper>

@@ -37,16 +37,16 @@ public class NoticeService {
 
     public Object insertNotice(NoticeDTO noticeDTO) {
         int insertNotice = noticeMapper.insertNotice(noticeDTO);
-        return (insertNotice > 0) ? "게시글 입력 성공!" : "게시글 입력 실패 ㅜ";
+        return (insertNotice > 0) ? "공지사항 입력 성공!" : "공지사항 입력 실패 ㅜ";
     }
 
     public Object updateNotice(NoticeDTO noticeDTO) {
         int updateNotice = noticeMapper.updateNotice(noticeDTO);
-        return (updateNotice > 0) ? "게시글 수정 성공!" : "게시글 수정 실패 ㅜ";
+        return (updateNotice > 0) ? "공지사항 수정 성공!" : "공지사항 수정 실패 ㅜ";
     }
 
     public Object deleteNotice(NoticeDTO noticeDTO) {
         int deleteNotice = noticeMapper.deleteNotice(noticeDTO);
-        return (deleteNotice > 0) ? "게시글 삭제 성공!" : "게시글 삭제 실패 ㅠ";
+        return (deleteNotice > 0) ? "공지사항 삭제 성공!" : "공지사항 삭제 실패 ㅠ";
     }
 }

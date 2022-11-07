@@ -12,9 +12,8 @@ public class MemberDTO implements UserDetails {
     private String memberId;
     private String memberPassword;
     private String memberRole;
+    private String memberNickname;
     private String memberName;
-    private String memberSex;
-    private String memberBirth;
     private String stockFirm;
     private String accountNum;
     private String appKey;
@@ -23,22 +22,22 @@ public class MemberDTO implements UserDetails {
     private String termsAgreementYn;
     private int reportCount;
     private String blacklistYn;
+    private String stockCareer;
+    private String withdrawYn;
 
     public MemberDTO() {}
 
-    public MemberDTO(int memberCode, String memberId, String memberPassword,
-                     String memberRole, String memberName, String memberSex,
-                     String memberBirth, String stockFirm, String accountNum,
-                     String appKey, String appSecret, Date appKeyExpiresin,
-                     String termsAgreementYn, int reportCount, String blacklistYn,
+    public MemberDTO(int memberCode, String memberId, String memberPassword, String memberRole,
+                     String memberNickname, String memberName, String stockFirm, String accountNum,
+                     String appKey, String appSecret, Date appKeyExpiresin, String termsAgreementYn,
+                     int reportCount, String blacklistYn, String stockCareer, String withdrawYn,
                      Collection<? extends GrantedAuthority> authorities) {
         this.memberCode = memberCode;
         this.memberId = memberId;
         this.memberPassword = memberPassword;
         this.memberRole = memberRole;
+        this.memberNickname = memberNickname;
         this.memberName = memberName;
-        this.memberSex = memberSex;
-        this.memberBirth = memberBirth;
         this.stockFirm = stockFirm;
         this.accountNum = accountNum;
         this.appKey = appKey;
@@ -47,6 +46,8 @@ public class MemberDTO implements UserDetails {
         this.termsAgreementYn = termsAgreementYn;
         this.reportCount = reportCount;
         this.blacklistYn = blacklistYn;
+        this.stockCareer = stockCareer;
+        this.withdrawYn = withdrawYn;
         this.authorities = authorities;
     }
 
@@ -57,9 +58,8 @@ public class MemberDTO implements UserDetails {
                 ", memberId='" + memberId + '\'' +
                 ", memberPassword='" + memberPassword + '\'' +
                 ", memberRole='" + memberRole + '\'' +
+                ", memberNickname='" + memberNickname + '\'' +
                 ", memberName='" + memberName + '\'' +
-                ", memberSex='" + memberSex + '\'' +
-                ", memberBirth='" + memberBirth + '\'' +
                 ", stockFirm='" + stockFirm + '\'' +
                 ", accountNum='" + accountNum + '\'' +
                 ", appKey='" + appKey + '\'' +
@@ -68,51 +68,173 @@ public class MemberDTO implements UserDetails {
                 ", termsAgreementYn='" + termsAgreementYn + '\'' +
                 ", reportCount=" + reportCount +
                 ", blacklistYn='" + blacklistYn + '\'' +
+                ", stockCareer='" + stockCareer + '\'' +
+                ", withdrawYn='" + withdrawYn + '\'' +
                 ", authorities=" + authorities +
                 '}';
     }
-    public int getMemberCode() {return memberCode;}
-    public void setMemberCode(int memberCode) {this.memberCode = memberCode;}
-    public String getMemberId() {return memberId;}
-    public void setMemberId(String memberId) {this.memberId = memberId;}
-    public String getMemberPassword() {return memberPassword;}
-    public void setMemberPassword(String memberPassword) {this.memberPassword = memberPassword;}
-    public String getMemberRole() {return memberRole;}
-    public void setMemberRole(String memberRole) {this.memberRole = memberRole;}
-    public String getMemberName() {return memberName;}
-    public void setMemberName(String memberName) {this.memberName = memberName;}
-    public String getMemberSex() {return memberSex;}
-    public void setMemberSex(String memberSex) {this.memberSex = memberSex;}
-    public String getMemberBirth() {return memberBirth;}
-    public void setMemberBirth(String memberBirth) {this.memberBirth = memberBirth;}
-    public String getStockFirm() {return stockFirm;}
-    public void setStockFirm(String stockFirm) {this.stockFirm = stockFirm;}
-    public String getAccountNum() {return accountNum;}
-    public void setAccountNum(String accountNum) {this.accountNum = accountNum;}
-    public String getAppKey() {return appKey;}
-    public void setAppKey(String appKey) {this.appKey = appKey;}
-    public String getAppSecret() {return appSecret;}
-    public void setAppSecret(String appSecret) {this.appSecret = appSecret;}public Date getAppKeyExpiresin() {return appKeyExpiresin;}
-    public void setAppKeyExpiresin(Date appKeyExpiresin) {this.appKeyExpiresin = appKeyExpiresin;}
-    public String getTermsAgreementYn() {return termsAgreementYn;}
-    public void setTermsAgreementYn(String termsAgreementYn) {this.termsAgreementYn = termsAgreementYn;}
-    public int getReportCount() {return reportCount;}public void setReportCount(int reportCount) {this.reportCount = reportCount;}
-    public String getBlacklistYn() {return blacklistYn;}
-    public void setBlacklistYn(String blacklistYn) {this.blacklistYn = blacklistYn;}
+
+    public int getMemberCode() {
+        return memberCode;
+    }
+
+    public void setMemberCode(int memberCode) {
+        this.memberCode = memberCode;
+    }
+
+    public String getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
+    }
+
+    public String getMemberPassword() {
+        return memberPassword;
+    }
+
+    public void setMemberPassword(String memberPassword) {
+        this.memberPassword = memberPassword;
+    }
+
+    public String getMemberRole() {
+        return memberRole;
+    }
+
+    public void setMemberRole(String memberRole) {
+        this.memberRole = memberRole;
+    }
+
+    public String getMemberNickname() {
+        return memberNickname;
+    }
+
+    public void setMemberNickname(String memberNickname) {
+        this.memberNickname = memberNickname;
+    }
+
+    public String getMemberName() {
+        return memberName;
+    }
+
+    public void setMemberName(String memberName) {
+        this.memberName = memberName;
+    }
+
+    public String getStockFirm() {
+        return stockFirm;
+    }
+
+    public void setStockFirm(String stockFirm) {
+        this.stockFirm = stockFirm;
+    }
+
+    public String getAccountNum() {
+        return accountNum;
+    }
+
+    public void setAccountNum(String accountNum) {
+        this.accountNum = accountNum;
+    }
+
+    public String getAppKey() {
+        return appKey;
+    }
+
+    public void setAppKey(String appKey) {
+        this.appKey = appKey;
+    }
+
+    public String getAppSecret() {
+        return appSecret;
+    }
+
+    public void setAppSecret(String appSecret) {
+        this.appSecret = appSecret;
+    }
+
+    public Date getAppKeyExpiresin() {
+        return appKeyExpiresin;
+    }
+
+    public void setAppKeyExpiresin(Date appKeyExpiresin) {
+        this.appKeyExpiresin = appKeyExpiresin;
+    }
+
+    public String getTermsAgreementYn() {
+        return termsAgreementYn;
+    }
+
+    public void setTermsAgreementYn(String termsAgreementYn) {
+        this.termsAgreementYn = termsAgreementYn;
+    }
+
+    public int getReportCount() {
+        return reportCount;
+    }
+
+    public void setReportCount(int reportCount) {
+        this.reportCount = reportCount;
+    }
+
+    public String getBlacklistYn() {
+        return blacklistYn;
+    }
+
+    public void setBlacklistYn(String blacklistYn) {
+        this.blacklistYn = blacklistYn;
+    }
+
+    public String getStockCareer() {
+        return stockCareer;
+    }
+
+    public String getWithdrawYn() {
+        return withdrawYn;
+    }
+
+    public void setStockCareer(String stockCareer) {
+        this.stockCareer = stockCareer;
+    }
+
+    public void setWithdrawYn(String withdrawYn) {this.withdrawYn = withdrawYn;}
+
     public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {this.authorities = authorities;}
     private Collection<? extends GrantedAuthority> authorities;
+
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {return this.authorities;}
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.authorities;
+    }
+
     @Override
-    public String getPassword() {return null;}
+    public String getPassword() {
+        return null;
+    }
+
     @Override
-    public String getUsername() {return null;}
+    public String getUsername() {
+        return null;
+    }
+
     @Override
-    public boolean isAccountNonExpired() {return false;}
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
     @Override
-    public boolean isAccountNonLocked() {return false;}
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
     @Override
-    public boolean isCredentialsNonExpired() {return false;}
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
     @Override
-    public boolean isEnabled() {return false;}
+    public boolean isEnabled() {
+        return false;
+    }
 }

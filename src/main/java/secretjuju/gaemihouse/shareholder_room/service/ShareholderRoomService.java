@@ -34,4 +34,15 @@ public class ShareholderRoomService {
         return shareholderRoomDTOS;
     }
 
+    @Transactional
+    public void insertShareholderRoom(ShareholderRoom shareholderRoom) {
+
+        shareholderRoomRepository.save(shareholderRoom);
+    }
+
+    @Transactional
+    public void deleteShareholderRoom(int roomCode) {
+
+        shareholderRoomRepository.deleteByRoomCode(roomCode);
+    }
 }

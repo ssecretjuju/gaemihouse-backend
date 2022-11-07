@@ -1,4 +1,4 @@
-package secretjuju.gaemihouse.member.service;
+package secretjuju.gaemihouse.account.service;
 
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
@@ -10,9 +10,11 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.stereotype.Service;
 import secretjuju.gaemihouse.member.dto.MemberDTO;
 
 
+@Service
 public class KoreaInvestmentService {
     public String getAccessToken(/*MemberDTO member*/) {
 
@@ -56,7 +58,7 @@ public class KoreaInvestmentService {
         return accessToken;
     }
 
-    public void getAccountBalance(/*MemberDTO member*/) {
+    public boolean getAccountBalance(/*MemberDTO member*/) {
 
         MemberDTO member = new MemberDTO();
         member.setAppKey("PSAQ2zEMgKcoUYhfMMVxDfO5D6xxpyvdPVhR");
@@ -122,17 +124,80 @@ public class KoreaInvestmentService {
                 int accountTotalStockPurchasePrice = result2.getInt("pchs_amt_smtl_amt");
                 int accountTotalStockEvaluatePrice = result2.getInt("evlu_amt_smtl_amt");
                 int accountChangePrice = result2.getInt("evlu_pfls_smtl_amt");
-                int accountAmountPirce = result2.getInt("asst_icdc_amt");
+                int accountAmountPrice = result2.getInt("asst_icdc_amt");
                 System.out.println("보유 종목 총 매입 금액: " + accountTotalStockPurchasePrice + ", "
                         + "보유 종목 총 평가 금액: " + accountTotalStockEvaluatePrice + ", "
                         + "원금 대비 변동 금액: " + accountChangePrice
                 );
+
+                return true;
             } else {
                 System.out.println("응답 코드 : " + response.getStatusLine().getStatusCode());
+
+                return false;
             }
 
         } catch (Exception e) {
             System.err.println(e.toString());
+
+            return false;
+        }
+    }
+
+    public int getCurrentEvaluateProperty(/*member*/) {
+        MemberDTO member = new MemberDTO();
+        member.setAppKey("PSAQ2zEMgKcoUYhfMMVxDfO5D6xxpyvdPVhR");
+        member.setAppSecret("P0eIWiuAOlPMNSzK/8IcXCN62xuknqP8eJTqB4/s4T6vJKdOD/7vc1U04IMr0lHGPaj2voIo1fFYQZ3r2azuK5lREZCDFmDyWRt0hSVA9pEbTzM6BE3nnfLqk1Y7ZgK8pVx4unhYtAGc+VnTJSF756K6QD2NeXs/YpTd1Avz9KWn1s4D97o=");
+
+        member.setAccountNum("5007447801");
+        String accessToken = getAccessToken(/*member*/);
+        String url = "https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/trading/inquire-balance"
+                + "?CANO=" + member.getAccountNum().substring(0, 8)
+                + "&ACNT_PRDT_CD=" + member.getAccountNum().substring(8)
+                + "&AFHR_FLPR_YN=N"
+                + "&OFL_YN"
+                + "&INQR_DVSN=02"
+                + "&UNPR_DVSN=01"
+                + "&FUND_STTL_ICLD_YN=N"
+                + "&FNCG_AMT_AUTO_RDPT_YN=N"
+                + "&PRCS_DVSN=00"
+                + "&CTX_AREA_FK100"
+                + "&CTX_AREA_NK100";
+
+        System.out.println(url);
+
+        try {
+            HttpClient client = HttpClientBuilder.create().build();
+            HttpGet getRequest = new HttpGet(url);
+
+            getRequest.setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken);
+            getRequest.setHeader("appkey", member.getAppKey());
+            getRequest.setHeader("appsecret", member.getAppSecret());
+            getRequest.setHeader("tr_id", "VTTC8434R");
+            getRequest.setHeader("tr_cont", "M");
+
+            HttpResponse response = client.execute(getRequest);
+
+            if (response.getStatusLine().getStatusCode() == 200) {
+                ResponseHandler<String> handler = new BasicResponseHandler();
+                String body = handler.handleResponse(response);
+
+                JSONObject result2 = new JSONObject(body).getJSONArray("output2").getJSONObject(0);
+
+                int accountTotalStockEvaluatePrice = result2.getInt("evlu_amt_smtl_amt");
+                System.out.println("보유 종목 총 매입 금액: " + accountTotalStockEvaluatePrice);
+
+                return accountTotalStockEvaluatePrice;
+            } else {
+                System.out.println("응답 코드 : " + response.getStatusLine().getStatusCode());
+
+                return -1;
+            }
+
+        } catch (Exception e) {
+            System.err.println(e.toString());
+
+            return -1;
         }
     }
 }

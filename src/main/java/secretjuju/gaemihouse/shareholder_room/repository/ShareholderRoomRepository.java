@@ -9,5 +9,7 @@ public interface ShareholderRoomRepository extends Repository<ShareholderRoom, I
 
    List<ShareholderRoom> findShareholderRoomByMapCode(int mapCode);
 
+   void save(ShareholderRoom shareholderRoom);
 
+   void deleteByRoomCode(int roomCode);
 }

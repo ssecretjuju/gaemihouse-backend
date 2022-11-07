@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="secretjuju.gaemihouse.world.dao.WorldMapper">
+
+    <select id="selectWorldList" resultType="WorldDTO">
+        SELECT *
+        FROM TBL_WORLD
+    </select>
+
+    <insert id="insertWorld" parameterType="WorldDTO">
+        INSERT INTO TBL_WORLD
+        VALUES
+            (
+                #{worldId}
+            )
+    </insert>
+
+    <update id="updateWorld">
+        UPDATE TBL_WORLD
+        SET WORDL_ID = #{worldId}
+        WHERE WORDL_ID = #{worldId}
+    </update>
+
+    <delete id="deleteWorld">
+        DELETE FROM TBL_WORLD
+        WHERE WORLD_ID = #{worldId}
+    </delete>
+</mapper>
