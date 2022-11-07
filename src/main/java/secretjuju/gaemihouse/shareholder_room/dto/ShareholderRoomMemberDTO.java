@@ -60,7 +60,7 @@ public class ShareholderRoomMemberDTO {
 
     @Override
     public String toString() {
-        return "shareholderRoomMemberDTO{" +
+        return "ShareholderRoomMemberDTO{" +
                 "roomMemberCode=" + roomMemberCode +
                 ", roomMemberYield=" + roomMemberYield +
                 ", joinEvaluateProperty=" + joinEvaluateProperty +
