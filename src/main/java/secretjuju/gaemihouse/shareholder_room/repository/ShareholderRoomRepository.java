@@ -11,6 +11,5 @@ public interface ShareholderRoomRepository extends Repository<ShareholderRoom, I
 
    void save(ShareholderRoom shareholderRoom);
 
-
    void deleteByRoomCode(int roomCode);
 }
