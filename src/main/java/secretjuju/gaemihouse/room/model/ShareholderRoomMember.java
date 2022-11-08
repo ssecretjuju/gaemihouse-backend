@@ -1,4 +1,4 @@
-package secretjuju.gaemihouse.shareholder_room.model;
+package secretjuju.gaemihouse.room.model;
 
 import javax.persistence.*;
 

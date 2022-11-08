@@ -1,13 +1,20 @@
-package secretjuju.gaemihouse.shareholder_room.dto;
+package secretjuju.gaemihouse.room.dto;
 
-import javax.persistence.Column;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
+@ApiModel(value = "주주방 정보", description = "방 아이디, 방 최대 인원, 방 등록 인원, 방 수익률, 맵 아이디")
 public class ShareholderRoomDTO {
 
+    @ApiModelProperty(value = "방 아이디")
     private int roomCode;
+    @ApiModelProperty(value = "방 최대 인원")
     private int roomLimitedNumber;
+    @ApiModelProperty(value = "방 등록 인원")
     private int roomRegistedNumber;
+    @ApiModelProperty(value = "방 수익률")
     private int roomYield;
+    @ApiModelProperty(value = "맵 아이디")
     private  int mapCode;
 
     public ShareholderRoomDTO() {

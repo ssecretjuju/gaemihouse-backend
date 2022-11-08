@@ -1,16 +1,17 @@
-package secretjuju.gaemihouse.shareholder_room.controller;
+package secretjuju.gaemihouse.room.controller;
 
+import io.swagger.annotations.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import secretjuju.gaemihouse.common.ResponseDTO;
-import secretjuju.gaemihouse.shareholder_room.dto.ShareholderRoomDTO;
-import secretjuju.gaemihouse.shareholder_room.dto.ShareholderRoomMemberDTO;
-import secretjuju.gaemihouse.shareholder_room.model.ShareholderRoom;
-import secretjuju.gaemihouse.shareholder_room.service.ShareholderRoomMemberService;
-import secretjuju.gaemihouse.shareholder_room.service.ShareholderRoomService;
+import secretjuju.gaemihouse.room.dto.ShareholderRoomDTO;
+import secretjuju.gaemihouse.room.dto.ShareholderRoomMemberDTO;
+import secretjuju.gaemihouse.room.model.ShareholderRoom;
+import secretjuju.gaemihouse.room.service.ShareholderRoomMemberService;
+import secretjuju.gaemihouse.room.service.ShareholderRoomService;
 
 import java.net.URI;
 import java.nio.charset.Charset;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@Api("ShareholderRoomController")
 public class ShareholderRoomController {
 
     private final ShareholderRoomService shareholderRoomService;
@@ -30,6 +32,12 @@ public class ShareholderRoomController {
 
     // Unity App 로드 시 요청 => 내부맵 위에 주주방 조회
     @GetMapping("/shareholder-room")
+    @ApiOperation(value = "주주방 조회", notes = "맵 오브젝트 ID를 통해 해당하는 주주방 목록 조회")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "successful"),
+            @ApiResponse(code = 404, message = "not found"),
+            @ApiResponse(code = 500, message = "sever error")
+    })
     public ResponseEntity<ResponseDTO> selectShareholderRoomByMapCode(@RequestParam(name = "mapcode") int mapCode) {
 
         HttpHeaders headers = new HttpHeaders();

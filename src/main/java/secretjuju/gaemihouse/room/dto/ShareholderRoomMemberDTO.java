@@ -1,4 +1,4 @@
-package secretjuju.gaemihouse.shareholder_room.dto;
+package secretjuju.gaemihouse.room.dto;
 
 public class ShareholderRoomMemberDTO {
 

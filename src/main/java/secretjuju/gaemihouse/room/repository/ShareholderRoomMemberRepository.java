@@ -1,7 +1,7 @@
-package secretjuju.gaemihouse.shareholder_room.repository;
+package secretjuju.gaemihouse.room.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import secretjuju.gaemihouse.shareholder_room.model.ShareholderRoomMember;
+import secretjuju.gaemihouse.room.model.ShareholderRoomMember;
 
 import java.util.List;
 
