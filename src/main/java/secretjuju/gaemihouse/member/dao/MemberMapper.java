@@ -34,4 +34,6 @@ public interface MemberMapper {
     int updateMember(MemberDTO memberDTO);
 
     int withdrawMember(MemberDTO memberDTO);
+
+    MemberDTO selectMemberInfobyCode(int memberCode);
 }

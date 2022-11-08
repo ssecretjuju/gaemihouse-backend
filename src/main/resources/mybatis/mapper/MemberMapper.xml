@@ -45,7 +45,6 @@
             MEMBER_PASSWORD,
             MEMBER_NICKNAME,
             MEMBER_NAME,
-
             STOCK_FIRM,
             ACCOUNT_NUM,
             APP_KEY,
@@ -83,5 +82,11 @@
         SET WITHDRAW_YN = #{withdrawYn}
         WHERE MEMBER_CODE = #{memberCode}
     </update>
+
+    <select id="selectMemberInfobyCode" resultType="MemberDTO">
+        SELECT *
+          FROM TBL_MEMBER
+         WHERE MEMBER_CODE = #{memberCode}
+    </select>
 
 </mapper>
