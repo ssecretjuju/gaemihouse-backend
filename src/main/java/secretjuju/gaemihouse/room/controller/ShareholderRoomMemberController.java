@@ -1,4 +1,4 @@
-package secretjuju.gaemihouse.shareholder_room.controller;
+package secretjuju.gaemihouse.room.controller;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 import secretjuju.gaemihouse.account.service.KoreaInvestmentService;
 import secretjuju.gaemihouse.common.ResponseDTO;
 import secretjuju.gaemihouse.member.service.MemberService;
-import secretjuju.gaemihouse.shareholder_room.dto.ShareholderRoomMemberDTO;
-import secretjuju.gaemihouse.shareholder_room.model.ShareholderRoomMember;
-import secretjuju.gaemihouse.shareholder_room.service.ShareholderRoomMemberService;
-import secretjuju.gaemihouse.shareholder_room.service.ShareholderRoomService;
+import secretjuju.gaemihouse.room.dto.ShareholderRoomMemberDTO;
+import secretjuju.gaemihouse.room.model.ShareholderRoomMember;
+import secretjuju.gaemihouse.room.service.ShareholderRoomMemberService;
+import secretjuju.gaemihouse.room.service.ShareholderRoomService;
 
 import java.net.URI;
 import java.nio.charset.Charset;
@@ -71,8 +71,8 @@ public class ShareholderRoomMemberController {
                 .body(new ResponseDTO(HttpStatus.CREATED, "successful", true));
     }
 
-    @PostMapping("/current/evaluate-yield")
-    public ResponseEntity<ResponseDTO> getCurrentMemberYield(/* 회원 코드, 방 코드*/) {
+    @PostMapping("/shareholder-room//current/evaluate-yield")
+    public ResponseEntity<ResponseDTO> getCurrentMemberYield(/* 회원 코드, 방 코드 */) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));

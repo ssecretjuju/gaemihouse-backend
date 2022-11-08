@@ -1,13 +1,11 @@
-package secretjuju.gaemihouse.shareholder_room.service;
+package secretjuju.gaemihouse.room.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import secretjuju.gaemihouse.avatar.dto.AvatarDTO;
-import secretjuju.gaemihouse.avatar.repository.AvatarRepository;
-import secretjuju.gaemihouse.shareholder_room.dto.ShareholderRoomDTO;
-import secretjuju.gaemihouse.shareholder_room.model.ShareholderRoom;
-import secretjuju.gaemihouse.shareholder_room.repository.ShareholderRoomRepository;
+import secretjuju.gaemihouse.room.dto.ShareholderRoomDTO;
+import secretjuju.gaemihouse.room.model.ShareholderRoom;
+import secretjuju.gaemihouse.room.repository.ShareholderRoomRepository;
 
 import java.util.ArrayList;
 import java.util.List;
