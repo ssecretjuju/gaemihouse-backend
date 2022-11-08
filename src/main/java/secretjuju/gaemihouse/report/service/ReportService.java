@@ -35,6 +35,8 @@ public class ReportService {
         int insertReport = reportMapper.insertReport(reportDTO);
         int updateReportCount = reportMapper.updateReportCount(reportDTO);
 
+
+
         return (insertReport > 0) ? "신고 내역 입력 성공!" : "신고 내역 입력 실패 ㅜ";
     }
 
