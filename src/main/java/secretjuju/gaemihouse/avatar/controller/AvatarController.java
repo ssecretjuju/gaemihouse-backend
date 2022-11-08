@@ -12,6 +12,7 @@ import secretjuju.gaemihouse.common.ResponseDTO;
 
 import java.net.URI;
 import java.nio.charset.Charset;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -25,12 +26,10 @@ public class AvatarController {
 
     // Unity App 로드 시 회원 정보를 포함하여 요청 => 아바타 정보 반환
     @GetMapping("/avatar")
-    public ResponseEntity<ResponseDTO> selectAvatarByMemberCode(@RequestBody Map<String, Object> requestBody) {
+    public ResponseEntity<ResponseDTO> selectAvatarByMemberCode(@RequestParam(name = "memberCode") int memberCode) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-
-        int memberCode = (int) requestBody.get("memberCode");
 
         AvatarDTO avatarDTO = avatarService.selectAvatarByMemberCode(memberCode);
 
@@ -40,6 +39,7 @@ public class AvatarController {
                 .body(new ResponseDTO(HttpStatus.OK, "successful", avatarDTO));
     }
 
+    // 아바타 생성 시 요청
     @PostMapping("/avatar")
     public ResponseEntity<ResponseDTO> insertAvatarByMemberCode(@RequestBody Map<String, Object> requestBody) {
 
@@ -58,6 +58,7 @@ public class AvatarController {
                         insertResult));
     }
 
+    // 아바타 수정 시 요청
     @PutMapping("/avatar")
     public ResponseEntity<ResponseDTO> updateAvatarByMemberCode(@RequestBody Map<String, Object> requestBody) {
 
@@ -80,6 +81,7 @@ public class AvatarController {
         }
     }
 
+    // 회원 탈퇴 시 요청
     @DeleteMapping("/avatar")
     public ResponseEntity<ResponseDTO> deleteAvatarByMemberCode(@RequestBody Map<String, Object> requestBody) {
 
@@ -100,5 +102,12 @@ public class AvatarController {
                     .badRequest()
                     .body(new ResponseDTO(HttpStatus.BAD_REQUEST, "Delete failed", false));
         }
+    }
+
+    @PostMapping("/test")
+    public String test(@RequestBody List<Map<String, String>> req) {
+        System.out.println(req);
+
+        return "[apple, banana, orange, blue, sky]";
     }
 }

@@ -63,4 +63,25 @@ public class KoreanInvestmentController {
                     .body(new ResponseDTO(HttpStatus.OK, "successful", currentEvaluateProperty));
         }
     }
+
+    @PostMapping("/current/evaluate-yield")
+    public ResponseEntity<ResponseDTO> getCurrentEvaluateYield(/*MemberDTO member*/) {
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+        double currentEvaluateYield = koreaInvestmentService.getCurrentEvaluateYield();
+
+        if(currentEvaluateYield == -1) {
+            return ResponseEntity
+                    .ok()
+                    .headers(headers)
+                    .body(new ResponseDTO(HttpStatus.OK, "failed", -1));
+        } else {
+            return ResponseEntity
+                    .ok()
+                    .headers(headers)
+                    .body(new ResponseDTO(HttpStatus.OK, "successful", currentEvaluateYield));
+        }
+    }
 }

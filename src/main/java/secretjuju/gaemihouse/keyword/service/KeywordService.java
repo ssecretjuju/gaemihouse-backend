@@ -5,9 +5,7 @@ import org.springframework.stereotype.Service;
 import secretjuju.gaemihouse.keyword.dto.KeywordDTO;
 import secretjuju.gaemihouse.keyword.model.Keyword;
 import secretjuju.gaemihouse.keyword.repository.KeywordRepository;
-import secretjuju.gaemihouse.shareholder_room.dto.ShareholderRoomDTO;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
