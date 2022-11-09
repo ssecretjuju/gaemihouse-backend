@@ -52,7 +52,7 @@ public class PaymentController {
     @PostMapping("/update")
     public ResponseEntity<ResponseDTO> updatePayment(@RequestBody PaymentDTO paymentDTO) {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK,"결제 수정(취소) 성공", paymentService.updatePayment(paymentDTO)));
-    //orderId를 가지고 옴.
+    //paymentDTO에서 orderId를 가지고 와서 orderId와 일치하는 결제 내역을 취소처리함
     }
 
 
