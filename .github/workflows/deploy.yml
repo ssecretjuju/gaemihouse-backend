@@ -3,7 +3,7 @@ name: build_docker_image
 # condition
 on:
   pull_request:
-    branches: [main]
+    branches: [master]
 
 # pipeline
 jobs:
