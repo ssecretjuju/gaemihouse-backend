@@ -46,7 +46,7 @@ public class CommunityController {
     @PostMapping("/update")
     public ResponseEntity<ResponseDTO> updateCommunity(@RequestBody CommunityDTO communityDTO) {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK,"게시글 수정 성공", communityService.updateCommunity(communityDTO)));
-        //게시글 코드, 게시글 제목, 게시글 내용, ++ 작성자 아이디 가져오기
+        //communityDTO ->게시글 코드, 게시글 제목, 게시글 내용, ++ 작성자 아이디 가져오기
     }
 
     @PostMapping("/delete")
