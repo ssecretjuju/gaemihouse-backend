@@ -15,7 +15,6 @@ package secretjuju.gaemihouse.member.dto;
  * @version 1(클래스 버전)
  */
 
-
 public class TokenDTO {
     private String grantType;
     private String memberName;
