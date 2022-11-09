@@ -46,7 +46,7 @@ public class PaymentController {
     @PostMapping("/insert")
     public ResponseEntity<ResponseDTO> insertPayment(@RequestBody PaymentDTO paymentDTO) {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK,"결제 내역 저장 성공", paymentService.insertPayment(paymentDTO)));
-    //cancelYn빼고 다
+    //cancelYn빼고 다 넣어야함
     }
 
     @PostMapping("/update")
