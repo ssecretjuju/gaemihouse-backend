@@ -40,7 +40,7 @@ public class PaymentController {
     @GetMapping("/select/{memberId}")
     public ResponseEntity<ResponseDTO> selectPaymetListById(@PathVariable("memberId") String memberId) {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "결제 내역 조회 성공", paymentService.selectPaymentListById(memberId)));
-    //memberId
+    //memberId를 url에 담아서 보내기
     }
 
     @PostMapping("/insert")
