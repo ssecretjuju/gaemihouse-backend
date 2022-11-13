@@ -4,11 +4,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import secretjuju.gaemihouse.common.ResponseDTO;
+import secretjuju.gaemihouse.member.dto.MemberDTO;
 import secretjuju.gaemihouse.member.service.MemberService;
+import secretjuju.gaemihouse.notice.dto.NoticeDTO;
 
 /**
  * <pre>
@@ -18,10 +18,10 @@ import secretjuju.gaemihouse.member.service.MemberService;
  * ================================================================
  * DATE             AUTHOR           NOTE
  * ----------------------------------------------------------------
- * 2022-10-24       홍길동           최초 생성
+ * 2022-10-24       차용준            최초 생성
  * </pre>
  *
- * @author 홍길동(최초 작성자)
+ * @author 차용준 (최초 작성자)
  * @version 1(클래스 버전)
  * @see (참고할 class 또는 외부 url)
  */
@@ -35,9 +35,26 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    @GetMapping("/{memberId}")
+    @GetMapping("/id/{memberId}")
     public ResponseEntity<ResponseDTO> selectMyMemberInfo(@PathVariable String memberId) {
         System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", memberService.selectMyInfo(memberId)));
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "회원 (id) 조회 성공", memberService.selectMyInfo(memberId)));
     }
+
+    @GetMapping("/code/{memberCode}")
+    public ResponseEntity<ResponseDTO> selectMyMemberInfo(@PathVariable int memberCode) {
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "회원 (code) 조회 성공", memberService.selectMemberInfobyCode(memberCode)));
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<ResponseDTO> updateMember(@RequestBody MemberDTO memberDTO) {
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK,"회원 정보 수정 성공", memberService.updateMember(memberDTO)));
+    }
+
+    @PostMapping("/withdraw")
+    public ResponseEntity<ResponseDTO> withdrawMember(@RequestBody MemberDTO memberDTO) {
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK,"회원 정보 수정 성공", memberService.withdrawMember(memberDTO)));
+    }
+
 }

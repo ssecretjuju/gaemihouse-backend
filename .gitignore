@@ -32,6 +32,8 @@ build/
 ### VS Code ###
 .vscode/
 
-S3UploadConfig.java
-application.yml
+### etc ###
 *.yml
+application.yml
+aws.yml
+S3UploadConfig.java

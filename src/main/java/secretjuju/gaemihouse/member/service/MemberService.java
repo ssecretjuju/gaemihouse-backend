@@ -16,12 +16,11 @@ import secretjuju.gaemihouse.member.dto.MemberDTO;
  * ================================================================
  * DATE             AUTHOR           NOTE
  * ----------------------------------------------------------------
- * 2022-10-24       홍길동           최초 생성
+ * 2022-10-24       차용준            최초 생성
  * </pre>
  *
- * @author 홍길동(최초 작성자)
+ * @author 차용준 (최초 작성자)
  * @version 1(클래스 버전)
- * @see (참고할 class 또는 외부 url)
  */
 @Service
 public class MemberService {
@@ -40,6 +39,22 @@ public class MemberService {
         log.info("[MemberService] {}", member);
         log.info("[MemberService] getMyInfo End ==============================");
 
+        return member;
+    }
+
+
+    public Object updateMember(MemberDTO memberDTO) {
+        int updateMember = memberMapper.updateMember(memberDTO);
+        return (updateMember > 0) ? "회원 정보 수정 성공 !" : "회원 정보 수정 실패 ㅜ";
+    }
+
+    public Object withdrawMember(MemberDTO memberDTO) {
+        int withdrawMember = memberMapper.withdrawMember(memberDTO);
+        return (withdrawMember > 0) ? "회원 탈퇴 성공 !" : "회원 탈퇴 실패 ㅜ";
+    }
+
+    public Object selectMemberInfobyCode(int memberCode) {
+        MemberDTO member = memberMapper.selectMemberInfobyCode(memberCode);
         return member;
     }
 }

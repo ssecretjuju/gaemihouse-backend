@@ -1,4 +1,4 @@
-package src.test.java.secretjuju.gaemihouse.demo;
+package secretjuju.gaemihouse;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

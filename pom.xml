@@ -12,11 +12,23 @@
     <artifactId>gaemihouse-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>gaemihouse-backend</name>
+    <packaging>jar</packaging>
     <description>gaemihouse-backend</description>
     <properties>
         <java.version>11</java.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
