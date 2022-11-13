@@ -4,9 +4,9 @@ server:
 spring:
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@metaverse.ohgiraffers.com:1521/xe
-    username: C##GAEMIHOUSE
-    password: GAEMIHOUSE
+    url: jdbc:oracle:thin:@secretjuju.cobnraaxcbeh.ap-northeast-2.rds.amazonaws.com:1521/orcl
+    username: admin
+    password: 123ckdydwns!
   servlet:
     multipart:
       enabled: true
@@ -19,9 +19,6 @@ spring:
       enabled: true
   freemarker:
     cache: false
-  web:
-    resources:
-      static-locations: classpath:/productimgs/
   main:
     allow-circular-references: true
   jpa:
@@ -64,3 +61,11 @@ logging:
   level:
     root: info
 
+cloud:
+  aws:
+    s3:
+      bucket:
+        secretjuju
+    region:
+      static:
+        ap-northeast-2
