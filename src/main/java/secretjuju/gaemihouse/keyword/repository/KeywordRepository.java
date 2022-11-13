@@ -8,5 +8,5 @@ import java.util.Date;
 import java.util.List;
 
 public interface KeywordRepository extends JpaRepository<Keyword, Integer> {
-    List<Keyword> findAllByKeywordDateBetween(Date start, Date end);
+    List<Keyword> findAllByKeywordDateBetweenOrderByKeywordCountDesc(Date start, Date end);
 }

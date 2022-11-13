@@ -1,5 +1,6 @@
 package secretjuju.gaemihouse.keyword.controller;
 
+import org.json.JSONObject;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -56,5 +57,17 @@ public class KeywordController {
                 .ok()
                 .headers(headers)
                 .body(new ResponseDTO(HttpStatus.OK, "successful", keywords));
+    }
+
+    @GetMapping("aa")
+    public int aa() {
+
+        return 1;
+    }
+
+    @GetMapping("bb")
+    public int bb() {
+
+        return 0;
     }
 }
