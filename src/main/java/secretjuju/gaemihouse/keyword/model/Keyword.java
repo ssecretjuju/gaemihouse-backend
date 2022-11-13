@@ -27,6 +27,9 @@ public class Keyword {
     @Column(name = "KEYWORD_CONTENT")
     private String keywordContent;
 
+    @Column(name = "KEYWORD_COUNT")
+    private String keywordCount;
+
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yy-MM-dd")
     @Column(name = "KEYWORD_DATE")
@@ -40,9 +43,10 @@ public class Keyword {
         this.keywordDate = keywordDate;
     }
 
-    public Keyword(int keywordId, String keywordContent, Date keywordDate) {
+    public Keyword(int keywordId, String keywordContent, String keywordCount, Date keywordDate) {
         this.keywordId = keywordId;
         this.keywordContent = keywordContent;
+        this.keywordCount = keywordCount;
         this.keywordDate = keywordDate;
     }
 
@@ -52,6 +56,10 @@ public class Keyword {
 
     public String getKeywordContent() {
         return keywordContent;
+    }
+
+    public String getKeywordCount() {
+        return keywordCount;
     }
 
     public Date getKeywordDate() {
