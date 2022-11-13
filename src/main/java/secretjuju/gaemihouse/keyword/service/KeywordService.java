@@ -22,7 +22,7 @@ public class KeywordService {
     }
 
     public List<KeywordDTO> findAllByKeywordDateBetween(Date start, Date end) {
-        List<Keyword> keywords = keywordRepository.findAllByKeywordDateBetween(start, end);
+        List<Keyword> keywords = keywordRepository.findAllByKeywordDateBetweenOrderByKeywordCountDesc(start, end);
         List<KeywordDTO> keywordDTOS = new ArrayList<>();
         for (int i = 0; i < keywords.size(); i++) {
             keywordDTOS.add(modelMapper.map(keywords.get(i), KeywordDTO.class));
