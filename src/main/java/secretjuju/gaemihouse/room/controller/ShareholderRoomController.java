@@ -38,13 +38,13 @@ public class ShareholderRoomController {
             @ApiResponse(code = 404, message = "not found"),
             @ApiResponse(code = 500, message = "sever error")
     })
-    public ResponseEntity<ResponseDTO> selectShareholderRoomByMapCode(@RequestParam(name = "mapcode") int mapCode) {
+    public ResponseEntity<ResponseDTO> selectShareholderRoomByMapCode() {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
         List<ShareholderRoomDTO> shareholderRooms =
-                shareholderRoomService.selectShareholderRoomByMapCode(mapCode);
+                shareholderRoomService.selectShareholderRoom();
 
         return ResponseEntity
                 .ok()
@@ -55,13 +55,20 @@ public class ShareholderRoomController {
     @PostMapping("/shareholder-room")
     public ResponseEntity<ResponseDTO> insertShareholderRoom(@RequestBody Map<String, Object> requestBody) {
 
-       ShareholderRoom shareholderRoom = new ShareholderRoom((int) requestBody.get("roomCode"),
-               (int) requestBody.get("roomLimitedNumber"), 1, 0, (int) requestBody.get("mapCode"));
+       ShareholderRoom shareholderRoom = new ShareholderRoom((String)requestBody.get("roomTitle"),
+               (int) requestBody.get("roomLimitedNumber"), 1, 0);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
-        shareholderRoomService.insertShareholderRoom(shareholderRoom);
+        try {
+            shareholderRoomService.insertShareholderRoom(shareholderRoom);
+        } catch (Exception e) {
+            return ResponseEntity
+                    .badRequest()
+                    .headers(headers)
+                    .body(new ResponseDTO(HttpStatus.CREATED, "there already exists", false));
+        }
 
         return ResponseEntity
                 .created(URI.create("/shareholder-room"))
@@ -82,15 +89,15 @@ public class ShareholderRoomController {
     }
 
     @GetMapping("/shareholder-room/members")
-    public ResponseEntity<ResponseDTO> getShareholderRoomMembers(/* roomCode */) {
+    public ResponseEntity<ResponseDTO> getShareholderRoomMembers(@RequestBody Map<String, String> data) {
+
+        String roomTitle = data.get("roomTitle");
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
-        int roomCode = 1;
-
         List<ShareholderRoomMemberDTO> shareholderRoomMembers =
-                shareholderRoomMemberService.findShareholderRoomMemberAllByRoomCode(roomCode);
+                shareholderRoomMemberService.findShareholderRoomMemberAllByRoomTitle(roomTitle);
 
         return ResponseEntity
                 .ok()
@@ -99,7 +106,10 @@ public class ShareholderRoomController {
     }
 
     @GetMapping("/shareholder-room/yield")
-    public ResponseEntity<ResponseDTO> getShareholderRoomYield(/* roomCode */) {
+    public ResponseEntity<ResponseDTO> getShareholderRoomYield(@RequestBody Map<String, String> data) {
+
+        String memberId = data.get("memberId");
+        String roomTitle = data.get("roomTitle");
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
@@ -107,7 +117,7 @@ public class ShareholderRoomController {
         int roomCode = 1;
 
         double shareholderRoomYield =
-                shareholderRoomMemberService.findShareholderRoomYieldByRoomCode(roomCode);
+                shareholderRoomMemberService.findShareholderRoomYieldByRoomCode(memberId, roomTitle);
 
         return ResponseEntity
                 .ok()

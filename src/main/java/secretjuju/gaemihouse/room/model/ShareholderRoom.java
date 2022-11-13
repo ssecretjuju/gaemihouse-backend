@@ -1,16 +1,28 @@
 package secretjuju.gaemihouse.room.model;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity(name = "ShareholderRoom")
 @Table(name="TBL_SHAREHOLDER_ROOM")
 @Access(AccessType.FIELD)
+@SequenceGenerator(
+        name="SEQ_ROOM_CODE_GEN",
+        sequenceName = "SEQ_ROOM_CODE",
+        initialValue = 1,
+        allocationSize = 1
+)
 public class ShareholderRoom {
 
     @Id
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "SEQ_ROOM_CODE_GEN"
+    )
     @Column(name = "ROOM_CODE")
     private int roomCode;
+
+    @Column(name = "ROOM_TITLE")
+    private String roomTitle;
 
     @Column(name = "ROOM_LIMITED_NUMBER")
     private int roomLimitedNumber;
@@ -21,22 +33,34 @@ public class ShareholderRoom {
     @Column(name = "ROOM_YIELD")
     private int roomYield;
 
-    @Column(name = "MAP_CODE")
-    private  int mapCode;
+//    @Column(name = "MAP_CODE")
+//    private  int mapCode;
+
 
     public ShareholderRoom() {
     }
 
-    public ShareholderRoom(int roomCode, int roomLimitedNumber, int roomRegistedNumber, int roomYield, int mapCode) {
-        this.roomCode = roomCode;
+    public ShareholderRoom(String roomTitle, int roomLimitedNumber, int roomRegistedNumber, int roomYield) {
+        this.roomTitle = roomTitle;
         this.roomLimitedNumber = roomLimitedNumber;
         this.roomRegistedNumber = roomRegistedNumber;
         this.roomYield = roomYield;
-        this.mapCode = mapCode;
+    }
+
+    public ShareholderRoom(int roomCode, String roomTitle, int roomLimitedNumber, int roomRegistedNumber, int roomYield) {
+        this.roomCode = roomCode;
+        this.roomTitle = roomTitle;
+        this.roomLimitedNumber = roomLimitedNumber;
+        this.roomRegistedNumber = roomRegistedNumber;
+        this.roomYield = roomYield;
     }
 
     public int getRoomCode() {
         return roomCode;
+    }
+
+    public String getRoomTitle() {
+        return roomTitle;
     }
 
     public int getRoomLimitedNumber() {
@@ -49,22 +73,5 @@ public class ShareholderRoom {
 
     public int getRoomYield() {
         return roomYield;
-    }
-
-    public int getMapCode() {
-        return mapCode;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ShareholderRoom that = (ShareholderRoom) o;
-        return roomCode == that.roomCode && roomLimitedNumber == that.roomLimitedNumber && roomRegistedNumber == that.roomRegistedNumber && roomYield == that.roomYield && mapCode == that.mapCode;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(roomCode, roomLimitedNumber, roomRegistedNumber, roomYield, mapCode);
     }
 }
