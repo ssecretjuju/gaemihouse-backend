@@ -8,24 +8,26 @@ public class ShareholderRoomDTO {
 
     @ApiModelProperty(value = "방 아이디")
     private int roomCode;
+    @ApiModelProperty(value = "방 제목")
+    private String roomTitle;
     @ApiModelProperty(value = "방 최대 인원")
     private int roomLimitedNumber;
     @ApiModelProperty(value = "방 등록 인원")
     private int roomRegistedNumber;
     @ApiModelProperty(value = "방 수익률")
     private int roomYield;
-    @ApiModelProperty(value = "맵 아이디")
-    private  int mapCode;
+//    @ApiModelProperty(value = "맵 아이디")
+//    private  int mapCode;
 
     public ShareholderRoomDTO() {
     }
 
-    public ShareholderRoomDTO(int roomCode, int roomLimitedNumber, int roomRegistedNumber, int roomYield, int mapCode) {
+    public ShareholderRoomDTO(int roomCode, String roomTitle, int roomLimitedNumber, int roomRegistedNumber, int roomYield) {
         this.roomCode = roomCode;
+        this.roomTitle = roomTitle;
         this.roomLimitedNumber = roomLimitedNumber;
         this.roomRegistedNumber = roomRegistedNumber;
         this.roomYield = roomYield;
-        this.mapCode = mapCode;
     }
 
     public int getRoomCode() {
@@ -34,6 +36,14 @@ public class ShareholderRoomDTO {
 
     public void setRoomCode(int roomCode) {
         this.roomCode = roomCode;
+    }
+
+    public String getRoomTitle() {
+        return roomTitle;
+    }
+
+    public void setRoomTitle(String roomTitle) {
+        this.roomTitle = roomTitle;
     }
 
     public int getRoomLimitedNumber() {
@@ -60,22 +70,14 @@ public class ShareholderRoomDTO {
         this.roomYield = roomYield;
     }
 
-    public int getMapCode() {
-        return mapCode;
-    }
-
-    public void setMapCode(int mapCode) {
-        this.mapCode = mapCode;
-    }
-
     @Override
     public String toString() {
         return "ShareholderRoomDTO{" +
                 "roomCode=" + roomCode +
+                ", roomTitle='" + roomTitle + '\'' +
                 ", roomLimitedNumber=" + roomLimitedNumber +
                 ", roomRegistedNumber=" + roomRegistedNumber +
                 ", roomYield=" + roomYield +
-                ", mapCode=" + mapCode +
                 '}';
     }
 }

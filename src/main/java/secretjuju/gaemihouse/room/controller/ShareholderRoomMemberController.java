@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import secretjuju.gaemihouse.account.service.KoreaInvestmentService;
 import secretjuju.gaemihouse.common.ResponseDTO;
@@ -16,6 +17,7 @@ import secretjuju.gaemihouse.room.service.ShareholderRoomService;
 
 import java.net.URI;
 import java.nio.charset.Charset;
+import java.util.Map;
 
 @RestController
 public class ShareholderRoomMemberController {
@@ -33,15 +35,15 @@ public class ShareholderRoomMemberController {
     }
 
     @PostMapping("/shareholder-room/member")
-    public  ResponseEntity<ResponseDTO> findShareHolderRoom(/* 회원 코드, 방 코드*/) {
+    public  ResponseEntity<ResponseDTO> findShareHolderRoom(@RequestBody Map<String, String> data) {
+
+        String memberId = data.get("memberId");
+        String roomTitle = data.get("roomTitle");
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
-        int memberCode = 1;
-        int roomCode = 1;
-
-        ShareholderRoomMemberDTO shareholderRoomMember = shareholderRoomMemberService.findShareholderRoomMember(memberCode);
+        ShareholderRoomMemberDTO shareholderRoomMember = shareholderRoomMemberService.findShareholderRoomMember(memberId);
 
         return ResponseEntity
                 .ok()
@@ -51,17 +53,18 @@ public class ShareholderRoomMemberController {
 
     // url 설정하여 권한 설정하기
     @PostMapping("/shareholder-room/join")
-    public ResponseEntity<ResponseDTO> joinShareHolderRoom(/* 회원 코드, 방 코드*/) {
+    public ResponseEntity<ResponseDTO> joinShareHolderRoom(@RequestBody Map<String, String> data) {
+
+        String memberId = data.get("memberId");
+        String roomTitle = data.get("roomTitle");
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
-        int memberCode = 2;
-        int roomCode = 1;
-        int currentEvaluateProperty = koreaInvestmentService.getCurrentEvaluateProperty(/*memberCode*/);
+        int currentEvaluateProperty = koreaInvestmentService.getCurrentEvaluateProperty(memberId);
 
         ShareholderRoomMember shareholderRoomMember =
-                new ShareholderRoomMember(0, currentEvaluateProperty, memberCode, roomCode);
+                new ShareholderRoomMember(0, currentEvaluateProperty, memberId, roomTitle);
 
         shareholderRoomMemberService.updateShareholderRoom(shareholderRoomMember);
 
@@ -72,21 +75,22 @@ public class ShareholderRoomMemberController {
     }
 
     @PostMapping("/shareholder-room//current/evaluate-yield")
-    public ResponseEntity<ResponseDTO> getCurrentMemberYield(/* 회원 코드, 방 코드 */) {
+    public ResponseEntity<ResponseDTO> getCurrentMemberYield(@RequestBody Map<String, String> data) {
+
+        String memberId = data.get("memberId");
+        String roomTitle = data.get("roomTitle");
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
-        int memberCode = 2;
-        int roomCode = 1;
-        int roomMemberCode = shareholderRoomMemberService.findShareholderRoomMember(memberCode).getRoomMemberCode();
-        int currentEvaluateProperty = koreaInvestmentService.getCurrentEvaluateProperty(/*memberCode*/);
-        int joinEvaluateProperty = shareholderRoomMemberService.findShareholderRoomMember(memberCode).getJoinEvaluateProperty();
+        int roomMemberCode = shareholderRoomMemberService.findShareholderRoomMember(memberId).getRoomMemberCode();
+        int currentEvaluateProperty = koreaInvestmentService.getCurrentEvaluateProperty(memberId);
+        int joinEvaluateProperty = shareholderRoomMemberService.findShareholderRoomMember(memberId).getJoinEvaluateProperty();
 
         double currentMemberYield = Math.round((currentEvaluateProperty - joinEvaluateProperty) / (double) joinEvaluateProperty * 100 * 100) / 100.0;
 
         ShareholderRoomMember shareholderRoomMember =
-                new ShareholderRoomMember(roomMemberCode, currentMemberYield, joinEvaluateProperty, memberCode, roomCode);
+                new ShareholderRoomMember(roomMemberCode, currentMemberYield, joinEvaluateProperty, memberId, roomTitle);
 
         shareholderRoomMemberService.updateShareholderRoom(shareholderRoomMember); // 1인당 1방이므로 방 정보까지 필요하지 않음.
 

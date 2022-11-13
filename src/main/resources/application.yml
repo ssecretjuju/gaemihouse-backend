@@ -1,0 +1,71 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@secretjuju.cobnraaxcbeh.ap-northeast-2.rds.amazonaws.com:1521/orcl
+    username: admin
+    password: 123ckdydwns!
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+  devtools:
+    restart:
+      enabled: false
+    livereload:
+      enabled: true
+  freemarker:
+    cache: false
+  main:
+    allow-circular-references: true
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+    generate-ddl: false
+    database: oracle
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+# ??? ??? ??? ??? ? ??? ?? ??
+image:
+  # WebConfig? ??
+  add-resource-locations: classpath:/static/productimgs/
+  add-resource-handler: /productimgs/**
+  # ProductService? ??
+  image-dir: src/main/resources/static/productimgs
+  image-url: http://localhost:8080/productimgs/
+
+# HS512 ????? ??? ??? ??? 512bit, ? 64byte ??? secret key? ???? ??.
+# Secret ?? ?? ???? Base64 ? ???? ? ??
+jwt:
+  secret: asdfjp298pafo1320efqw0udvnh0er0h412r08byfdq9dsvh02143908hfeqwn80fdqs0nfdqs0n412013rq0nqefn08dfas0das730732g86923
+
+
+mybatis:
+  # mapper.xml location Setting
+  mapper-locations: mybatis/mapper/*.xml
+  # alias Setting
+  type-aliases-package: secretjuju.gaemihouse
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    root: info
+
+cloud:
+  aws:
+    s3:
+      bucket:
+        secretjuju
+    region:
+      static:
+        ap-northeast-2

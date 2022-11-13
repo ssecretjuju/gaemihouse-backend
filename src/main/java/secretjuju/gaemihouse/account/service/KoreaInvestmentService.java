@@ -12,15 +12,25 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import secretjuju.gaemihouse.member.dto.MemberDTO;
+import secretjuju.gaemihouse.member.service.MemberService;
 
 
 @Service
 public class KoreaInvestmentService {
-    public String getAccessToken(/*MemberDTO member*/) {
 
-        MemberDTO member = new MemberDTO();
-        member.setAppKey("PSAQ2zEMgKcoUYhfMMVxDfO5D6xxpyvdPVhR");
-        member.setAppSecret("P0eIWiuAOlPMNSzK/8IcXCN62xuknqP8eJTqB4/s4T6vJKdOD/7vc1U04IMr0lHGPaj2voIo1fFYQZ3r2azuK5lREZCDFmDyWRt0hSVA9pEbTzM6BE3nnfLqk1Y7ZgK8pVx4unhYtAGc+VnTJSF756K6QD2NeXs/YpTd1Avz9KWn1s4D97o=");
+    private final MemberService memberService;
+
+    public KoreaInvestmentService(MemberService memberService) {
+        this.memberService = memberService;
+    }
+
+    public String getAccessToken(String memberId) {
+
+//        MemberDTO member = new MemberDTO();
+//        member.setAppKey("PSAQ2zEMgKcoUYhfMMVxDfO5D6xxpyvdPVhR");
+//        member.setAppSecret("P0eIWiuAOlPMNSzK/8IcXCN62xuknqP8eJTqB4/s4T6vJKdOD/7vc1U04IMr0lHGPaj2voIo1fFYQZ3r2azuK5lREZCDFmDyWRt0hSVA9pEbTzM6BE3nnfLqk1Y7ZgK8pVx4unhYtAGc+VnTJSF756K6QD2NeXs/YpTd1Avz9KWn1s4D97o=");
+
+        MemberDTO member = memberService.selectMyInfo(memberId);
 
         String accessToken = "";
 
@@ -58,14 +68,17 @@ public class KoreaInvestmentService {
         return accessToken;
     }
 
-    public boolean getAccountBalance(/*MemberDTO member*/) {
+    public boolean getAccountBalance(String memberId) {
 
-        MemberDTO member = new MemberDTO();
-        member.setAppKey("PSAQ2zEMgKcoUYhfMMVxDfO5D6xxpyvdPVhR");
-        member.setAppSecret("P0eIWiuAOlPMNSzK/8IcXCN62xuknqP8eJTqB4/s4T6vJKdOD/7vc1U04IMr0lHGPaj2voIo1fFYQZ3r2azuK5lREZCDFmDyWRt0hSVA9pEbTzM6BE3nnfLqk1Y7ZgK8pVx4unhYtAGc+VnTJSF756K6QD2NeXs/YpTd1Avz9KWn1s4D97o=");
+//        MemberDTO member = new MemberDTO();
+//        member.setAppKey("PSAQ2zEMgKcoUYhfMMVxDfO5D6xxpyvdPVhR");
+//        member.setAppSecret("P0eIWiuAOlPMNSzK/8IcXCN62xuknqP8eJTqB4/s4T6vJKdOD/7vc1U04IMr0lHGPaj2voIo1fFYQZ3r2azuK5lREZCDFmDyWRt0hSVA9pEbTzM6BE3nnfLqk1Y7ZgK8pVx4unhYtAGc+VnTJSF756K6QD2NeXs/YpTd1Avz9KWn1s4D97o=");
+//
+//        member.setAccountNum("5007447801");
 
-        member.setAccountNum("5007447801");
-        String accessToken = getAccessToken(/*member*/);
+        MemberDTO member = memberService.selectMyInfo(memberId);
+
+        String accessToken = getAccessToken(memberId);
         String url = "https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/trading/inquire-balance"
                 + "?CANO=" + member.getAccountNum().substring(0, 8)
                 + "&ACNT_PRDT_CD=" + member.getAccountNum().substring(8)
@@ -144,13 +157,16 @@ public class KoreaInvestmentService {
         }
     }
 
-    public int getCurrentEvaluateProperty(/*member*/) {
-        MemberDTO member = new MemberDTO();
-        member.setAppKey("PSAQ2zEMgKcoUYhfMMVxDfO5D6xxpyvdPVhR");
-        member.setAppSecret("P0eIWiuAOlPMNSzK/8IcXCN62xuknqP8eJTqB4/s4T6vJKdOD/7vc1U04IMr0lHGPaj2voIo1fFYQZ3r2azuK5lREZCDFmDyWRt0hSVA9pEbTzM6BE3nnfLqk1Y7ZgK8pVx4unhYtAGc+VnTJSF756K6QD2NeXs/YpTd1Avz9KWn1s4D97o=");
+    public int getCurrentEvaluateProperty(String memberId) {
+//        MemberDTO member = new MemberDTO();
+//        member.setAppKey("PSAQ2zEMgKcoUYhfMMVxDfO5D6xxpyvdPVhR");
+//        member.setAppSecret("P0eIWiuAOlPMNSzK/8IcXCN62xuknqP8eJTqB4/s4T6vJKdOD/7vc1U04IMr0lHGPaj2voIo1fFYQZ3r2azuK5lREZCDFmDyWRt0hSVA9pEbTzM6BE3nnfLqk1Y7ZgK8pVx4unhYtAGc+VnTJSF756K6QD2NeXs/YpTd1Avz9KWn1s4D97o=");
+//
+//        member.setAccountNum("5007447801");
 
-        member.setAccountNum("5007447801");
-        String accessToken = getAccessToken(/*member*/);
+        MemberDTO member = memberService.selectMyInfo(memberId);
+
+        String accessToken = getAccessToken(memberId);
         String url = "https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/trading/inquire-balance"
                 + "?CANO=" + member.getAccountNum().substring(0, 8)
                 + "&ACNT_PRDT_CD=" + member.getAccountNum().substring(8)
@@ -201,13 +217,16 @@ public class KoreaInvestmentService {
         }
     }
 
-    public double getCurrentEvaluateYield(/* member */) {
-        MemberDTO member = new MemberDTO();
-        member.setAppKey("PSAQ2zEMgKcoUYhfMMVxDfO5D6xxpyvdPVhR");
-        member.setAppSecret("P0eIWiuAOlPMNSzK/8IcXCN62xuknqP8eJTqB4/s4T6vJKdOD/7vc1U04IMr0lHGPaj2voIo1fFYQZ3r2azuK5lREZCDFmDyWRt0hSVA9pEbTzM6BE3nnfLqk1Y7ZgK8pVx4unhYtAGc+VnTJSF756K6QD2NeXs/YpTd1Avz9KWn1s4D97o=");
+    public double getCurrentEvaluateYield(String memberId) {
+//        MemberDTO member = new MemberDTO();
+//        member.setAppKey("PSAQ2zEMgKcoUYhfMMVxDfO5D6xxpyvdPVhR");
+//        member.setAppSecret("P0eIWiuAOlPMNSzK/8IcXCN62xuknqP8eJTqB4/s4T6vJKdOD/7vc1U04IMr0lHGPaj2voIo1fFYQZ3r2azuK5lREZCDFmDyWRt0hSVA9pEbTzM6BE3nnfLqk1Y7ZgK8pVx4unhYtAGc+VnTJSF756K6QD2NeXs/YpTd1Avz9KWn1s4D97o=");
+//
+//        member.setAccountNum("5007447801");
 
-        member.setAccountNum("5007447801");
-        String accessToken = getAccessToken(/*member*/);
+        MemberDTO member = memberService.selectMyInfo(memberId);
+
+        String accessToken = getAccessToken(memberId);
         String url = "https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/trading/inquire-balance"
                 + "?CANO=" + member.getAccountNum().substring(0, 8)
                 + "&ACNT_PRDT_CD=" + member.getAccountNum().substring(8)
