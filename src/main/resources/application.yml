@@ -4,9 +4,9 @@ server:
 spring:
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@metaverse.ohgiraffers.com:1521/xe
-    username: C##GAEMIHOUSE
-    password: GAEMIHOUSE
+    url: ${{ secrets.DATASOURCE_URL }}
+    username: ${{ secrets.DATASOURCE_USERNAME }}
+    password: ${{ secrets.DATASOURCE_PASSWORD }}
   servlet:
     multipart:
       enabled: true
@@ -46,7 +46,7 @@ image:
 # HS512 ????? ??? ??? ??? 512bit, ? 64byte ??? secret key? ???? ??.
 # Secret ?? ?? ???? Base64 ? ???? ? ??
 jwt:
-  secret: asdfjp298pafo1320efqw0udvnh0er0h412r08byfdq9dsvh02143908hfeqwn80fdqs0nfdqs0n412013rq0nqefn08dfas0das730732g86923
+  secret: ${{ secrets.JWT_SECRET }}
 
 
 mybatis:
