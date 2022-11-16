@@ -21,9 +21,9 @@ public class ShareholderRoomService {
         this.modelMapper = modelMapper;
     }
 
-    public List<ShareholderRoomDTO> selectShareholderRoomByMapCode(int mapcode) {
+    public List<ShareholderRoomDTO> selectShareholderRoom() {
 
-        List<ShareholderRoom> shareholderRooms = shareholderRoomRepository.findShareholderRoomByMapCode(mapcode);
+        List<ShareholderRoom> shareholderRooms = shareholderRoomRepository.findAll();
         List<ShareholderRoomDTO> shareholderRoomDTOS = new ArrayList<>();
         for (int i = 0; i < shareholderRooms.size(); i++) {
             shareholderRoomDTOS.add(modelMapper.map(shareholderRooms.get(i), ShareholderRoomDTO.class));

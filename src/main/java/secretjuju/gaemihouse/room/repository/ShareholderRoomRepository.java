@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ShareholderRoomRepository extends Repository<ShareholderRoom, Integer> {
 
-   List<ShareholderRoom> findShareholderRoomByMapCode(int mapCode);
+   List<ShareholderRoom> findAll();
 
    void save(ShareholderRoom shareholderRoom);
 

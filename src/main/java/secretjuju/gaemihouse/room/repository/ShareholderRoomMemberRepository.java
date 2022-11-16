@@ -6,7 +6,7 @@ import secretjuju.gaemihouse.room.model.ShareholderRoomMember;
 import java.util.List;
 
 public interface ShareholderRoomMemberRepository extends JpaRepository<ShareholderRoomMember, Integer> {
-    ShareholderRoomMember findByMemberCode(int memberCode);
+    ShareholderRoomMember findByMemberId(String memberId);
 
-    List<ShareholderRoomMember> findAllByRoomCode(int roomCode);
+    List<ShareholderRoomMember> findAllByRoomTitle(String roomTitle);
 }

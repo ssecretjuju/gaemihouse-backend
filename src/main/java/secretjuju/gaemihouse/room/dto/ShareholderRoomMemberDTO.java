@@ -5,17 +5,17 @@ public class ShareholderRoomMemberDTO {
     private int roomMemberCode;
     private double roomMemberYield;
     private int joinEvaluateProperty;
-    private int memberCode;
-    private int roomCode;
+    private String memberId;
+    private String roomTitle;
     public ShareholderRoomMemberDTO() {
     }
 
-    public ShareholderRoomMemberDTO(int roomMemberCode, double roomMemberYield, int joinEvaluateProperty, int memberCode, int roomCode) {
+    public ShareholderRoomMemberDTO(int roomMemberCode, double roomMemberYield, int joinEvaluateProperty, String memberId, String roomTitle) {
         this.roomMemberCode = roomMemberCode;
         this.roomMemberYield = roomMemberYield;
         this.joinEvaluateProperty = joinEvaluateProperty;
-        this.memberCode = memberCode;
-        this.roomCode = roomCode;
+        this.memberId = memberId;
+        this.roomTitle = roomTitle;
     }
 
     public int getRoomMemberCode() {
@@ -42,20 +42,20 @@ public class ShareholderRoomMemberDTO {
         this.joinEvaluateProperty = joinEvaluateProperty;
     }
 
-    public int getMemberCode() {
-        return memberCode;
+    public String getMemberId() {
+        return memberId;
     }
 
-    public void setMemberCode(int memberCode) {
-        this.memberCode = memberCode;
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
     }
 
-    public int getRoomCode() {
-        return roomCode;
+    public String getRoomTitle() {
+        return roomTitle;
     }
 
-    public void setRoomCode(int roomCode) {
-        this.roomCode = roomCode;
+    public void setRoomTitle(String roomTitle) {
+        this.roomTitle = roomTitle;
     }
 
     @Override
@@ -64,8 +64,8 @@ public class ShareholderRoomMemberDTO {
                 "roomMemberCode=" + roomMemberCode +
                 ", roomMemberYield=" + roomMemberYield +
                 ", joinEvaluateProperty=" + joinEvaluateProperty +
-                ", memberCode=" + memberCode +
-                ", roomCode=" + roomCode +
+                ", memberId='" + memberId + '\'' +
+                ", roomTitle='" + roomTitle + '\'' +
                 '}';
     }
 }

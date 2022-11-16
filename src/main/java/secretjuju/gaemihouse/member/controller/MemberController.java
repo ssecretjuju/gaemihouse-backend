@@ -5,10 +5,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import secretjuju.gaemihouse.account.service.KoreaInvestmentService;
 import secretjuju.gaemihouse.common.ResponseDTO;
 import secretjuju.gaemihouse.member.dto.MemberDTO;
 import secretjuju.gaemihouse.member.service.MemberService;
-import secretjuju.gaemihouse.notice.dto.NoticeDTO;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <pre>
@@ -30,15 +34,40 @@ import secretjuju.gaemihouse.notice.dto.NoticeDTO;
 public class MemberController {
 
     private final MemberService memberService;
+    private final KoreaInvestmentService koreaInvestmentService;
 
-    public MemberController(MemberService memberService) {
+    public MemberController(MemberService memberService, KoreaInvestmentService koreaInvestmentService) {
         this.memberService = memberService;
+        this.koreaInvestmentService = koreaInvestmentService;
     }
 
     @GetMapping("/id/{memberId}")
     public ResponseEntity<ResponseDTO> selectMyMemberInfo(@PathVariable String memberId) {
         System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "회원 (id) 조회 성공", memberService.selectMyInfo(memberId)));
+        double yield = koreaInvestmentService.getCurrentEvaluateYield(memberId);
+        MemberDTO memberInfo = memberService.selectMyInfo(memberId);
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("memberCode", memberInfo.getMemberCode());
+        result.put("memberId", memberInfo.getMemberId());
+        result.put("memberPassword", memberInfo.getMemberPassword());
+        result.put("memberRole", memberInfo.getMemberRole());
+        result.put("memberNickname", memberInfo.getMemberNickname());
+        result.put("memberName", memberInfo.getMemberName());
+        result.put("stockFirm", memberInfo.getStockFirm());
+        result.put("accountNum", memberInfo.getAccountNum());
+        result.put("appKey", memberInfo.getAppKey());
+        result.put("appSecret", memberInfo.getAppSecret());
+        result.put("appKeyExpiresin", memberInfo.getAppKeyExpiresin());
+        result.put("termsAgreementYn", memberInfo.getTermsAgreementYn());
+        result.put("reportCount", memberInfo.getReportCount());
+        result.put("blacklistYn", memberInfo.getBlacklistYn());
+        result.put("stockCareer", memberInfo.getStockCareer());
+        result.put("withdrawYn", memberInfo.getWithdrawYn());
+        result.put("authorities", memberInfo.getAuthorities());
+        result.put("yield", yield);
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "회원 (id) 조회 성공", result));
     }
 
     @GetMapping("/code/{memberCode}")
