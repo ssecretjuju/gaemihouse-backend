@@ -34,4 +34,3 @@ build/
 
 S3UploadConfig.java
 aws.yml
-Dockerrun.aws.json
