@@ -1,0 +1,13 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "donghwoocho/backend",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": 8080,
+      "HostPort": 8080
+    }
+  ]
+}
