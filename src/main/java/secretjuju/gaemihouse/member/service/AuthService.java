@@ -12,7 +12,20 @@ import secretjuju.gaemihouse.member.dao.MemberMapper;
 import secretjuju.gaemihouse.member.dto.MemberDTO;
 import secretjuju.gaemihouse.member.dto.TokenDTO;
 
-
+/**
+ * <pre>
+ * Class : AuthService
+ * Comment: 클래스에 대한 간단 설명
+ * History
+ * ================================================================
+ * DATE             AUTHOR           NOTE
+ * ----------------------------------------------------------------
+ * 2022-10-24       차용준           최초 생성
+ * </pre>
+ *
+ * @author 차용준(최초 작성자)
+ * @version 1(클래스 버전)
+ */
 
 @Service
 public class AuthService {

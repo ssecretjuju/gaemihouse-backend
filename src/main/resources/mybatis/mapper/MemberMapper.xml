@@ -6,33 +6,19 @@
 
     <select id="selectByMemberId" resultType="MemberDTO">
         SELECT
-            MEMBER_CODE
-             ,  MEMBER_ID
-             ,  MEMBER_NAME
-             ,  MEMBER_PASSWORD
-             ,  MEMBER_ROLE
+            *
         FROM TBL_MEMBER
         WHERE MEMBER_ID = #{memberId}
     </select>
 
     <select id="selectById" resultType="MemberDTO">
-        SELECT
-                MEMBER_CODE
-             ,  MEMBER_ID
-             ,  MEMBER_NAME
-             ,  MEMBER_PASSWORD
-             ,  MEMBER_ROLE
+        SELECT *
         FROM TBL_MEMBER
         WHERE MEMBER_ID = #{id}
     </select>
 
     <select id="findByMemberId" resultType="MemberDTO">
-        SELECT
-                MEMBER_CODE
-             ,  MEMBER_ID
-             ,  MEMBER_NAME
-             ,  MEMBER_PASSWORD
-             ,  MEMBER_ROLE
+        SELECT *
         FROM TBL_MEMBER
         WHERE MEMBER_ID = #{memberId}
     </select>
@@ -42,32 +28,51 @@
         (
             MEMBER_CODE,
             MEMBER_ID,
-            MEMBER_NAME,
             MEMBER_PASSWORD,
-            MEMBER_SEX,
-            MEMBER_BIRTH,
+            MEMBER_NICKNAME,
+            MEMBER_NAME,
             STOCK_FIRM,
             ACCOUNT_NUM,
             APP_KEY,
             APP_SECRET,
             APP_KEY_EXPIRESIN,
-            TERMS_AGREEMENT_YN
+            TERMS_AGREEMENT_YN,
+            STOCK_CAREER
         )
         VALUES
         (
             SEQ_MEMBER_CODE.NEXTVAL,
             #{memberId},
-            #{memberName},
             #{memberPassword},
-            #{memberSex},
-            #{memberBirth},
+            #{memberNickname},
+            #{memberName},
             #{stockFirm},
             #{accountNum},
             #{appKey},
             #{appSecret},
             SYSDATE + 365,
-            #{termsAgreementYn}
+            #{termsAgreementYn},
+            #{stockCareer}
         )
     </insert>
+
+    <update id="updateMember" parameterType="MemberDTO">
+        UPDATE TBL_MEMBER
+        SET MEMBER_NICKNAME = #{memberNickname},
+            STOCK_CAREER = #{stockCareer}
+        WHERE MEMBER_CODE = #{memberCode}
+    </update>
+
+    <update id="withdrawMember" parameterType="MemberDTO">
+        UPDATE TBL_MEMBER
+        SET WITHDRAW_YN = #{withdrawYn}
+        WHERE MEMBER_CODE = #{memberCode}
+    </update>
+
+    <select id="selectMemberInfobyCode" resultType="MemberDTO">
+        SELECT *
+          FROM TBL_MEMBER
+         WHERE MEMBER_CODE = #{memberCode}
+    </select>
 
 </mapper>

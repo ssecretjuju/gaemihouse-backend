@@ -68,7 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .authorizeRequests()
 //                    .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                     .antMatchers("/auth/**").permitAll()
-                    .antMatchers("/member/**").hasAnyRole("USER")  // 나머지 API 는 전부 인증 필요
+//                    .antMatchers("/member/**").hasAnyRole("USER")  // 나머지 API 는 전부 인증 필요
 
                 .and()
                 .cors()
@@ -81,7 +81,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration configuration = new CorsConfiguration();
         // 로컬 React에서 오는 요청은 CORS 허용해준다.
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000" ));
+        configuration.setAllowedOrigins(Arrays.asList("*"));
         configuration.setAllowedMethods(Arrays.asList("GET", "PUT", "POST", "DELETE"));
         configuration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Origin", "Content-Type", "Access-Control-Allow-Headers", "Authorization", "X-Requested-With"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
