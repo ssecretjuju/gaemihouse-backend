@@ -33,11 +33,10 @@ spring:
       ddl-auto: update
     generate-ddl: false
     database: oracle
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 
-
-mvc:
-  pathmatch:
-    matching-strategy=ant_path_matcher:
 jwt:
   secret: ${{ secrets.JWT_SECRET }}
 
