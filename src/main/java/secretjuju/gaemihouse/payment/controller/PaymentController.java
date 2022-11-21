@@ -40,19 +40,19 @@ public class PaymentController {
     @GetMapping("/select/{memberId}")
     public ResponseEntity<ResponseDTO> selectPaymetListById(@PathVariable("memberId") String memberId) {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "결제 내역 조회 성공", paymentService.selectPaymentListById(memberId)));
-    //memberId
+    //memberId를 url에 담아서 보내기
     }
 
     @PostMapping("/insert")
     public ResponseEntity<ResponseDTO> insertPayment(@RequestBody PaymentDTO paymentDTO) {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK,"결제 내역 저장 성공", paymentService.insertPayment(paymentDTO)));
-    //cancelYn빼고 다
+    //cancelYn빼고 다 넣어야함
     }
 
     @PostMapping("/update")
     public ResponseEntity<ResponseDTO> updatePayment(@RequestBody PaymentDTO paymentDTO) {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK,"결제 수정(취소) 성공", paymentService.updatePayment(paymentDTO)));
-    //orderId를 가지고 옴.
+    //paymentDTO에서 orderId를 가지고 와서 orderId와 일치하는 결제 내역을 취소처리함
     }
 
 
