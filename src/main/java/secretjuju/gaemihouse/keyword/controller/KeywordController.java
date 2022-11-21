@@ -59,15 +59,4 @@ public class KeywordController {
                 .body(new ResponseDTO(HttpStatus.OK, "successful", keywords));
     }
 
-    @GetMapping("aa")
-    public int aa() {
-
-        return 1;
-    }
-
-    @GetMapping("bb")
-    public int bb() {
-
-        return 0;
-    }
 }
