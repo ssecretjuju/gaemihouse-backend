@@ -68,7 +68,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     private MemberDTO addAuthorities(MemberDTO member) {
         member.setAuthorities(Arrays.asList(new SimpleGrantedAuthority(member.getMemberRole())));
-
         return member;
     }
 

@@ -1,13 +1,13 @@
-package secretjuju.gaemihouse.community.dao;
+package secretjuju.gaemihouse.roomboard.dao;
 
 import org.apache.ibatis.annotations.Mapper;
-import secretjuju.gaemihouse.community.dto.CommunityDTO;
+import secretjuju.gaemihouse.roomboard.dto.RoomBoardDTO;
 
 import java.util.List;
 
 /**
  * <pre>
- * Class : CommunityMapper
+ * Class : RoomBoardMapper
  * Comment: 클래스에 대한 간단 설명
  * History
  * ================================================================
@@ -21,12 +21,12 @@ import java.util.List;
  * @see (참고할 class 또는 외부 url)
  */
 @Mapper
-public interface CommunityMapper {
-    List<CommunityDTO> selectCommunityList(int roomCode);
+public interface RoomBoardMapper {
+    List<RoomBoardDTO> selectRoomBoardList();
 
-    int insertCommunity(CommunityDTO communityDTO);
+    int insertRoomBoard(RoomBoardDTO roomBoardDTO);
 
-    int updateCommunity(CommunityDTO communityDTO);
+    int updateRoomBoard(RoomBoardDTO roomBoardDTO);
 
-    int deleteCommunity(CommunityDTO communityDTO);
+    int deleteRoomBoard(RoomBoardDTO roomBoardDTO);
 }

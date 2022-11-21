@@ -38,12 +38,14 @@ public class MemberController {
     @GetMapping("/id/{memberId}")
     public ResponseEntity<ResponseDTO> selectMyMemberInfo(@PathVariable String memberId) {
         System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
+        System.out.println("[TEST] member/id/{memberid} : " + memberId);
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "회원 (id) 조회 성공", memberService.selectMyInfo(memberId)));
     }
 
     @GetMapping("/code/{memberCode}")
     public ResponseEntity<ResponseDTO> selectMyMemberInfo(@PathVariable int memberCode) {
         System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
+
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "회원 (code) 조회 성공", memberService.selectMemberInfobyCode(memberCode)));
     }
 

@@ -31,14 +31,10 @@ public class MemberService {
         this.memberMapper = memberMapper;
     }
 
-    @GetMapping
-    public MemberDTO selectMyInfo(@PathVariable String memberId) {
-        log.info("[MemberService] getMyInfo Start ==============================");
 
-        MemberDTO member = memberMapper.selectByMemberId(memberId);
-        log.info("[MemberService] {}", member);
-        log.info("[MemberService] getMyInfo End ==============================");
-
+    public Object selectMyInfo(String memberId) {
+        MemberDTO member = memberMapper.selectMyInfo(memberId);
+        System.out.println("[TEST] member/id/{memberid} : " + memberId);
         return member;
     }
 
@@ -55,6 +51,7 @@ public class MemberService {
 
     public Object selectMemberInfobyCode(int memberCode) {
         MemberDTO member = memberMapper.selectMemberInfobyCode(memberCode);
+        System.out.println("[TEST] member/code/{memberCode} : " + memberCode);
         return member;
     }
 }

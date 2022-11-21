@@ -5,36 +5,33 @@
 <mapper namespace="secretjuju.gaemihouse.member.dao.MemberMapper">
 
     <select id="selectByMemberId" resultType="MemberDTO">
-        SELECT
-            MEMBER_CODE
-             ,  MEMBER_ID
-             ,  MEMBER_NAME
-             ,  MEMBER_PASSWORD
-             ,  MEMBER_ROLE
+        SELECT *
         FROM TBL_MEMBER
         WHERE MEMBER_ID = #{memberId}
     </select>
 
     <select id="selectById" resultType="MemberDTO">
-        SELECT
-                MEMBER_CODE
-             ,  MEMBER_ID
-             ,  MEMBER_NAME
-             ,  MEMBER_PASSWORD
-             ,  MEMBER_ROLE
+        SELECT *
         FROM TBL_MEMBER
         WHERE MEMBER_ID = #{id}
     </select>
 
     <select id="findByMemberId" resultType="MemberDTO">
-        SELECT
-                MEMBER_CODE
-             ,  MEMBER_ID
-             ,  MEMBER_NAME
-             ,  MEMBER_PASSWORD
-             ,  MEMBER_ROLE
+        SELECT *
         FROM TBL_MEMBER
         WHERE MEMBER_ID = #{memberId}
+    </select>
+
+    <select id="selectMyInfo" resultType="MemberDTO">
+        SELECT *
+          FROM TBL_MEMBER
+         WHERE MEMBER_ID = #{memberId}
+    </select>
+
+    <select id="selectMemberInfobyCode" resultType="MemberDTO">
+        SELECT *
+          FROM TBL_MEMBER
+         WHERE MEMBER_CODE = #{memberCode}
     </select>
 
     <insert id="insertMember" parameterType="MemberDTO">
@@ -83,10 +80,6 @@
         WHERE MEMBER_CODE = #{memberCode}
     </update>
 
-    <select id="selectMemberInfobyCode" resultType="MemberDTO">
-        SELECT *
-          FROM TBL_MEMBER
-         WHERE MEMBER_CODE = #{memberCode}
-    </select>
+
 
 </mapper>
