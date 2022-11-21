@@ -30,8 +30,8 @@ public class CommunityService {
         this.communityMapper = communityMapper;
     }
 
-    public Object selectCommunityList() {
-        List<CommunityDTO> communityList = communityMapper.selectCommunityList();
+    public Object selectCommunityList(int roomCode) {
+        List<CommunityDTO> communityList = communityMapper.selectCommunityList(roomCode);
         return communityList;
     }
 

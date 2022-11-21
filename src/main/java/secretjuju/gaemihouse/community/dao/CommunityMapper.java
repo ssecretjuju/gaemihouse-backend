@@ -22,7 +22,7 @@ import java.util.List;
  */
 @Mapper
 public interface CommunityMapper {
-    List<CommunityDTO> selectCommunityList();
+    List<CommunityDTO> selectCommunityList(int roomCode);
 
     int insertCommunity(CommunityDTO communityDTO);
 
