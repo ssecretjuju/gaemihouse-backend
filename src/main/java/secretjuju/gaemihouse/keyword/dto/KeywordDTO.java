@@ -6,13 +6,13 @@ public class KeywordDTO {
 
     private int keywordId;
     private String keywordContent;
-    private String keywordCount;
+    private int keywordCount;
     private Date keywordDate;
 
     public KeywordDTO() {
     }
 
-    public KeywordDTO(int keywordId, String keywordContent, String keywordCount, Date keywordDate) {
+    public KeywordDTO(int keywordId, String keywordContent, int keywordCount, Date keywordDate) {
         this.keywordId = keywordId;
         this.keywordContent = keywordContent;
         this.keywordCount = keywordCount;
@@ -35,11 +35,11 @@ public class KeywordDTO {
         this.keywordContent = keywordContent;
     }
 
-    public String getKeywordCount() {
+    public int getKeywordCount() {
         return keywordCount;
     }
 
-    public void setKeywordCount(String keywordCount) {
+    public void setKeywordCount(int keywordCount) {
         this.keywordCount = keywordCount;
     }
 
@@ -56,7 +56,7 @@ public class KeywordDTO {
         return "KeywordDTO{" +
                 "keywordId=" + keywordId +
                 ", keywordContent='" + keywordContent + '\'' +
-                ", keywordCount='" + keywordCount + '\'' +
+                ", keywordCount=" + keywordCount +
                 ", keywordDate=" + keywordDate +
                 '}';
     }
