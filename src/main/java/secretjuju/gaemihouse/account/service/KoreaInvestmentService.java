@@ -250,7 +250,7 @@ public class KoreaInvestmentService {
             getRequest.setHeader("appkey", member.getAppKey());
             getRequest.setHeader("appsecret", member.getAppSecret());
             getRequest.setHeader("tr_id", "VTTC8434R");
-            getRequest.setHeader("tr_cont", "M");
+            getRequest.setHeader("tr_cont", "F");
 
             HttpResponse response = client.execute(getRequest);
 
@@ -264,6 +264,53 @@ public class KoreaInvestmentService {
                 int accountChangePrice = result2.getInt("evlu_pfls_smtl_amt");
 
                 return Math.round(accountChangePrice / (double) accountTotalStockPurchasePrice * 100 * 100) / 100.0;
+            } else {
+                System.out.println("응답 코드 : " + response.getStatusLine().getStatusCode());
+
+                return -1;
+            }
+
+        } catch (Exception e) {
+            System.err.println(e.toString());
+
+            return -1;
+        }
+    }
+
+    public int getKOSPITrand(String memberId) {
+        MemberDTO member = memberService.selectMyInfo(memberId);
+
+        String accessToken = getAccessToken(memberId);
+        String url = "https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/quotations/inquire-price"
+                + "?FID_COND_MRKT_DIV_CODE=" + "J"
+                + "&FID_INPUT_ISCD=" + "069500";
+
+        System.out.println(url);
+
+        try {
+            HttpClient client = HttpClientBuilder.create().build();
+            HttpGet getRequest = new HttpGet(url);
+
+            getRequest.setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken);
+            getRequest.setHeader("appkey", member.getAppKey());
+            getRequest.setHeader("appsecret", member.getAppSecret());
+            getRequest.setHeader("tr_id", "FHKST01010100");
+            getRequest.setHeader("tr_cont", "M");
+
+            HttpResponse response = client.execute(getRequest);
+
+            if (response.getStatusLine().getStatusCode() == 200) {
+                ResponseHandler<String> handler = new BasicResponseHandler();
+                String body = handler.handleResponse(response);
+
+                int result = new JSONObject(body).getJSONObject("output").getInt("prdy_vrss");
+//
+//                int accountTotalStockPurchasePrice = result2.getInt("pchs_amt_smtl_amt");
+//                int accountChangePrice = result2.getInt("evlu_pfls_smtl_amt");
+
+//                return Math.round(accountChangePrice / (double) accountTotalStockPurchasePrice * 100 * 100) / 100.0;
+                System.out.println(body);
+                return result;
             } else {
                 System.out.println("응답 코드 : " + response.getStatusLine().getStatusCode());
 
