@@ -4,13 +4,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import secretjuju.gaemihouse.account.service.KoreaInvestmentService;
 import secretjuju.gaemihouse.common.ResponseDTO;
 
 import java.nio.charset.Charset;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/account")
@@ -24,12 +23,15 @@ public class KoreanInvestmentController {
 
     // Appkey & Appsecret 유효성 검사
     @PostMapping("/auth")
-    public ResponseEntity<ResponseDTO> checkAccessToken(/*MemberDTO member*/) {
+    public ResponseEntity<ResponseDTO> checkAccessToken(@RequestBody Map<String, String> member) {
+
+        String memberId = member.get("memberId");
+        System.out.println(memberId);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
-        if(koreaInvestmentService.getAccountBalance()) {
+        if(koreaInvestmentService.getAccountBalance(memberId)) {
             return ResponseEntity
                     .ok()
                     .headers(headers)
@@ -44,12 +46,15 @@ public class KoreanInvestmentController {
     }
 
     @PostMapping("/current/evaluate-property")
-    public ResponseEntity<ResponseDTO> getCurrentEvaluateProperty(/*MemberDTO member*/) {
+    public ResponseEntity<ResponseDTO> getCurrentEvaluateProperty(@RequestBody Map<String, String> member) {
+
+        String memberId = member.get("memberId");
+        System.out.println(memberId);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
-        int currentEvaluateProperty = koreaInvestmentService.getCurrentEvaluateProperty();
+        int currentEvaluateProperty = koreaInvestmentService.getCurrentEvaluateProperty(memberId);
 
         if(currentEvaluateProperty == -1) {
             return ResponseEntity
@@ -65,12 +70,15 @@ public class KoreanInvestmentController {
     }
 
     @PostMapping("/current/evaluate-yield")
-    public ResponseEntity<ResponseDTO> getCurrentEvaluateYield(/*MemberDTO member*/) {
+    public ResponseEntity<ResponseDTO> getCurrentEvaluateYield(@RequestBody Map<String, String> member) {
+
+        String memberId = member.get("memberId");
+        System.out.println(memberId);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
-        double currentEvaluateYield = koreaInvestmentService.getCurrentEvaluateYield();
+        double currentEvaluateYield = koreaInvestmentService.getCurrentEvaluateYield(memberId);
 
         if(currentEvaluateYield == -1) {
             return ResponseEntity
@@ -82,6 +90,27 @@ public class KoreanInvestmentController {
                     .ok()
                     .headers(headers)
                     .body(new ResponseDTO(HttpStatus.OK, "successful", currentEvaluateYield));
+        }
+    }
+
+    @GetMapping("/kospi")
+    public ResponseEntity<ResponseDTO> getCurrentKOSPI() {
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+        int currentKOSPI = koreaInvestmentService.getKOSPITrand("whehdgn");
+
+        if(currentKOSPI == -1) {
+            return ResponseEntity
+                    .ok()
+                    .headers(headers)
+                    .body(new ResponseDTO(HttpStatus.OK, "failed", -1));
+        } else {
+            return ResponseEntity
+                    .ok()
+                    .headers(headers)
+                    .body(new ResponseDTO(HttpStatus.OK, "successful", currentKOSPI >= 0? 1:0)); // 0: 하락, 1: 상승 및 보합
         }
     }
 }

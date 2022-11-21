@@ -5,7 +5,9 @@
 <mapper namespace="secretjuju.gaemihouse.member.dao.MemberMapper">
 
     <select id="selectByMemberId" resultType="MemberDTO">
-        SELECT *
+
+        SELECT
+            *
         FROM TBL_MEMBER
         WHERE MEMBER_ID = #{memberId}
     </select>

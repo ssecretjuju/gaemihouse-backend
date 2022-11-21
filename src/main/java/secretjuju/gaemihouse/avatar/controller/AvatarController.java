@@ -104,10 +104,8 @@ public class AvatarController {
         }
     }
 
-    @PostMapping("/test")
-    public String test(@RequestBody List<Map<String, String>> req) {
-        System.out.println(req);
-
-        return "[apple, banana, orange, blue, sky]";
+    @GetMapping("/")
+    public String test() {
+        return "Server is opened.";
     }
 }

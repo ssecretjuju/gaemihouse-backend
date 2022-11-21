@@ -23,9 +23,9 @@ public class ShareholderRoomMemberService {
         this.modelMapper = modelMapper;
     }
 
-    public ShareholderRoomMemberDTO findShareholderRoomMember(int memberCode) {
+    public ShareholderRoomMemberDTO findShareholderRoomMember(String memberId) {
 
-        ShareholderRoomMember shareholderRoomMember = shareholderRoomMemberRepository.findByMemberCode(memberCode);
+        ShareholderRoomMember shareholderRoomMember = shareholderRoomMemberRepository.findByMemberId(memberId);
 
         return modelMapper.map(shareholderRoomMember, ShareholderRoomMemberDTO.class);
     }
@@ -35,21 +35,20 @@ public class ShareholderRoomMemberService {
         shareholderRoomMemberRepository.save(shareholderRoomMember);
     }
 
-    public List<ShareholderRoomMemberDTO> findShareholderRoomMemberAllByRoomCode(int roomCode) {
-        List<ShareholderRoomMember> shareholderRoomMembers = shareholderRoomMemberRepository.findAllByRoomCode(roomCode);
+    public List<ShareholderRoomMemberDTO> findShareholderRoomMemberAllByRoomTitle(String roomTitle) {
+        List<ShareholderRoomMember> shareholderRoomMembers = shareholderRoomMemberRepository.findAllByRoomTitle(roomTitle);
         List<ShareholderRoomMemberDTO> shareholderRoomMemberDTOS = new ArrayList<>();
 
 
         ShareholderRoomMember shareholderRoomMember = null;
         for(int i = 0; i < shareholderRoomMembers.size(); i++) {
-            int memberCode = 1;
-            int roomMemberCode = findShareholderRoomMember(memberCode).getRoomMemberCode();
-            int currentEvaluateProperty = koreaInvestmentService.getCurrentEvaluateProperty(/*memberCode*/);
-            int joinEvaluateProperty = findShareholderRoomMember(memberCode).getJoinEvaluateProperty();
+            String roomMemberId = shareholderRoomMembers.get(i).getMemberId();
+            int currentEvaluateProperty = koreaInvestmentService.getCurrentEvaluateProperty(roomMemberId);
+            int joinEvaluateProperty = findShareholderRoomMember(roomMemberId).getJoinEvaluateProperty();
 
             double currentMemberYield = Math.round((currentEvaluateProperty - joinEvaluateProperty) / (double) joinEvaluateProperty * 100 * 100) / 100.0;
 
-            shareholderRoomMember = new ShareholderRoomMember(roomMemberCode, currentMemberYield, joinEvaluateProperty, memberCode, roomCode);
+            shareholderRoomMember = new ShareholderRoomMember(shareholderRoomMembers.get(i).getRoomMemberCode(), currentMemberYield, joinEvaluateProperty, roomMemberId, roomTitle);
 
             updateShareholderRoom(shareholderRoomMember);
             shareholderRoomMemberDTOS.add(modelMapper.map(shareholderRoomMembers.get(i), ShareholderRoomMemberDTO.class));
@@ -58,8 +57,8 @@ public class ShareholderRoomMemberService {
         return shareholderRoomMemberDTOS;
     }
 
-    public double findShareholderRoomYieldByRoomCode(int roomCode) {
-        List<ShareholderRoomMemberDTO> shareholderRoomMemberDTOS = findShareholderRoomMemberAllByRoomCode(roomCode);
+    public double findShareholderRoomYieldByRoomCode(String memberId, String roomTitle) {
+        List<ShareholderRoomMemberDTO> shareholderRoomMemberDTOS = findShareholderRoomMemberAllByRoomTitle(roomTitle);
 
         int shareholderRoomStartProperty = 0;
         int shareholderRoomEndProperty = 0;

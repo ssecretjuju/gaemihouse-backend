@@ -27,28 +27,28 @@ public class ShareholderRoomMember {
     @Column(name = "JOIN_EVALUATE_PROPERTY")
     private int joinEvaluateProperty;
 
-    @Column(name = "MEMBER_CODE")
-    private int memberCode;
+    @Column(name = "MEMBER_ID")
+    private String memberId;
 
-    @Column(name = "ROOM_CODE")
-    private int roomCode;
+    @Column(name = "ROOM_TITLE")
+    private String roomTitle;
 
     public ShareholderRoomMember() {
     }
 
-    public ShareholderRoomMember(double roomMemberYield, int joinEvaluateProperty, int memberCode, int roomCode) {
+    public ShareholderRoomMember(double roomMemberYield, int joinEvaluateProperty, String memberId, String roomTitle) {
         this.roomMemberYield = roomMemberYield;
         this.joinEvaluateProperty = joinEvaluateProperty;
-        this.memberCode = memberCode;
-        this.roomCode = roomCode;
+        this.memberId = memberId;
+        this.roomTitle = roomTitle;
     }
 
-    public ShareholderRoomMember(int roomMemberCode, double roomMemberYield, int joinEvaluateProperty, int memberCode, int roomCode) {
+    public ShareholderRoomMember(int roomMemberCode, double roomMemberYield, int joinEvaluateProperty, String memberId, String roomTitle) {
         this.roomMemberCode = roomMemberCode;
         this.roomMemberYield = roomMemberYield;
         this.joinEvaluateProperty = joinEvaluateProperty;
-        this.memberCode = memberCode;
-        this.roomCode = roomCode;
+        this.memberId = memberId;
+        this.roomTitle = roomTitle;
     }
 
     public int getRoomMemberCode() {
@@ -63,11 +63,11 @@ public class ShareholderRoomMember {
         return joinEvaluateProperty;
     }
 
-    public int getMemberCode() {
-        return memberCode;
+    public String getMemberId() {
+        return memberId;
     }
 
-    public int getRoomCode() {
-        return roomCode;
+    public String getRoomTitle() {
+        return roomTitle;
     }
 }

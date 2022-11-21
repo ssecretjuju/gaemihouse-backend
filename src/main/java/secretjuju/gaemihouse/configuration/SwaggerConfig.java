@@ -1,6 +1,5 @@
 package secretjuju.gaemihouse.configuration;
 
-import com.google.common.base.Predicate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,7 +20,7 @@ import java.util.List;
 
 @Configuration
 @EnableSwagger2
-public class SwaggerConfiguration {
+public class SwaggerConfig {
 
     private String version = "V1";
     private String title = "API 명세서 " + version;

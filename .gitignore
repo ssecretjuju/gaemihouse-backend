@@ -33,6 +33,6 @@ build/
 .vscode/
 
 
-### etc ###
-application.yml
-*.yml
+S3UploadConfig.java
+aws.yml
+

@@ -12,15 +12,25 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import secretjuju.gaemihouse.member.dto.MemberDTO;
+import secretjuju.gaemihouse.member.service.MemberService;
 
 
 @Service
 public class KoreaInvestmentService {
-    public String getAccessToken(/*MemberDTO member*/) {
 
-        MemberDTO member = new MemberDTO();
-        member.setAppKey("PSAQ2zEMgKcoUYhfMMVxDfO5D6xxpyvdPVhR");
-        member.setAppSecret("P0eIWiuAOlPMNSzK/8IcXCN62xuknqP8eJTqB4/s4T6vJKdOD/7vc1U04IMr0lHGPaj2voIo1fFYQZ3r2azuK5lREZCDFmDyWRt0hSVA9pEbTzM6BE3nnfLqk1Y7ZgK8pVx4unhYtAGc+VnTJSF756K6QD2NeXs/YpTd1Avz9KWn1s4D97o=");
+    private final MemberService memberService;
+
+    public KoreaInvestmentService(MemberService memberService) {
+        this.memberService = memberService;
+    }
+
+    public String getAccessToken(String memberId) {
+
+//        MemberDTO member = new MemberDTO();
+//        member.setAppKey("PSAQ2zEMgKcoUYhfMMVxDfO5D6xxpyvdPVhR");
+//        member.setAppSecret("P0eIWiuAOlPMNSzK/8IcXCN62xuknqP8eJTqB4/s4T6vJKdOD/7vc1U04IMr0lHGPaj2voIo1fFYQZ3r2azuK5lREZCDFmDyWRt0hSVA9pEbTzM6BE3nnfLqk1Y7ZgK8pVx4unhYtAGc+VnTJSF756K6QD2NeXs/YpTd1Avz9KWn1s4D97o=");
+
+        MemberDTO member = memberService.selectMyInfo(memberId);
 
         String accessToken = "";
 
@@ -58,14 +68,17 @@ public class KoreaInvestmentService {
         return accessToken;
     }
 
-    public boolean getAccountBalance(/*MemberDTO member*/) {
+    public boolean getAccountBalance(String memberId) {
 
-        MemberDTO member = new MemberDTO();
-        member.setAppKey("PSAQ2zEMgKcoUYhfMMVxDfO5D6xxpyvdPVhR");
-        member.setAppSecret("P0eIWiuAOlPMNSzK/8IcXCN62xuknqP8eJTqB4/s4T6vJKdOD/7vc1U04IMr0lHGPaj2voIo1fFYQZ3r2azuK5lREZCDFmDyWRt0hSVA9pEbTzM6BE3nnfLqk1Y7ZgK8pVx4unhYtAGc+VnTJSF756K6QD2NeXs/YpTd1Avz9KWn1s4D97o=");
+//        MemberDTO member = new MemberDTO();
+//        member.setAppKey("PSAQ2zEMgKcoUYhfMMVxDfO5D6xxpyvdPVhR");
+//        member.setAppSecret("P0eIWiuAOlPMNSzK/8IcXCN62xuknqP8eJTqB4/s4T6vJKdOD/7vc1U04IMr0lHGPaj2voIo1fFYQZ3r2azuK5lREZCDFmDyWRt0hSVA9pEbTzM6BE3nnfLqk1Y7ZgK8pVx4unhYtAGc+VnTJSF756K6QD2NeXs/YpTd1Avz9KWn1s4D97o=");
+//
+//        member.setAccountNum("5007447801");
 
-        member.setAccountNum("5007447801");
-        String accessToken = getAccessToken(/*member*/);
+        MemberDTO member = memberService.selectMyInfo(memberId);
+
+        String accessToken = getAccessToken(memberId);
         String url = "https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/trading/inquire-balance"
                 + "?CANO=" + member.getAccountNum().substring(0, 8)
                 + "&ACNT_PRDT_CD=" + member.getAccountNum().substring(8)
@@ -144,13 +157,16 @@ public class KoreaInvestmentService {
         }
     }
 
-    public int getCurrentEvaluateProperty(/*member*/) {
-        MemberDTO member = new MemberDTO();
-        member.setAppKey("PSAQ2zEMgKcoUYhfMMVxDfO5D6xxpyvdPVhR");
-        member.setAppSecret("P0eIWiuAOlPMNSzK/8IcXCN62xuknqP8eJTqB4/s4T6vJKdOD/7vc1U04IMr0lHGPaj2voIo1fFYQZ3r2azuK5lREZCDFmDyWRt0hSVA9pEbTzM6BE3nnfLqk1Y7ZgK8pVx4unhYtAGc+VnTJSF756K6QD2NeXs/YpTd1Avz9KWn1s4D97o=");
+    public int getCurrentEvaluateProperty(String memberId) {
+//        MemberDTO member = new MemberDTO();
+//        member.setAppKey("PSAQ2zEMgKcoUYhfMMVxDfO5D6xxpyvdPVhR");
+//        member.setAppSecret("P0eIWiuAOlPMNSzK/8IcXCN62xuknqP8eJTqB4/s4T6vJKdOD/7vc1U04IMr0lHGPaj2voIo1fFYQZ3r2azuK5lREZCDFmDyWRt0hSVA9pEbTzM6BE3nnfLqk1Y7ZgK8pVx4unhYtAGc+VnTJSF756K6QD2NeXs/YpTd1Avz9KWn1s4D97o=");
+//
+//        member.setAccountNum("5007447801");
 
-        member.setAccountNum("5007447801");
-        String accessToken = getAccessToken(/*member*/);
+        MemberDTO member = memberService.selectMyInfo(memberId);
+
+        String accessToken = getAccessToken(memberId);
         String url = "https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/trading/inquire-balance"
                 + "?CANO=" + member.getAccountNum().substring(0, 8)
                 + "&ACNT_PRDT_CD=" + member.getAccountNum().substring(8)
@@ -201,13 +217,16 @@ public class KoreaInvestmentService {
         }
     }
 
-    public double getCurrentEvaluateYield(/* member */) {
-        MemberDTO member = new MemberDTO();
-        member.setAppKey("PSAQ2zEMgKcoUYhfMMVxDfO5D6xxpyvdPVhR");
-        member.setAppSecret("P0eIWiuAOlPMNSzK/8IcXCN62xuknqP8eJTqB4/s4T6vJKdOD/7vc1U04IMr0lHGPaj2voIo1fFYQZ3r2azuK5lREZCDFmDyWRt0hSVA9pEbTzM6BE3nnfLqk1Y7ZgK8pVx4unhYtAGc+VnTJSF756K6QD2NeXs/YpTd1Avz9KWn1s4D97o=");
+    public double getCurrentEvaluateYield(String memberId) {
+//        MemberDTO member = new MemberDTO();
+//        member.setAppKey("PSAQ2zEMgKcoUYhfMMVxDfO5D6xxpyvdPVhR");
+//        member.setAppSecret("P0eIWiuAOlPMNSzK/8IcXCN62xuknqP8eJTqB4/s4T6vJKdOD/7vc1U04IMr0lHGPaj2voIo1fFYQZ3r2azuK5lREZCDFmDyWRt0hSVA9pEbTzM6BE3nnfLqk1Y7ZgK8pVx4unhYtAGc+VnTJSF756K6QD2NeXs/YpTd1Avz9KWn1s4D97o=");
+//
+//        member.setAccountNum("5007447801");
 
-        member.setAccountNum("5007447801");
-        String accessToken = getAccessToken(/*member*/);
+        MemberDTO member = memberService.selectMyInfo(memberId);
+
+        String accessToken = getAccessToken(memberId);
         String url = "https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/trading/inquire-balance"
                 + "?CANO=" + member.getAccountNum().substring(0, 8)
                 + "&ACNT_PRDT_CD=" + member.getAccountNum().substring(8)
@@ -231,7 +250,7 @@ public class KoreaInvestmentService {
             getRequest.setHeader("appkey", member.getAppKey());
             getRequest.setHeader("appsecret", member.getAppSecret());
             getRequest.setHeader("tr_id", "VTTC8434R");
-            getRequest.setHeader("tr_cont", "M");
+            getRequest.setHeader("tr_cont", "F");
 
             HttpResponse response = client.execute(getRequest);
 
@@ -245,6 +264,53 @@ public class KoreaInvestmentService {
                 int accountChangePrice = result2.getInt("evlu_pfls_smtl_amt");
 
                 return Math.round(accountChangePrice / (double) accountTotalStockPurchasePrice * 100 * 100) / 100.0;
+            } else {
+                System.out.println("응답 코드 : " + response.getStatusLine().getStatusCode());
+
+                return -1;
+            }
+
+        } catch (Exception e) {
+            System.err.println(e.toString());
+
+            return -1;
+        }
+    }
+
+    public int getKOSPITrand(String memberId) {
+        MemberDTO member = memberService.selectMyInfo(memberId);
+
+        String accessToken = getAccessToken(memberId);
+        String url = "https://openapivts.koreainvestment.com:29443/uapi/domestic-stock/v1/quotations/inquire-price"
+                + "?FID_COND_MRKT_DIV_CODE=" + "J"
+                + "&FID_INPUT_ISCD=" + "069500";
+
+        System.out.println(url);
+
+        try {
+            HttpClient client = HttpClientBuilder.create().build();
+            HttpGet getRequest = new HttpGet(url);
+
+            getRequest.setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken);
+            getRequest.setHeader("appkey", member.getAppKey());
+            getRequest.setHeader("appsecret", member.getAppSecret());
+            getRequest.setHeader("tr_id", "FHKST01010100");
+            getRequest.setHeader("tr_cont", "M");
+
+            HttpResponse response = client.execute(getRequest);
+
+            if (response.getStatusLine().getStatusCode() == 200) {
+                ResponseHandler<String> handler = new BasicResponseHandler();
+                String body = handler.handleResponse(response);
+
+                int result = new JSONObject(body).getJSONObject("output").getInt("prdy_vrss");
+//
+//                int accountTotalStockPurchasePrice = result2.getInt("pchs_amt_smtl_amt");
+//                int accountChangePrice = result2.getInt("evlu_pfls_smtl_amt");
+
+//                return Math.round(accountChangePrice / (double) accountTotalStockPurchasePrice * 100 * 100) / 100.0;
+                System.out.println(body);
+                return result;
             } else {
                 System.out.println("응답 코드 : " + response.getStatusLine().getStatusCode());
 

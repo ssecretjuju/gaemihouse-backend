@@ -49,7 +49,7 @@ public class MemberService {
         return (withdrawMember > 0) ? "회원 탈퇴 성공 !" : "회원 탈퇴 실패 ㅜ";
     }
 
-    public Object selectMemberInfobyCode(int memberCode) {
+    public MemberDTO selectMemberInfobyCode(int memberCode) {
         MemberDTO member = memberMapper.selectMemberInfobyCode(memberCode);
         System.out.println("[TEST] member/code/{memberCode} : " + memberCode);
         return member;
