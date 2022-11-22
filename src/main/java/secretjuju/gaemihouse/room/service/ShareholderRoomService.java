@@ -47,5 +47,6 @@ public class ShareholderRoomService {
     public ShareholderRoomDTO findShareholderRoom(String roomTitle) {
 
         return modelMapper.map(shareholderRoomRepository.findByRoomTitle(roomTitle), ShareholderRoomDTO.class);
+
     }
 }

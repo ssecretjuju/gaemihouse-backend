@@ -102,6 +102,7 @@ public class ShareholderRoomController {
                     .headers(headers)
                     .body(new ResponseDTO(HttpStatus.OK, "fail", false));
         }
+
     }
 
     @GetMapping("/shareholder-room/members")
