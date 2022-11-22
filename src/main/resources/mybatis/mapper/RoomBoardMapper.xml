@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="secretjuju.gaemihouse.roomboard.dao.RoomBoardMapper">
+
+    <select id="selectRoomBoardList" resultType="RoomBoardDTO">
+        SELECT *
+          FROM TBL_ROOMBOARD
+    </select>
+
+    <select id="selectRoomBoardListByRoomCode" resultType="RoomBoardDTO">
+        SELECT *
+          FROM TBL_ROOMBOARD
+          WHERE SHAREHOLDERROOM_CODE = #{shareholderRoomCode}
+    </select>
+
+    <insert id="insertRoomBoard" parameterType="RoomBoardDTO">
+        INSERT INTO TBL_ROOMBOARD
+        VALUES
+        (
+         SEQ_COMMUNITY_CODE.NEXTVAL,
+         #{roomBoardTitle},
+         #{roomBoardContent},
+         SYSDATE,
+         #{memberCode},
+         #{shareholderRoomCode},
+         #{likeCount}
+        )
+    </insert>
+
+    <update id="updateRoomBoard">
+        UPDATE TBL_ROOMBOARD
+           SET ROOMBOARD_TITLE = #{roomBoardTitle},
+               ROOMBOARD_CONTENT = #{roomBoardContent}
+         WHERE ROOMBOARD_CODE = #{roomBoardCode} AND MEMBER_CODE = #{memberCode}
+    </update>
+
+    <delete id="deleteRoomBoard">
+        DELETE FROM TBL_ROOMBOARD
+         WHERE ROOMBOARD_CODE = #{roomBoardCode} AND MEMBER_CODE = #{memberCode}
+    </delete>
+</mapper>

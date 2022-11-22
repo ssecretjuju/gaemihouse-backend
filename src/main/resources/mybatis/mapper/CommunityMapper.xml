@@ -6,6 +6,7 @@
     <select id="selectCommunityList" resultType="CommunityDTO">
         SELECT *
           FROM TBL_COMMUNITY
+          WHERE SHAREHOLDERROOM_CODE = #{shareholderRoomCode}
     </select>
 
     <insert id="insertCommunity" parameterType="CommunityDTO">
