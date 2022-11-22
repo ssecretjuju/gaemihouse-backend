@@ -79,13 +79,30 @@ public class ShareholderRoomController {
     @DeleteMapping("/shareholder-room")
     public ResponseEntity<ResponseDTO> deleteShareholderRoom(@RequestBody Map<String, Object> requestBody) {
 
-        int roomCode = (int) requestBody.get("roomCode");
+        String roomTitle = (String) requestBody.get("roomTitle");
 
-        shareholderRoomService.deleteShareholderRoom(roomCode);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
-        return ResponseEntity
-                .noContent()
-                .build();
+        try {
+
+            ShareholderRoomDTO shareholderRoom = shareholderRoomService.findShareholderRoom(roomTitle);
+
+            shareholderRoomService.deleteShareholderRoom(shareholderRoom.getRoomTitle());
+
+            return ResponseEntity
+                    .ok()
+                    .headers(headers)
+                    .body(new ResponseDTO(HttpStatus.OK, "successful", true));
+
+        } catch(Exception e) {
+
+            return ResponseEntity
+                    .ok()
+                    .headers(headers)
+                    .body(new ResponseDTO(HttpStatus.OK, "fail", false));
+        }
+
     }
 
     @GetMapping("/shareholder-room/members")
@@ -123,5 +140,40 @@ public class ShareholderRoomController {
                 .ok()
                 .headers(headers)
                 .body(new ResponseDTO(HttpStatus.OK, "successful", shareholderRoomYield));
+    }
+
+    @PostMapping("/shareholder-room/entrance")
+    public ResponseEntity<ResponseDTO> enterShareHolderRoom(@RequestBody Map<String, String> data) {
+
+        String memberId = data.get("memberId");
+        String roomTitle = data.get("roomTitle");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+        ShareholderRoomMemberDTO shareholderRoomMember;
+        try {
+            shareholderRoomMember = shareholderRoomMemberService.findShareholderRoomMember(memberId);
+
+            String joinRoomTitle = shareholderRoomMember.getRoomTitle();
+
+            if (joinRoomTitle.equals(roomTitle)) {
+                return ResponseEntity
+                        .ok()
+                        .headers(headers)
+                        .body(new ResponseDTO(HttpStatus.OK, "successful", 1)); // 입장 가능 => 바로 입장
+            } else {
+                return ResponseEntity
+                        .ok()
+                        .headers(headers)
+                        .body(new ResponseDTO(HttpStatus.OK, "successful", -1)); // 입장 불가 => 이미 다른 방 가입 창
+            }
+
+        } catch(Exception e) {
+            return ResponseEntity
+                    .ok()
+                    .headers(headers)
+                    .body(new ResponseDTO(HttpStatus.OK, "successful", 0)); // 정보 없음 => 가입 창
+        }
     }
 }
