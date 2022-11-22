@@ -131,7 +131,6 @@ public class ShareholderRoomController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
-        int roomCode = 1;
 
         double shareholderRoomYield =
                 shareholderRoomMemberService.findShareholderRoomYieldByRoomCode(memberId, roomTitle);
