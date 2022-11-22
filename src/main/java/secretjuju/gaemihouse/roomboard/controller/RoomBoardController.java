@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import secretjuju.gaemihouse.common.ResponseDTO;
+import secretjuju.gaemihouse.roomboard.dto.LikeCountDTO;
 import secretjuju.gaemihouse.roomboard.dto.RoomBoardDTO;
 import secretjuju.gaemihouse.roomboard.service.RoomBoardService;
 
@@ -22,6 +23,7 @@ import secretjuju.gaemihouse.roomboard.service.RoomBoardService;
  * @version 1(클래스 버전)
  * @see (참고할 class 또는 외부 url)
  */
+
 
 @RestController
 @RequestMapping("/roomBoard")
@@ -58,6 +60,11 @@ public class RoomBoardController {
     @PostMapping("/delete")
     public ResponseEntity<ResponseDTO> deleteroomBoard(@RequestBody RoomBoardDTO roomBoardDTO) {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK,"게시글 삭제 성공", roomBoardService.deleteRoomBoard(roomBoardDTO)));
+    }
+
+    @PostMapping("/updatelikecount")
+    public ResponseEntity<ResponseDTO> updateLikeCount(@RequestBody LikeCountDTO likeCountDTO) {
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK,"좋아요 수정 성공", roomBoardService.updateLikeCount(likeCountDTO)));
     }
 
 }
