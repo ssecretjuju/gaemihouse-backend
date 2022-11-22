@@ -79,13 +79,29 @@ public class ShareholderRoomController {
     @DeleteMapping("/shareholder-room")
     public ResponseEntity<ResponseDTO> deleteShareholderRoom(@RequestBody Map<String, Object> requestBody) {
 
-        int roomCode = (int) requestBody.get("roomCode");
+        String roomTitle = (String) requestBody.get("roomTitle");
 
-        shareholderRoomService.deleteShareholderRoom(roomCode);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
-        return ResponseEntity
-                .noContent()
-                .build();
+        try {
+
+            ShareholderRoomDTO shareholderRoom = shareholderRoomService.findShareholderRoom(roomTitle);
+
+            shareholderRoomService.deleteShareholderRoom(shareholderRoom.getRoomTitle());
+
+            return ResponseEntity
+                    .ok()
+                    .headers(headers)
+                    .body(new ResponseDTO(HttpStatus.OK, "successful", true));
+
+        } catch(Exception e) {
+
+            return ResponseEntity
+                    .ok()
+                    .headers(headers)
+                    .body(new ResponseDTO(HttpStatus.OK, "fail", false));
+        }
     }
 
     @GetMapping("/shareholder-room/members")

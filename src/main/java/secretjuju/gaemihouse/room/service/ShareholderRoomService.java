@@ -39,8 +39,13 @@ public class ShareholderRoomService {
     }
 
     @Transactional
-    public void deleteShareholderRoom(int roomCode) {
+    public void deleteShareholderRoom(String roomTitle) {
 
-        shareholderRoomRepository.deleteByRoomCode(roomCode);
+        shareholderRoomRepository.deleteByRoomTitle(roomTitle);
+    }
+
+    public ShareholderRoomDTO findShareholderRoom(String roomTitle) {
+
+        return modelMapper.map(shareholderRoomRepository.findByRoomTitle(roomTitle), ShareholderRoomDTO.class);
     }
 }
