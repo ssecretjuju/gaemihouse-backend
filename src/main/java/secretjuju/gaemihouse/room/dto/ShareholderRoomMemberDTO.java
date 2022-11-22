@@ -10,6 +10,13 @@ public class ShareholderRoomMemberDTO {
     public ShareholderRoomMemberDTO() {
     }
 
+    public ShareholderRoomMemberDTO(double roomMemberYield, int joinEvaluateProperty, String memberId, String roomTitle) {
+        this.roomMemberYield = roomMemberYield;
+        this.joinEvaluateProperty = joinEvaluateProperty;
+        this.memberId = memberId;
+        this.roomTitle = roomTitle;
+    }
+
     public ShareholderRoomMemberDTO(int roomMemberCode, double roomMemberYield, int joinEvaluateProperty, String memberId, String roomTitle) {
         this.roomMemberCode = roomMemberCode;
         this.roomMemberYield = roomMemberYield;

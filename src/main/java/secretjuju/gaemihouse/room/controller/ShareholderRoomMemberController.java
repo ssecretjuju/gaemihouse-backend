@@ -63,15 +63,29 @@ public class ShareholderRoomMemberController {
 
         int currentEvaluateProperty = koreaInvestmentService.getCurrentEvaluateProperty(memberId);
 
-        ShareholderRoomMember shareholderRoomMember =
-                new ShareholderRoomMember(0, currentEvaluateProperty, memberId, roomTitle);
+        ShareholderRoomMemberDTO shareholderRoomMemberDTO;
+        try {
+            shareholderRoomMemberDTO = shareholderRoomMemberService.findShareholderRoomMember(memberId);
 
-        shareholderRoomMemberService.updateShareholderRoom(shareholderRoomMember);
+            String joinRoomTitle = shareholderRoomMemberDTO.getRoomTitle();
 
-        return ResponseEntity
-                .created(URI.create("/shareholder-room/join"))
-                .headers(headers)
-                .body(new ResponseDTO(HttpStatus.CREATED, "successful", true));
+            return ResponseEntity
+                    .badRequest()
+                    .headers(headers)
+                    .body(new ResponseDTO(HttpStatus.CREATED, "fail", false)); // 이미 다른 방에 가입 되어 있는 경우
+
+        } catch (Exception e) {
+
+            ShareholderRoomMember shareholderRoomMember =
+                    new ShareholderRoomMember(0, currentEvaluateProperty, memberId, roomTitle);
+
+            shareholderRoomMemberService.updateShareholderRoom(shareholderRoomMember);
+
+            return ResponseEntity
+                    .created(URI.create("/shareholder-room/join"))
+                    .headers(headers)
+                    .body(new ResponseDTO(HttpStatus.CREATED, "successful", true));
+        }
     }
 
     @PostMapping("/shareholder-room//current/evaluate-yield")
