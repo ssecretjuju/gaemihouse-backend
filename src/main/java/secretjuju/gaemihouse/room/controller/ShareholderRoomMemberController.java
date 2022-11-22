@@ -35,7 +35,7 @@ public class ShareholderRoomMemberController {
     }
 
     @PostMapping("/shareholder-room/member")
-    public  ResponseEntity<ResponseDTO> findShareHolderRoom(@RequestBody Map<String, String> data) {
+    public ResponseEntity<ResponseDTO> findShareHolderRoom(@RequestBody Map<String, String> data) {
 
         String memberId = data.get("memberId");
         String roomTitle = data.get("roomTitle");
