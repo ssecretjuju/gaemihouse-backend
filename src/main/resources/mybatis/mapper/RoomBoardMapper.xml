@@ -40,4 +40,69 @@
         DELETE FROM TBL_ROOMBOARD
          WHERE ROOMBOARD_CODE = #{roomBoardCode} AND MEMBER_CODE = #{memberCode}
     </delete>
+
+<!--좋아요 쿼리문-->
+
+    <select id="CheckLikeList" resultType="LikeCountDTO">
+        SELECT *
+          FROM TBL_LIKE_COUNT
+          WHERE PUSH_MEMBER_CODE = #{pushMemberCode}
+    </select>
+
+    <select id="CheckLikePushed" resultType="LikeCountDTO">
+        SELECT PUSHED_YN
+          FROM TBL_LIKE_COUNT
+          WHERE PUSH_MEMBER_CODE = #{pushMemberCode}
+    </select>
+
+    <update id="ChangePlusLikeCountTable">
+        UPDATE TBL_LIKE_COUNT
+           SET PUSHED_YN='Y'
+           WHERE PUSH_MEMBER_CODE = #{pushMemberCode} AND ROOMBOARD_CODE = #{roomboardCode}
+    </update>
+
+    <update id="ChangePlusRoomBoardTable">
+        UPDATE TBL_ROOMBOARD
+           SET LIKE_COUNT = LIKE_COUNT + 1
+           WHERE ROOMBOARD_CODE = #{roomboardCode}
+    </update>
+
+    <update id="ChangeMinusLikeCountTable">
+        UPDATE TBL_LIKE_COUNT
+           SET PUSHED_YN='N'
+           WHERE PUSH_MEMBER_CODE = #{pushMemberCode} AND ROOMBOARD_CODE = #{roomboardCode}
+    </update>
+
+    <update id="ChangeMinusRoomBoardTable">
+        UPDATE TBL_ROOMBOARD
+           SET LIKE_COUNT = LIKE_COUNT - 1
+           WHERE ROOMBOARD_CODE = #{roomboardCode}
+    </update>
+
+    <update id="ChangePlusMemberTable">
+        UPDATE TBL_MEMBER
+           SET LIKE_COUNT = LIKE_COUNT + 1
+           WHERE MEMBER_CODE = #{memberCode}
+    </update>
+
+    <update id="ChangeMinusMemberTable">
+        UPDATE TBL_MEMBER
+           SET LIKE_COUNT = LIKE_COUNT - 1
+           WHERE MEMBER_CODE = #{memberCode}
+    </update>
+
+    <insert id="insertLikeCount" parameterType="LikeCountDTO">
+        INSERT INTO TBL_LIKE_COUNT
+        VALUES
+        (
+         #{roomboardCode},
+         #{memberCode},
+         #{pushMemberCode},
+         #{pushedYn}
+        )
+    </insert>
+
+
+
+
 </mapper>

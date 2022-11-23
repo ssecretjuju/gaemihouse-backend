@@ -1,6 +1,8 @@
 package secretjuju.gaemihouse.roomboard.dao;
 
 import org.apache.ibatis.annotations.Mapper;
+import secretjuju.gaemihouse.roomboard.controller.RoomBoardController;
+import secretjuju.gaemihouse.roomboard.dto.LikeCountDTO;
 import secretjuju.gaemihouse.roomboard.dto.RoomBoardDTO;
 
 import java.util.List;
@@ -31,4 +33,22 @@ public interface RoomBoardMapper {
     int updateRoomBoard(RoomBoardDTO roomBoardDTO);
 
     int deleteRoomBoard(RoomBoardDTO roomBoardDTO);
+
+    List<LikeCountDTO> CheckLikeList(LikeCountDTO likeCountDTO);
+
+    LikeCountDTO CheckLikePushed(LikeCountDTO likeCountDTO);
+
+    int ChangePlusLikeCountTable(LikeCountDTO likeCountDTO);
+
+    int ChangePlusRoomBoardTable(LikeCountDTO likeCountDTO);
+
+    int ChangeMinusLikeCountTable(LikeCountDTO likeCountDTO);
+
+    int ChangeMinusRoomBoardTable(LikeCountDTO likeCountDTO);
+
+    int ChangePlusMemberTable(LikeCountDTO likeCountDTO);
+
+    int ChangeMinusMemberTable(LikeCountDTO likeCountDTO);
+
+    int insertLikeCount(LikeCountDTO likeCountDTO);
 }
