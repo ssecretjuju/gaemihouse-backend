@@ -20,9 +20,9 @@ public class AvatarService {
         this.avatarRepository = avatarRepository;
         this.modelMapper = modelMapper;
     }
-    public AvatarDTO selectAvatarByMemberCode(int memberCode) {
+    public AvatarDTO selectAvatarByMemberId(String memberId) {
 
-        Avatar avatar = avatarRepository.findAvatarByMemberCode(memberCode);
+        Avatar avatar = avatarRepository.findAvatarByMemberId(memberId);
 
         return modelMapper.map(avatar, AvatarDTO.class);
     }
@@ -31,7 +31,7 @@ public class AvatarService {
     public boolean insertAvatarByMemberCode(Avatar avatar) {
 
         try {
-            avatarRepository.findAvatarByMemberCode(avatar.getMemberCode()).getAvatarId();
+            avatarRepository.findAvatarByMemberId(avatar.getMemberId()).getFaceType(); // 이미 있는지 확인
             System.out.println("Already exists avatar");
 
             // 아바타가 이미 존재할 시 false 반환
@@ -50,9 +50,8 @@ public class AvatarService {
     public boolean updateAvatarByMemberCode(Avatar avatar) {
 
         try {
-            Avatar beforeAvatar = avatarRepository.findAvatarByMemberCode(avatar.getMemberCode());
-            if(beforeAvatar.getAvatarId() == avatar.getAvatarId() &&
-                    beforeAvatar.getMemberCode() == avatar.getMemberCode()) {
+            Avatar beforeAvatar = avatarRepository.findAvatarByMemberId(avatar.getMemberId());
+            if(beforeAvatar.getMemberId().equals(avatar.getMemberId())) {
 
                 avatarRepository.save(avatar);
                 System.out.println("Update avatar");
@@ -77,7 +76,7 @@ public class AvatarService {
     public boolean deleteAvatarByMemberCode(Avatar avatar) {
 
         try {
-            avatarRepository.deleteByMemberCode(avatar.getMemberCode());
+            avatarRepository.deleteByMemberId(avatar.getMemberId());
             System.out.println("delete successfully");
 
             // 아바타를 삭제할 시 true 반환

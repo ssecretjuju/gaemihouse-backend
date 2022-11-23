@@ -5,9 +5,9 @@ import secretjuju.gaemihouse.avatar.model.Avatar;
 
 public interface AvatarRepository extends Repository<Avatar, Integer> {
 
-    Avatar findAvatarByMemberCode(int memberCode);
+    Avatar findAvatarByMemberId(String memberId);
 
     void save(Avatar avatar);
 
-    void deleteByMemberCode(int memberCode);
+    void deleteByMemberId(String memberId);
 }
