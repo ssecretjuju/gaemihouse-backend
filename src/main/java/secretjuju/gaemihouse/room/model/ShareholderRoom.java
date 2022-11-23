@@ -33,26 +33,28 @@ public class ShareholderRoom {
     @Column(name = "ROOM_YIELD")
     private int roomYield;
 
-//    @Column(name = "MAP_CODE")
-//    private  int mapCode;
+    @Column(name = "MEMBER_ID")
+    private String memberId;
 
 
     public ShareholderRoom() {
     }
 
-    public ShareholderRoom(String roomTitle, int roomLimitedNumber, int roomRegistedNumber, int roomYield) {
+    public ShareholderRoom(String roomTitle, int roomLimitedNumber, int roomRegistedNumber, int roomYield, String memberId) {
         this.roomTitle = roomTitle;
         this.roomLimitedNumber = roomLimitedNumber;
         this.roomRegistedNumber = roomRegistedNumber;
         this.roomYield = roomYield;
+        this.memberId = memberId;
     }
 
-    public ShareholderRoom(int roomCode, String roomTitle, int roomLimitedNumber, int roomRegistedNumber, int roomYield) {
+    public ShareholderRoom(int roomCode, String roomTitle, int roomLimitedNumber, int roomRegistedNumber, int roomYield, String memberId) {
         this.roomCode = roomCode;
         this.roomTitle = roomTitle;
         this.roomLimitedNumber = roomLimitedNumber;
         this.roomRegistedNumber = roomRegistedNumber;
         this.roomYield = roomYield;
+        this.memberId = memberId;
     }
 
     public int getRoomCode() {
@@ -73,5 +75,9 @@ public class ShareholderRoom {
 
     public int getRoomYield() {
         return roomYield;
+    }
+
+    public String getMemberId() {
+        return memberId;
     }
 }

@@ -56,12 +56,13 @@ public class ShareholderRoomController {
     public ResponseEntity<ResponseDTO> insertShareholderRoom(@RequestBody Map<String, Object> requestBody) {
 
        ShareholderRoom shareholderRoom = new ShareholderRoom((String)requestBody.get("roomTitle"),
-               (int) requestBody.get("roomLimitedNumber"), 1, 0);
+               (int) requestBody.get("roomLimitedNumber"), 1, 0, (String)requestBody.get("memberId"));
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
         try {
+            shareholderRoomMemberService.findShareholderRoomMember((String)requestBody.get("memberId")).getRoomTitle(); // 가입한 방이 있는지 확인
             shareholderRoomService.insertShareholderRoom(shareholderRoom);
         } catch (Exception e) {
             return ResponseEntity
