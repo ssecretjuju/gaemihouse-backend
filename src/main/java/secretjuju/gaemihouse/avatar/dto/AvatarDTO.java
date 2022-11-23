@@ -1,38 +1,61 @@
 package secretjuju.gaemihouse.avatar.dto;
 
 public class AvatarDTO {
-    private int avatarId;
-    private int memberCode;
+    private String memberId;
+    private int faceType;
+    private int bodyType;
+
+    private int accType;
 
     public AvatarDTO() {
     }
 
-    public AvatarDTO(int avatarId, int memberCode) {
-        this.avatarId = avatarId;
-        this.memberCode = memberCode;
+    public AvatarDTO(String memberId, int faceType, int bodyType, int accType) {
+        this.memberId = memberId;
+        this.faceType = faceType;
+        this.bodyType = bodyType;
+        this.accType = accType;
     }
 
-    public int getAvatarId() {
-        return avatarId;
+    public String getMemberId() {
+        return memberId;
     }
 
-    public void setAvatarId(int avatarId) {
-        this.avatarId = avatarId;
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
     }
 
-    public int getMemberCode() {
-        return memberCode;
+    public int getFaceType() {
+        return faceType;
     }
 
-    public void setMemberCode(int memberCode) {
-        this.memberCode = memberCode;
+    public void setFaceType(int faceType) {
+        this.faceType = faceType;
+    }
+
+    public int getBodyType() {
+        return bodyType;
+    }
+
+    public void setBodyType(int bodyType) {
+        this.bodyType = bodyType;
+    }
+
+    public int getAccType() {
+        return accType;
+    }
+
+    public void setAccType(int accType) {
+        this.accType = accType;
     }
 
     @Override
     public String toString() {
         return "AvatarDTO{" +
-                "avatarId=" + avatarId +
-                ", memberCode=" + memberCode +
+                "memberId='" + memberId + '\'' +
+                ", faceType=" + faceType +
+                ", bodyType=" + bodyType +
+                ", accType=" + accType +
                 '}';
     }
 }

@@ -8,26 +8,55 @@ import javax.persistence.*;
 public class Avatar {
 
     @Id
-    @Column(name = "AVATAR_ID")
-    private int avatarId;
+    @Column(name = "MEMBER_ID")
+    private String memberId;
 
-    @Column(name = "MEMBER_CODE")
-    private int memberCode;
+    @Column(name = "FACE_TYPE")
+    private int faceType;
+
+    @Column(name = "BODY_TYPE")
+    private int bodyType;
+
+    @Column(name = "ACC_TYPE")
+    private int accType;
 
     public Avatar() {
     }
 
-    public Avatar(int avatarId, int memberCode) {
-        this.avatarId = avatarId;
-        this.memberCode = memberCode;
+    public Avatar(String memberId) {
+        this.memberId = memberId;
     }
 
-    public int getAvatarId() {
-        return avatarId;
+    public Avatar(String memberId, int faceType, int bodyType, int accType) {
+        this.memberId = memberId;
+        this.faceType = faceType;
+        this.bodyType = bodyType;
+        this.accType = accType;
     }
 
-    public int getMemberCode() {
-        return memberCode;
+    public String getMemberId() {
+        return memberId;
     }
 
+    public int getFaceType() {
+        return faceType;
+    }
+
+    public int getBodyType() {
+        return bodyType;
+    }
+
+    public int getAccType() {
+        return accType;
+    }
+
+    @Override
+    public String toString() {
+        return "Avatar{" +
+                "memberId='" + memberId + '\'' +
+                ", faceType=" + faceType +
+                ", bodyType=" + bodyType +
+                ", accType=" + accType +
+                '}';
+    }
 }
