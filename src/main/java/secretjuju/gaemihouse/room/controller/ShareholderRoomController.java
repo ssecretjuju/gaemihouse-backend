@@ -63,18 +63,21 @@ public class ShareholderRoomController {
 
         try {
             shareholderRoomMemberService.findShareholderRoomMember((String)requestBody.get("memberId")).getRoomTitle(); // 가입한 방이 있는지 확인
-            shareholderRoomService.insertShareholderRoom(shareholderRoom);
-        } catch (Exception e) {
+
             return ResponseEntity
                     .badRequest()
                     .headers(headers)
                     .body(new ResponseDTO(HttpStatus.CREATED, "there already exists", false));
-        }
 
-        return ResponseEntity
-                .created(URI.create("/shareholder-room"))
-                .headers(headers)
-                .body(new ResponseDTO(HttpStatus.CREATED, "successful", true));
+        } catch (Exception e) {
+            shareholderRoomService.insertShareholderRoom(shareholderRoom);
+
+
+            return ResponseEntity
+                    .created(URI.create("/shareholder-room"))
+                    .headers(headers)
+                    .body(new ResponseDTO(HttpStatus.CREATED, "successful", true));
+        }
     }
 
     @DeleteMapping("/shareholder-room")
