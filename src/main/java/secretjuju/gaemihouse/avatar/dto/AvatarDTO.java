@@ -1,7 +1,7 @@
 package secretjuju.gaemihouse.avatar.dto;
 
 public class AvatarDTO {
-    private String memberId;
+    private String colorMemberNickname;
     private int faceType;
     private int bodyType;
 
@@ -10,19 +10,19 @@ public class AvatarDTO {
     public AvatarDTO() {
     }
 
-    public AvatarDTO(String memberId, int faceType, int bodyType, int accType) {
-        this.memberId = memberId;
+    public AvatarDTO(String colorMemberNickname, int faceType, int bodyType, int accType) {
+        this.colorMemberNickname = colorMemberNickname;
         this.faceType = faceType;
         this.bodyType = bodyType;
         this.accType = accType;
     }
 
-    public String getMemberId() {
-        return memberId;
+    public String getColorMemberNickname() {
+        return colorMemberNickname;
     }
 
-    public void setMemberId(String memberId) {
-        this.memberId = memberId;
+    public void setColorMemberNickname(String colorMemberNickname) {
+        this.colorMemberNickname = colorMemberNickname;
     }
 
     public int getFaceType() {
@@ -52,7 +52,7 @@ public class AvatarDTO {
     @Override
     public String toString() {
         return "AvatarDTO{" +
-                "memberId='" + memberId + '\'' +
+                "colorMemberNickname='" + colorMemberNickname + '\'' +
                 ", faceType=" + faceType +
                 ", bodyType=" + bodyType +
                 ", accType=" + accType +
