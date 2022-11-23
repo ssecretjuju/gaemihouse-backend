@@ -8,8 +8,8 @@ import javax.persistence.*;
 public class Avatar {
 
     @Id
-    @Column(name = "MEMBER_ID")
-    private String memberId;
+    @Column(name = "COLOR_MEMBER_NICKNAME")
+    private String colorMemberNickname;
 
     @Column(name = "FACE_TYPE")
     private int faceType;
@@ -23,37 +23,53 @@ public class Avatar {
     public Avatar() {
     }
 
-    public Avatar(String memberId) {
-        this.memberId = memberId;
+    public Avatar(String colorMemberNickname) {
+        this.colorMemberNickname = colorMemberNickname;
     }
 
-    public Avatar(String memberId, int faceType, int bodyType, int accType) {
-        this.memberId = memberId;
+    public Avatar(String colorMemberNickname, int faceType, int bodyType, int accType) {
+        this.colorMemberNickname = colorMemberNickname;
         this.faceType = faceType;
         this.bodyType = bodyType;
         this.accType = accType;
     }
 
-    public String getMemberId() {
-        return memberId;
+    public String getColorMemberNickname() {
+        return colorMemberNickname;
+    }
+
+    public void setColorMemberNickname(String colorMemberNickname) {
+        this.colorMemberNickname = colorMemberNickname;
     }
 
     public int getFaceType() {
         return faceType;
     }
 
+    public void setFaceType(int faceType) {
+        this.faceType = faceType;
+    }
+
     public int getBodyType() {
         return bodyType;
+    }
+
+    public void setBodyType(int bodyType) {
+        this.bodyType = bodyType;
     }
 
     public int getAccType() {
         return accType;
     }
 
+    public void setAccType(int accType) {
+        this.accType = accType;
+    }
+
     @Override
     public String toString() {
         return "Avatar{" +
-                "memberId='" + memberId + '\'' +
+                "colorMemberNickname='" + colorMemberNickname + '\'' +
                 ", faceType=" + faceType +
                 ", bodyType=" + bodyType +
                 ", accType=" + accType +
