@@ -49,4 +49,15 @@ public class ShareholderRoomService {
         return modelMapper.map(shareholderRoomRepository.findByRoomTitle(roomTitle), ShareholderRoomDTO.class);
 
     }
+
+    public ShareholderRoom findShareholderRoomEntity(String roomTitle) {
+
+        return shareholderRoomRepository.findByRoomTitle(roomTitle);
+
+    }
+
+    public void updateRegistedNumber(ShareholderRoom shareholderRoom) {
+
+        shareholderRoomRepository.save(shareholderRoom);
+    }
 }

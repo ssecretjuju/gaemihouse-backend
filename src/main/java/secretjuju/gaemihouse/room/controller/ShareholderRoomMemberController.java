@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import secretjuju.gaemihouse.account.service.KoreaInvestmentService;
 import secretjuju.gaemihouse.common.ResponseDTO;
 import secretjuju.gaemihouse.member.service.MemberService;
+import secretjuju.gaemihouse.room.dto.ShareholderRoomDTO;
 import secretjuju.gaemihouse.room.dto.ShareholderRoomMemberDTO;
+import secretjuju.gaemihouse.room.model.ShareholderRoom;
 import secretjuju.gaemihouse.room.model.ShareholderRoomMember;
 import secretjuju.gaemihouse.room.service.ShareholderRoomMemberService;
 import secretjuju.gaemihouse.room.service.ShareholderRoomService;
@@ -81,6 +83,13 @@ public class ShareholderRoomMemberController {
 
             shareholderRoomMemberService.updateShareholderRoom(shareholderRoomMember);
 
+            ShareholderRoom tempRoom = shareholderRoomService.findShareholderRoomEntity(roomTitle);
+            ShareholderRoom shareholderRoom =
+                    new ShareholderRoom(tempRoom.getRoomCode(), tempRoom.getRoomTitle(),
+                            tempRoom.getRoomLimitedNumber(), tempRoom.getRoomRegistedNumber() + 1, tempRoom.getRoomYield());
+
+            shareholderRoomService.updateRegistedNumber(shareholderRoom);
+
             return ResponseEntity
                     .created(URI.create("/shareholder-room/join"))
                     .headers(headers)
@@ -109,7 +118,7 @@ public class ShareholderRoomMemberController {
         shareholderRoomMemberService.updateShareholderRoom(shareholderRoomMember); // 1인당 1방이므로 방 정보까지 필요하지 않음.
 
         return ResponseEntity
-                .created(URI.create("/shareholder-room/join"))
+                .created(URI.create("/shareholder-room//current/evaluate-yield"))
                 .headers(headers)
                 .body(new ResponseDTO(HttpStatus.CREATED, "successful", currentMemberYield));
     }
