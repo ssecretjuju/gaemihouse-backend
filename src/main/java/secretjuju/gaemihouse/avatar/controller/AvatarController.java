@@ -26,9 +26,7 @@ public class AvatarController {
 
     // Unity App 로드 시 회원 정보를 포함하여 요청 => 아바타 정보 반환
     @GetMapping("/avatar")
-    public ResponseEntity<ResponseDTO> selectAvatarByColorMemberNickname(@RequestBody Map<String, Object> requestBody) {
-
-        String colorMemberNickname = (String) requestBody.get("colorMemberNickname");
+    public ResponseEntity<ResponseDTO> selectAvatarByColorMemberNickname(@PathVariable String colorMemberNickname) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
