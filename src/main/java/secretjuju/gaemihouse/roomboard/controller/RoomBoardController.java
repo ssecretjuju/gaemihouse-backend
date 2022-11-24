@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import secretjuju.gaemihouse.common.ResponseDTO;
+import secretjuju.gaemihouse.room.service.ShareholderRoomService;
 import secretjuju.gaemihouse.roomboard.dto.LikeCountDTO;
 import secretjuju.gaemihouse.roomboard.dto.RoomBoardDTO;
 import secretjuju.gaemihouse.roomboard.service.RoomBoardService;
@@ -30,9 +31,11 @@ import secretjuju.gaemihouse.roomboard.service.RoomBoardService;
 public class RoomBoardController {
 
     private final RoomBoardService roomBoardService;
+    private final ShareholderRoomService shareholderRoomService;
 
-    public RoomBoardController(RoomBoardService roomBoardService) {
+    public RoomBoardController(RoomBoardService roomBoardService, ShareholderRoomService shareholderRoomService) {
         this.roomBoardService = roomBoardService;
+        this.shareholderRoomService = shareholderRoomService;
     }
 
     @GetMapping("/select")
@@ -40,8 +43,10 @@ public class RoomBoardController {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "게시판 리스트 조회 성공", roomBoardService.selectRoomBoardList()));
     }
 
-    @GetMapping("/select/{roomCode}")
-    public ResponseEntity<ResponseDTO> roomBoardList(@PathVariable int roomCode) {
+    @GetMapping("/select/{roomTitle}")
+    public ResponseEntity<ResponseDTO> roomBoardList(@PathVariable String roomTitle)
+    {
+        int roomCode = shareholderRoomService.findShareholderRoom(roomTitle).getRoomCode();
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "게시판 리스트 조회 성공", roomBoardService.selectRoomBoardListByRoomCode(roomCode)));
     }
 
