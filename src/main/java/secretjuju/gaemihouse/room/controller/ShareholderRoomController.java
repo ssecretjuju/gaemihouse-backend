@@ -80,7 +80,7 @@ public class ShareholderRoomController {
         }
     }
 
-    @DeleteMapping("/shareholder-room")
+    @PostMapping("/shareholder-room/remove")
     public ResponseEntity<ResponseDTO> deleteShareholderRoom(@RequestBody Map<String, Object> requestBody) {
 
         String roomTitle = (String) requestBody.get("roomTitle");
