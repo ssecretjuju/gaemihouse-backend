@@ -48,4 +48,6 @@ public class SwaggerConfig {
                 .contact(new Contact("DonghwooCho", "http://localhost:8080/swagger-ui.html", "whehdgn1001@kookmin.ac.kr"))
                 .version("1.0").build();
     }
+
+
 }

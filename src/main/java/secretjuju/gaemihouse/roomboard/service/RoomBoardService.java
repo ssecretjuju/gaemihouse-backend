@@ -85,9 +85,16 @@ public class RoomBoardService {
                 System.out.println( "ChangeMinusRoomBoardTable : " + ChangeMinusRoomBoardTable);
                 System.out.println( "ChangeMinusMemberTable : " + ChangeMinusMemberTable);
             }
-        } else if(checkLikeListSize == 0){
+        }else if(checkLikeListSize == 0){
             int insertLikeCount = roomBoardMapper.insertLikeCount(likeCountDTO);
-            System.out.println(insertLikeCount);
+            int ChangePlusLikeCountTable = roomBoardMapper.ChangePlusLikeCountTable(likeCountDTO);
+            int ChangePlusRoomBoardTable = roomBoardMapper.ChangePlusRoomBoardTable(likeCountDTO);
+            int ChangePlusMemberTable = roomBoardMapper.ChangePlusMemberTable(likeCountDTO);
+            System.out.println("insertLikeCount : " + insertLikeCount);
+            System.out.println("likeCountDTO : " + likeCountDTO);
+            System.out.println( "ChangePlusLikeCountTable : " + ChangePlusLikeCountTable);
+            System.out.println( "ChangePlusRoomBoardTable : " + ChangePlusRoomBoardTable);
+            System.out.println( "ChangePlusMemberTable : " + ChangePlusMemberTable);
         }
 
         return checkLikeList;
