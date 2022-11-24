@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import secretjuju.gaemihouse.account.service.KoreaInvestmentService;
 import secretjuju.gaemihouse.common.ResponseDTO;
 import secretjuju.gaemihouse.member.service.MemberService;
+import secretjuju.gaemihouse.room.dto.ShareholderRoomDTO;
 import secretjuju.gaemihouse.room.dto.ShareholderRoomMemberDTO;
+import secretjuju.gaemihouse.room.model.ShareholderRoom;
 import secretjuju.gaemihouse.room.model.ShareholderRoomMember;
 import secretjuju.gaemihouse.room.service.ShareholderRoomMemberService;
 import secretjuju.gaemihouse.room.service.ShareholderRoomService;
@@ -52,6 +54,7 @@ public class ShareholderRoomMemberController {
     }
 
     // url 설정하여 권한 설정하기
+    // 방 생성 시 방장 정보 받기(member)
     @PostMapping("/shareholder-room/join")
     public ResponseEntity<ResponseDTO> joinShareHolderRoom(@RequestBody Map<String, String> data) {
 
@@ -67,12 +70,12 @@ public class ShareholderRoomMemberController {
         try {
             shareholderRoomMemberDTO = shareholderRoomMemberService.findShareholderRoomMember(memberId);
 
-            String joinRoomTitle = shareholderRoomMemberDTO.getRoomTitle();
+            String joinRoomTitle = shareholderRoomMemberDTO.getRoomTitle(); // 가입된 방이 있는지 확인
 
             return ResponseEntity
                     .badRequest()
                     .headers(headers)
-                    .body(new ResponseDTO(HttpStatus.CREATED, "fail", false)); // 이미 다른 방에 가입 되어 있는 경우
+                    .body(new ResponseDTO(HttpStatus.BAD_REQUEST, "fail", false)); // 이미 다른 방에 가입 되어 있는 경우
 
         } catch (Exception e) {
 
@@ -81,6 +84,13 @@ public class ShareholderRoomMemberController {
 
             shareholderRoomMemberService.updateShareholderRoom(shareholderRoomMember);
 
+            ShareholderRoom tempRoom = shareholderRoomService.findShareholderRoomEntity(roomTitle);
+            ShareholderRoom shareholderRoom =
+                    new ShareholderRoom(tempRoom.getRoomCode(), tempRoom.getRoomTitle(),
+                            tempRoom.getRoomLimitedNumber(), tempRoom.getRoomRegistedNumber() + 1, tempRoom.getRoomYield(), memberId);
+
+            shareholderRoomService.updateRegistedNumber(shareholderRoom);
+
             return ResponseEntity
                     .created(URI.create("/shareholder-room/join"))
                     .headers(headers)
@@ -88,7 +98,7 @@ public class ShareholderRoomMemberController {
         }
     }
 
-    @PostMapping("/shareholder-room//current/evaluate-yield")
+    @PostMapping("/shareholder-room/current/evaluate-yield")
     public ResponseEntity<ResponseDTO> getCurrentMemberYield(@RequestBody Map<String, String> data) {
 
         String memberId = data.get("memberId");
@@ -109,7 +119,7 @@ public class ShareholderRoomMemberController {
         shareholderRoomMemberService.updateShareholderRoom(shareholderRoomMember); // 1인당 1방이므로 방 정보까지 필요하지 않음.
 
         return ResponseEntity
-                .created(URI.create("/shareholder-room/join"))
+                .created(URI.create("/shareholder-room/current/evaluate-yield"))
                 .headers(headers)
                 .body(new ResponseDTO(HttpStatus.CREATED, "successful", currentMemberYield));
     }

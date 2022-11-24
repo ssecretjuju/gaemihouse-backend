@@ -1,38 +1,61 @@
 package secretjuju.gaemihouse.avatar.dto;
 
 public class AvatarDTO {
-    private int avatarId;
-    private int memberCode;
+    private String colorMemberNickname;
+    private int faceType;
+    private int bodyType;
+
+    private int accType;
 
     public AvatarDTO() {
     }
 
-    public AvatarDTO(int avatarId, int memberCode) {
-        this.avatarId = avatarId;
-        this.memberCode = memberCode;
+    public AvatarDTO(String colorMemberNickname, int faceType, int bodyType, int accType) {
+        this.colorMemberNickname = colorMemberNickname;
+        this.faceType = faceType;
+        this.bodyType = bodyType;
+        this.accType = accType;
     }
 
-    public int getAvatarId() {
-        return avatarId;
+    public String getColorMemberNickname() {
+        return colorMemberNickname;
     }
 
-    public void setAvatarId(int avatarId) {
-        this.avatarId = avatarId;
+    public void setColorMemberNickname(String colorMemberNickname) {
+        this.colorMemberNickname = colorMemberNickname;
     }
 
-    public int getMemberCode() {
-        return memberCode;
+    public int getFaceType() {
+        return faceType;
     }
 
-    public void setMemberCode(int memberCode) {
-        this.memberCode = memberCode;
+    public void setFaceType(int faceType) {
+        this.faceType = faceType;
+    }
+
+    public int getBodyType() {
+        return bodyType;
+    }
+
+    public void setBodyType(int bodyType) {
+        this.bodyType = bodyType;
+    }
+
+    public int getAccType() {
+        return accType;
+    }
+
+    public void setAccType(int accType) {
+        this.accType = accType;
     }
 
     @Override
     public String toString() {
         return "AvatarDTO{" +
-                "avatarId=" + avatarId +
-                ", memberCode=" + memberCode +
+                "colorMemberNickname='" + colorMemberNickname + '\'' +
+                ", faceType=" + faceType +
+                ", bodyType=" + bodyType +
+                ", accType=" + accType +
                 '}';
     }
 }

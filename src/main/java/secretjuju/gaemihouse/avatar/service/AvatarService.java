@@ -20,23 +20,24 @@ public class AvatarService {
         this.avatarRepository = avatarRepository;
         this.modelMapper = modelMapper;
     }
-    public AvatarDTO selectAvatarByMemberCode(int memberCode) {
+    public AvatarDTO selectAvatarByMemberNickname(String memberNickname) {
 
-        Avatar avatar = avatarRepository.findAvatarByMemberCode(memberCode);
+        Avatar avatar = avatarRepository.findAvatarByColorMemberNickname(memberNickname);
 
         return modelMapper.map(avatar, AvatarDTO.class);
     }
 
     @Transactional
-    public boolean insertAvatarByMemberCode(Avatar avatar) {
+    public boolean insertAvatarByColorMemberNickname(Avatar avatar) {
 
         try {
-            avatarRepository.findAvatarByMemberCode(avatar.getMemberCode()).getAvatarId();
+            avatarRepository.findAvatarByColorMemberNickname(avatar.getColorMemberNickname()).getFaceType(); // 이미 있는지 확인
             System.out.println("Already exists avatar");
 
             // 아바타가 이미 존재할 시 false 반환
             return false;
         } catch(NullPointerException e) {
+            System.out.println(avatar);
             avatarRepository.save(avatar);
             System.out.println("Successful inserted");
 
@@ -47,12 +48,11 @@ public class AvatarService {
     }
 
     @Transactional
-    public boolean updateAvatarByMemberCode(Avatar avatar) {
+    public boolean updateAvatarByMemberNickname(Avatar avatar) {
 
         try {
-            Avatar beforeAvatar = avatarRepository.findAvatarByMemberCode(avatar.getMemberCode());
-            if(beforeAvatar.getAvatarId() == avatar.getAvatarId() &&
-                    beforeAvatar.getMemberCode() == avatar.getMemberCode()) {
+            Avatar beforeAvatar = avatarRepository.findAvatarByColorMemberNickname(avatar.getColorMemberNickname());
+            if(beforeAvatar.getColorMemberNickname().equals(avatar.getColorMemberNickname())) {
 
                 avatarRepository.save(avatar);
                 System.out.println("Update avatar");
@@ -77,7 +77,7 @@ public class AvatarService {
     public boolean deleteAvatarByMemberCode(Avatar avatar) {
 
         try {
-            avatarRepository.deleteByMemberCode(avatar.getMemberCode());
+            avatarRepository.deleteByColorMemberNickname(avatar.getColorMemberNickname());
             System.out.println("delete successfully");
 
             // 아바타를 삭제할 시 true 반환

@@ -25,30 +25,40 @@ public class AvatarController {
     }
 
     // Unity App 로드 시 회원 정보를 포함하여 요청 => 아바타 정보 반환
-    @GetMapping("/avatar")
-    public ResponseEntity<ResponseDTO> selectAvatarByMemberCode(@RequestParam(name = "memberCode") int memberCode) {
+    @GetMapping("/avatar/{colorMemberNickname}")
+    public ResponseEntity<ResponseDTO> selectAvatarByColorMemberNickname(@PathVariable String colorMemberNickname) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
-        AvatarDTO avatarDTO = avatarService.selectAvatarByMemberCode(memberCode);
+        AvatarDTO avatarDTO;
+        try {
+            avatarDTO = avatarService.selectAvatarByMemberNickname(colorMemberNickname);
 
-        return ResponseEntity
-                .ok()
-                .headers(headers)
-                .body(new ResponseDTO(HttpStatus.OK, "successful", avatarDTO));
+            return ResponseEntity
+                    .ok()
+                    .headers(headers)
+                    .body(new ResponseDTO(HttpStatus.OK, "successful", avatarDTO));
+        } catch (Exception e) {
+            return ResponseEntity
+                    .ok()
+                    .headers(headers)
+                    .body(new ResponseDTO(HttpStatus.OK, "not exist", null));
+        }
+
     }
 
     // 아바타 생성 시 요청
     @PostMapping("/avatar")
-    public ResponseEntity<ResponseDTO> insertAvatarByMemberCode(@RequestBody Map<String, Object> requestBody) {
+    public ResponseEntity<ResponseDTO> insertAvatarByColorMemberNickname(@RequestBody Map<String, Object> requestBody) {
 
-        Avatar avatar = new Avatar((int) requestBody.get("avatarId"), (int) requestBody.get("memberCode"));
+        Avatar avatar = new Avatar((String) requestBody.get("colorMemberNickname"),
+                (int) requestBody.get("faceType"), (int) requestBody.get("bodyType"), (int) requestBody.get("accType"));
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
-        boolean insertResult = avatarService.insertAvatarByMemberCode(avatar);
+        boolean insertResult = avatarService.insertAvatarByColorMemberNickname(avatar);
 
 
         return ResponseEntity
@@ -62,12 +72,13 @@ public class AvatarController {
     @PutMapping("/avatar")
     public ResponseEntity<ResponseDTO> updateAvatarByMemberCode(@RequestBody Map<String, Object> requestBody) {
 
-        Avatar avatar = new Avatar((int) requestBody.get("avatarId"), (int) requestBody.get("memberCode"));
+        Avatar avatar = new Avatar((String) requestBody.get("colorMemberNickname"),
+                (int) requestBody.get("faceType"), (int) requestBody.get("bodyType"), (int) requestBody.get("accType"));
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
-        boolean updateResult = avatarService.updateAvatarByMemberCode(avatar);
+        boolean updateResult = avatarService.updateAvatarByMemberNickname(avatar);
 
         if (updateResult) {
             return ResponseEntity
@@ -85,7 +96,7 @@ public class AvatarController {
     @DeleteMapping("/avatar")
     public ResponseEntity<ResponseDTO> deleteAvatarByMemberCode(@RequestBody Map<String, Object> requestBody) {
 
-        Avatar avatar = new Avatar((int) requestBody.get("avatarId"), (int) requestBody.get("memberCode"));
+        Avatar avatar = new Avatar((String) requestBody.get("colorMemberNickname"));
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
@@ -94,8 +105,9 @@ public class AvatarController {
 
         if (deleteResult) {
             return ResponseEntity
-                    .noContent()
-                    .build();
+                    .ok()
+                    .headers(headers)
+                    .body(new ResponseDTO(HttpStatus.OK, "successful", true));
 
         } else {
             return ResponseEntity
