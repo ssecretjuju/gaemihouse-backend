@@ -64,7 +64,7 @@ public class ShareholderRoomMemberService {
         return shareholderRoomMemberDTOS;
     }
 
-    public double findShareholderRoomYieldByRoomCode(String memberId, String roomTitle) {
+    public double findShareholderRoomYieldByRoomCode(String roomTitle) {
         List<ShareholderRoomMemberDTO> shareholderRoomMemberDTOS = findShareholderRoomMemberAllByRoomTitle(roomTitle);
 
         int shareholderRoomStartProperty = 0;

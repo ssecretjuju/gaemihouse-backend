@@ -118,10 +118,8 @@ public class ShareholderRoomController {
 
     }
 
-    @GetMapping("/shareholder-room/members")
-    public ResponseEntity<ResponseDTO> getShareholderRoomMembers(@RequestBody Map<String, String> data) {
-
-        String roomTitle = data.get("roomTitle");
+    @GetMapping("/shareholder-room/members/{roomTitle}")
+    public ResponseEntity<ResponseDTO> getShareholderRoomMembers(@PathVariable String roomTitle) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
@@ -135,18 +133,15 @@ public class ShareholderRoomController {
                 .body(new ResponseDTO(HttpStatus.OK, "successful", shareholderRoomMembers));
     }
 
-    @GetMapping("/shareholder-room/yield")
-    public ResponseEntity<ResponseDTO> getShareholderRoomYield(@RequestBody Map<String, String> data) {
-
-        String memberId = data.get("memberId");
-        String roomTitle = data.get("roomTitle");
+    @GetMapping("/shareholder-room/yield/{roomTitle}")
+    public ResponseEntity<ResponseDTO> getShareholderRoomYield(@PathVariable String roomTitle) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
 
         double shareholderRoomYield =
-                shareholderRoomMemberService.findShareholderRoomYieldByRoomCode(memberId, roomTitle);
+                shareholderRoomMemberService.findShareholderRoomYieldByRoomCode(roomTitle);
 
         return ResponseEntity
                 .ok()
