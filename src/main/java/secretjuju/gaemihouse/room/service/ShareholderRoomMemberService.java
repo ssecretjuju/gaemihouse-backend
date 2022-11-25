@@ -30,6 +30,13 @@ public class ShareholderRoomMemberService {
         return modelMapper.map(shareholderRoomMember, ShareholderRoomMemberDTO.class);
     }
 
+    public ShareholderRoomMember findShareholderRoomMemberModel(String memberId) {
+
+        ShareholderRoomMember shareholderRoomMember = shareholderRoomMemberRepository.findByMemberId(memberId);
+
+        return shareholderRoomMember;
+    }
+
     @Transactional
     public void updateShareholderRoom(ShareholderRoomMember shareholderRoomMember) {
         shareholderRoomMemberRepository.save(shareholderRoomMember);
