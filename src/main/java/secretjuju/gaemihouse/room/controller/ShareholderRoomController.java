@@ -6,10 +6,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import secretjuju.gaemihouse.account.service.KoreaInvestmentService;
 import secretjuju.gaemihouse.common.ResponseDTO;
 import secretjuju.gaemihouse.room.dto.ShareholderRoomDTO;
 import secretjuju.gaemihouse.room.dto.ShareholderRoomMemberDTO;
 import secretjuju.gaemihouse.room.model.ShareholderRoom;
+import secretjuju.gaemihouse.room.model.ShareholderRoomMember;
 import secretjuju.gaemihouse.room.service.ShareholderRoomMemberService;
 import secretjuju.gaemihouse.room.service.ShareholderRoomService;
 
@@ -22,10 +24,12 @@ import java.util.Map;
 @Api("ShareholderRoomController")
 public class ShareholderRoomController {
 
+    private final KoreaInvestmentService koreanInvestmentService;
     private final ShareholderRoomService shareholderRoomService;
     private final ShareholderRoomMemberService shareholderRoomMemberService;
 
-    public ShareholderRoomController(ShareholderRoomService shareholderRoomService, ShareholderRoomMemberService shareholderRoomMemberService) {
+    public ShareholderRoomController(KoreaInvestmentService koreanInvestmentService, ShareholderRoomService shareholderRoomService, ShareholderRoomMemberService shareholderRoomMemberService) {
+        this.koreanInvestmentService = koreanInvestmentService;
         this.shareholderRoomService = shareholderRoomService;
         this.shareholderRoomMemberService = shareholderRoomMemberService;
     }
@@ -72,6 +76,11 @@ public class ShareholderRoomController {
         } catch (Exception e) {
             shareholderRoomService.insertShareholderRoom(shareholderRoom);
 
+            int property = koreanInvestmentService.getCurrentEvaluateProperty((String)requestBody.get("memberId"));
+            ShareholderRoomMember shareholderRoomMember = new ShareholderRoomMember(0, property,
+                    (String)requestBody.get("memberId"), (String)requestBody.get("roomTitle"));
+
+            shareholderRoomMemberService.updateShareholderRoom(shareholderRoomMember);
 
             return ResponseEntity
                     .created(URI.create("/shareholder-room"))
@@ -109,10 +118,8 @@ public class ShareholderRoomController {
 
     }
 
-    @GetMapping("/shareholder-room/members")
-    public ResponseEntity<ResponseDTO> getShareholderRoomMembers(@RequestBody Map<String, String> data) {
-
-        String roomTitle = data.get("roomTitle");
+    @GetMapping("/shareholder-room/members/{roomTitle}")
+    public ResponseEntity<ResponseDTO> getShareholderRoomMembers(@PathVariable String roomTitle) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
@@ -126,18 +133,15 @@ public class ShareholderRoomController {
                 .body(new ResponseDTO(HttpStatus.OK, "successful", shareholderRoomMembers));
     }
 
-    @GetMapping("/shareholder-room/yield")
-    public ResponseEntity<ResponseDTO> getShareholderRoomYield(@RequestBody Map<String, String> data) {
-
-        String memberId = data.get("memberId");
-        String roomTitle = data.get("roomTitle");
+    @GetMapping("/shareholder-room/yield/{roomTitle}")
+    public ResponseEntity<ResponseDTO> getShareholderRoomYield(@PathVariable String roomTitle) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
 
         double shareholderRoomYield =
-                shareholderRoomMemberService.findShareholderRoomYieldByRoomCode(memberId, roomTitle);
+                shareholderRoomMemberService.findShareholderRoomYieldByRoomCode(roomTitle);
 
         return ResponseEntity
                 .ok()

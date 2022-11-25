@@ -31,8 +31,7 @@ public class MemberService {
         this.memberMapper = memberMapper;
     }
 
-    @GetMapping
-    public MemberDTO selectMyInfo(@PathVariable String memberId) {
+    public MemberDTO selectMyInfo(String memberId) {
         log.info("[MemberService] getMyInfo Start ==============================");
 
         MemberDTO member = memberMapper.selectByMemberId(memberId);
@@ -55,6 +54,11 @@ public class MemberService {
 
     public MemberDTO selectMemberInfobyCode(int memberCode) {
         MemberDTO member = memberMapper.selectMemberInfobyCode(memberCode);
+        return member;
+    }
+
+    public MemberDTO selectMemberInfoByMemberNickname(String memberNickname) {
+        MemberDTO member = memberMapper.selectMemberInfoByMemberNickname(memberNickname);
         return member;
     }
 }
