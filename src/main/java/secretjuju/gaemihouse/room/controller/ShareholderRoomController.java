@@ -118,6 +118,31 @@ public class ShareholderRoomController {
 
     }
 
+    @GetMapping("/shareholder-room/{roomTitle}")
+    public ResponseEntity<ResponseDTO> getShareholderRoomByRoomTitle(@PathVariable String roomTitle) {
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+        double shareholderRoomYield =
+                shareholderRoomMemberService.findShareholderRoomYieldByRoomCode(roomTitle);
+
+        ShareholderRoomDTO shareholderRoom =
+                shareholderRoomService.findShareholderRoom(roomTitle);
+
+        ShareholderRoom shareholderRoomEntity =
+                new ShareholderRoom(shareholderRoom.getRoomCode(), shareholderRoom.getRoomTitle(),
+                        shareholderRoom.getRoomLimitedNumber(), shareholderRoom.getRoomRegistedNumber(),
+                        shareholderRoomYield, shareholderRoom.getMemberId());
+
+        shareholderRoomService.updateRoomYield(shareholderRoomEntity);
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .body(new ResponseDTO(HttpStatus.OK, "successful", shareholderRoom));
+    }
+
     @GetMapping("/shareholder-room/members/{roomTitle}")
     public ResponseEntity<ResponseDTO> getShareholderRoomMembers(@PathVariable String roomTitle) {
 

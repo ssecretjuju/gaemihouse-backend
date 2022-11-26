@@ -31,7 +31,7 @@ public class ShareholderRoom {
     private int roomRegistedNumber;
 
     @Column(name = "ROOM_YIELD")
-    private int roomYield;
+    private double roomYield;
 
     @Column(name = "MEMBER_ID")
     private String memberId;
@@ -40,7 +40,7 @@ public class ShareholderRoom {
     public ShareholderRoom() {
     }
 
-    public ShareholderRoom(String roomTitle, int roomLimitedNumber, int roomRegistedNumber, int roomYield, String memberId) {
+    public ShareholderRoom(String roomTitle, int roomLimitedNumber, int roomRegistedNumber, double roomYield, String memberId) {
         this.roomTitle = roomTitle;
         this.roomLimitedNumber = roomLimitedNumber;
         this.roomRegistedNumber = roomRegistedNumber;
@@ -48,7 +48,7 @@ public class ShareholderRoom {
         this.memberId = memberId;
     }
 
-    public ShareholderRoom(int roomCode, String roomTitle, int roomLimitedNumber, int roomRegistedNumber, int roomYield, String memberId) {
+    public ShareholderRoom(int roomCode, String roomTitle, int roomLimitedNumber, int roomRegistedNumber, double roomYield, String memberId) {
         this.roomCode = roomCode;
         this.roomTitle = roomTitle;
         this.roomLimitedNumber = roomLimitedNumber;
@@ -73,7 +73,7 @@ public class ShareholderRoom {
         return roomRegistedNumber;
     }
 
-    public int getRoomYield() {
+    public double getRoomYield() {
         return roomYield;
     }
 

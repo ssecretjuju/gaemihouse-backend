@@ -15,7 +15,7 @@ public class ShareholderRoomDTO {
     @ApiModelProperty(value = "방 등록 인원")
     private int roomRegistedNumber;
     @ApiModelProperty(value = "방 수익률")
-    private int roomYield;
+    private double roomYield;
 
     @ApiModelProperty(value = "방장 아이디")
     private String memberId;
@@ -23,7 +23,7 @@ public class ShareholderRoomDTO {
     public ShareholderRoomDTO() {
     }
 
-    public ShareholderRoomDTO(int roomCode, String roomTitle, int roomLimitedNumber, int roomRegistedNumber, int roomYield, String memberId) {
+    public ShareholderRoomDTO(int roomCode, String roomTitle, int roomLimitedNumber, int roomRegistedNumber, double roomYield, String memberId) {
         this.roomCode = roomCode;
         this.roomTitle = roomTitle;
         this.roomLimitedNumber = roomLimitedNumber;
@@ -64,11 +64,11 @@ public class ShareholderRoomDTO {
         this.roomRegistedNumber = roomRegistedNumber;
     }
 
-    public int getRoomYield() {
+    public double getRoomYield() {
         return roomYield;
     }
 
-    public void setRoomYield(int roomYield) {
+    public void setRoomYield(double roomYield) {
         this.roomYield = roomYield;
     }
 
