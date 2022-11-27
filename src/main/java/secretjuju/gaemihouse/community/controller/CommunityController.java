@@ -44,6 +44,7 @@ public class CommunityController {
     }
 
 
+
     @PostMapping("/insert")
     public ResponseEntity<ResponseDTO> insertCommunity(@RequestBody CommunityDTO communityDTO) {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK,"게시글 작성 성공", communityService.insertCommunity(communityDTO)));

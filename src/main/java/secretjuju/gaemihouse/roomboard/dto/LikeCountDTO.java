@@ -17,16 +17,15 @@ package secretjuju.gaemihouse.roomboard.dto;
  */
 public class LikeCountDTO {
     private int roomboardCode;
-    private int roomBoardMemberCode;
+    private int memberCode;
     private int pushMemberCode;
     private String pushedYn;
 
     public LikeCountDTO() {}
 
-
-    public LikeCountDTO(int roomboardCode, int roomBoardMemberCode, int pushMemberCode, String pushedYn) {
+    public LikeCountDTO(int roomboardCode, int memberCode, int pushMemberCode, String pushedYn) {
         this.roomboardCode = roomboardCode;
-        this.roomBoardMemberCode = roomBoardMemberCode;
+        this.memberCode = memberCode;
         this.pushMemberCode = pushMemberCode;
         this.pushedYn = pushedYn;
     }
@@ -35,7 +34,7 @@ public class LikeCountDTO {
     public String toString() {
         return "LikeCountDTO{" +
                 "roomboardCode=" + roomboardCode +
-                ", roomBoardMemberCode=" + roomBoardMemberCode +
+                ", memberCode=" + memberCode +
                 ", pushMemberCode=" + pushMemberCode +
                 ", pushedYn='" + pushedYn + '\'' +
                 '}';
@@ -49,12 +48,12 @@ public class LikeCountDTO {
         this.roomboardCode = roomboardCode;
     }
 
-    public int getRoomBoardMemberCode() {
-        return roomBoardMemberCode;
+    public int getMemberCode() {
+        return memberCode;
     }
 
-    public void setRoomBoardMemberCode(int roomBoardMemberCode) {
-        this.roomBoardMemberCode = roomBoardMemberCode;
+    public void setMemberCode(int memberCode) {
+        this.memberCode = memberCode;
     }
 
     public int getPushMemberCode() {
