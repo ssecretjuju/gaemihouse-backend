@@ -32,6 +32,12 @@ public class CommunityController {
         this.communityService = communityService;
     }
 
+    @GetMapping("/select")
+    public ResponseEntity<ResponseDTO> commuintyListAll() {
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "게시판 리스트 조회 성공", communityService.selectCommunityListAll()));
+    }
+
+
     @GetMapping("/select/{roomCode}")
     public ResponseEntity<ResponseDTO> commuintyList(@PathVariable int roomCode) {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "게시판 리스트 조회 성공", communityService.selectCommunityList(roomCode)));

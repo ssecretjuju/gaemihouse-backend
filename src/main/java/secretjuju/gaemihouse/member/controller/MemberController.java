@@ -70,6 +70,36 @@ public class MemberController {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "회원 (id) 조회 성공", result));
     }
 
+    @GetMapping("/nickname/{memberNickname}")
+    public ResponseEntity<ResponseDTO> findByMemberNickname(@PathVariable String memberNickname) {
+
+        MemberDTO memberInfo = memberService.selectMemberInfoByMemberNickname(memberNickname);
+
+        double yield = koreaInvestmentService.getCurrentEvaluateYield(memberInfo.getMemberId());
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("memberCode", memberInfo.getMemberCode());
+        result.put("memberId", memberInfo.getMemberId());
+        result.put("memberPassword", memberInfo.getMemberPassword());
+        result.put("memberRole", memberInfo.getMemberRole());
+        result.put("memberNickname", memberInfo.getMemberNickname());
+        result.put("memberName", memberInfo.getMemberName());
+        result.put("stockFirm", memberInfo.getStockFirm());
+        result.put("accountNum", memberInfo.getAccountNum());
+        result.put("appKey", memberInfo.getAppKey());
+        result.put("appSecret", memberInfo.getAppSecret());
+        result.put("appKeyExpiresin", memberInfo.getAppKeyExpiresin());
+        result.put("termsAgreementYn", memberInfo.getTermsAgreementYn());
+        result.put("reportCount", memberInfo.getReportCount());
+        result.put("blacklistYn", memberInfo.getBlacklistYn());
+        result.put("stockCareer", memberInfo.getStockCareer());
+        result.put("withdrawYn", memberInfo.getWithdrawYn());
+        result.put("authorities", memberInfo.getAuthorities());
+        result.put("yield", yield);
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "회원 (nickname) 조회 성공", result));
+    }
+
     @GetMapping("/code/{memberCode}")
     public ResponseEntity<ResponseDTO> selectMyMemberInfo(@PathVariable int memberCode) {
         System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());

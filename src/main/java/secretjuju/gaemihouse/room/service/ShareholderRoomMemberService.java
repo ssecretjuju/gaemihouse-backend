@@ -30,6 +30,13 @@ public class ShareholderRoomMemberService {
         return modelMapper.map(shareholderRoomMember, ShareholderRoomMemberDTO.class);
     }
 
+    public ShareholderRoomMember findShareholderRoomMemberModel(String memberId) {
+
+        ShareholderRoomMember shareholderRoomMember = shareholderRoomMemberRepository.findByMemberId(memberId);
+
+        return shareholderRoomMember;
+    }
+
     @Transactional
     public void updateShareholderRoom(ShareholderRoomMember shareholderRoomMember) {
         shareholderRoomMemberRepository.save(shareholderRoomMember);
@@ -57,7 +64,7 @@ public class ShareholderRoomMemberService {
         return shareholderRoomMemberDTOS;
     }
 
-    public double findShareholderRoomYieldByRoomCode(String memberId, String roomTitle) {
+    public double findShareholderRoomYieldByRoomCode(String roomTitle) {
         List<ShareholderRoomMemberDTO> shareholderRoomMemberDTOS = findShareholderRoomMemberAllByRoomTitle(roomTitle);
 
         int shareholderRoomStartProperty = 0;

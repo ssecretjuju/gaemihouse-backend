@@ -60,4 +60,9 @@ public class ShareholderRoomService {
 
         shareholderRoomRepository.save(shareholderRoom);
     }
+
+    public void updateRoomYield(ShareholderRoom shareholderRoom) {
+
+        shareholderRoomRepository.save(shareholderRoom);
+    }
 }

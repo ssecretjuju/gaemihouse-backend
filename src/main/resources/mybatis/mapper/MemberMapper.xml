@@ -23,6 +23,12 @@
         WHERE MEMBER_ID = #{memberId}
     </select>
 
+    <select id="selectMemberInfoByMemberNickname" resultType="MemberDTO">
+        SELECT *
+        FROM TBL_MEMBER
+        WHERE MEMBER_NICKNAME = #{memberNickname}
+    </select>
+
     <insert id="insertMember" parameterType="MemberDTO">
         INSERT INTO TBL_MEMBER
         (
