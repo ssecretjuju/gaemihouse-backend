@@ -49,4 +49,9 @@ public class CommunityService {
         int deleteCommunity = communityMapper.deleteCommunity(communityDTO);
         return (deleteCommunity > 0) ? "게시글 삭제 성공!" : "게시글 삭제 실패 ㅠ";
     }
+
+    public Object selectCommunityListAll() {
+        List<CommunityDTO> communityList = communityMapper.selectCommunityListAll();
+        return communityList;
+    }
 }
