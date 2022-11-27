@@ -1,5 +1,6 @@
 package secretjuju.gaemihouse.stock.controller;
 
+import lombok.Value;
 import org.json.JSONObject;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,10 @@ import secretjuju.gaemihouse.stock.dto.StockPredictionDTO;
 import secretjuju.gaemihouse.stock.model.StockPrediction;
 import secretjuju.gaemihouse.stock.service.StockPredictionService;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.List;
 
@@ -35,6 +40,24 @@ public class StockPredictionController {
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
         List<StockPredictionDTO> stockPredictions = stockPredictionService.getStockPredictionByStockName(stockName);
+
+//        String imageUrl1 = stockPredictions.get(0).getStockPredictionImage1();
+//        String imageUrl2 = stockPredictions.get(0).getStockPredictionImage2();
+
+//        try {
+//            URL url1 = new URL(imageUrl1);
+//            URL url2 = new URL(imageUrl2);
+//
+//            InputStream in1 = url1.openStream();
+//            InputStream in2 = url2.openStream();
+
+//            AWSCredentials credentials = new BasicAWSCredentials()
+//            AmazonS3 s3client = AmazonS3ClientBuilder
+//                                .standard()
+//                                .withCredentials(new AWSStaticCredentialsProvider(credentials))
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
 
         return ResponseEntity
                 .ok()
