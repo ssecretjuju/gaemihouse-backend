@@ -6,6 +6,8 @@ import secretjuju.gaemihouse.roomboard.dao.RoomBoardMapper;
 import secretjuju.gaemihouse.roomboard.dto.LikeCountDTO;
 import secretjuju.gaemihouse.roomboard.dto.RoomBoardDTO;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,17 +43,17 @@ public class RoomBoardService {
         List<RoomBoardDTO> roomBoardList = roomBoardMapper.selectRoomBoardList();
         List<Map<String, Object>> resultList = new ArrayList<>();
 
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
+
         for(int i = 0; i < roomBoardList.size(); i++) {
             resultList.add(i, new HashMap<>());
             resultList.get(i).put("roomBoardCode", roomBoardList.get(i).getRoomBoardCode());
             resultList.get(i).put("roomBoardTitle", roomBoardList.get(i).getRoomBoardTitle());
             resultList.get(i).put("roomBoardContent", roomBoardList.get(i).getRoomBoardContent());
-            resultList.get(i).put("roomBoardRegistDate", roomBoardList.get(i).getRoomBoardRegistDate());
+            resultList.get(i).put("roomBoardRegistDate", simpleDateFormat.format(roomBoardList.get(i).getRoomBoardRegistDate()));
             resultList.get(i).put("memberCode", roomBoardList.get(i).getMemberCode());
             resultList.get(i).put("shareholderRoomCode", roomBoardList.get(i).getShareholderRoomCode());
             resultList.get(i).put("likeCount", roomBoardList.get(i).getLikeCount());
-//            System.out.println(roomBoardList.get(i).getMemberCode());
-//            System.out.println(memberService.selectMemberInfobyCode(roomBoardList.get(i).getMemberCode()));
             resultList.get(i).put("memberNickname", memberService.selectMemberInfobyCode(roomBoardList.get(i).getMemberCode()).getMemberNickname());
         }
 
