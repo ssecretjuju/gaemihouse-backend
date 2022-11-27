@@ -29,4 +29,6 @@ public interface CommunityMapper {
     int updateCommunity(CommunityDTO communityDTO);
 
     int deleteCommunity(CommunityDTO communityDTO);
+
+    List<CommunityDTO> selectCommunityListAll();
 }

@@ -9,6 +9,12 @@
          WHERE SHAREHOLDERROOM_CODE = #{roodCode}
     </select>
 
+    <select id="selectCommunityListAll" resultType="CommunityDTO">
+        SELECT *
+        FROM TBL_COMMUNITY
+       ORDER BY COMMUNITY_REGIST_DATE DESC
+    </select>
+
     <insert id="insertCommunity" parameterType="CommunityDTO">
         INSERT INTO TBL_COMMUNITY
         VALUES
