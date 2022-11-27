@@ -1,12 +1,15 @@
 package secretjuju.gaemihouse.roomboard.service;
 
 import org.springframework.stereotype.Service;
-import secretjuju.gaemihouse.roomboard.controller.RoomBoardController;
+import secretjuju.gaemihouse.member.service.MemberService;
 import secretjuju.gaemihouse.roomboard.dao.RoomBoardMapper;
 import secretjuju.gaemihouse.roomboard.dto.LikeCountDTO;
 import secretjuju.gaemihouse.roomboard.dto.RoomBoardDTO;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <pre>
@@ -27,14 +30,32 @@ import java.util.List;
 public class RoomBoardService {
 
     private final RoomBoardMapper roomBoardMapper;
+    private final MemberService memberService;
 
-    public RoomBoardService(RoomBoardMapper roomBoardMapper) {
+    public RoomBoardService(RoomBoardMapper roomBoardMapper, MemberService memberService) {
         this.roomBoardMapper = roomBoardMapper;
+        this.memberService = memberService;
     }
 
     public Object selectRoomBoardList() {
         List<RoomBoardDTO> roomBoardList = roomBoardMapper.selectRoomBoardList();
-        return roomBoardList;
+        List<Map<String, Object>> resultList = new ArrayList<>();
+
+        for(int i = 0; i < roomBoardList.size(); i++) {
+            resultList.add(i, new HashMap<>());
+            resultList.get(i).put("roomBoardCode", roomBoardList.get(i).getRoomBoardCode());
+            resultList.get(i).put("roomBoardTitle", roomBoardList.get(i).getRoomBoardTitle());
+            resultList.get(i).put("roomBoardContent", roomBoardList.get(i).getRoomBoardContent());
+            resultList.get(i).put("roomBoardRegistDate", roomBoardList.get(i).getRoomBoardRegistDate());
+            resultList.get(i).put("memberCode", roomBoardList.get(i).getMemberCode());
+            resultList.get(i).put("shareholderRoomCode", roomBoardList.get(i).getShareholderRoomCode());
+            resultList.get(i).put("likeCount", roomBoardList.get(i).getLikeCount());
+//            System.out.println(roomBoardList.get(i).getMemberCode());
+//            System.out.println(memberService.selectMemberInfobyCode(roomBoardList.get(i).getMemberCode()));
+            resultList.get(i).put("memberNickname", memberService.selectMemberInfobyCode(roomBoardList.get(i).getMemberCode()).getMemberNickname());
+        }
+
+        return resultList;
     }
 
     public Object selectRoomBoardListByRoomCode(int roomCode) {

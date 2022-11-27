@@ -70,7 +70,7 @@ public class AvatarController {
 
     // 아바타 수정 시 요청
     @PutMapping("/avatar")
-    public ResponseEntity<ResponseDTO> updateAvatarByMemberCode(@RequestBody Map<String, Object> requestBody) {
+    public ResponseEntity<ResponseDTO> updateAvatarByColorMemberNickname(@RequestBody Map<String, Object> requestBody) {
 
         Avatar avatar = new Avatar((String) requestBody.get("colorMemberNickname"),
                 (int) requestBody.get("faceType"), (int) requestBody.get("bodyType"), (int) requestBody.get("accType"));
