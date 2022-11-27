@@ -22,19 +22,19 @@ public class RoomBoardDTO {
     private String roomBoardTitle;
     private String roomBoardContent;
     private Date roomBoardRegistDate;
-    private int memberCode;
+    private int roomBoardMemberCode;
     private int shareholderRoomCode;
     private int likeCount;
 
     public RoomBoardDTO() {}
 
     public RoomBoardDTO(int roomBoardCode, String roomBoardTitle, String roomBoardContent,
-                        Date roomBoardRegistDate, int memberCode, int shareholderRoomCode, int likeCount) {
+                        Date roomBoardRegistDate, int roomBoardMemberCode, int shareholderRoomCode, int likeCount) {
         this.roomBoardCode = roomBoardCode;
         this.roomBoardTitle = roomBoardTitle;
         this.roomBoardContent = roomBoardContent;
         this.roomBoardRegistDate = roomBoardRegistDate;
-        this.memberCode = memberCode;
+        this.roomBoardMemberCode = roomBoardMemberCode;
         this.shareholderRoomCode = shareholderRoomCode;
         this.likeCount = likeCount;
     }
@@ -46,7 +46,7 @@ public class RoomBoardDTO {
                 ", roomBoardTitle='" + roomBoardTitle + '\'' +
                 ", roomBoardContent='" + roomBoardContent + '\'' +
                 ", roomBoardRegistDate=" + roomBoardRegistDate +
-                ", memberCode=" + memberCode +
+                ", roomBoardMemberCode=" + roomBoardMemberCode +
                 ", shareholderRoomCode=" + shareholderRoomCode +
                 ", likeCount=" + likeCount +
                 '}';
@@ -84,12 +84,12 @@ public class RoomBoardDTO {
         this.roomBoardRegistDate = roomBoardRegistDate;
     }
 
-    public int getMemberCode() {
-        return memberCode;
+    public int getRoomBoardMemberCode() {
+        return roomBoardMemberCode;
     }
 
-    public void setMemberCode(int memberCode) {
-        this.memberCode = memberCode;
+    public void setRoomBoardMemberCode(int roomBoardMemberCode) {
+        this.roomBoardMemberCode = roomBoardMemberCode;
     }
 
     public int getShareholderRoomCode() {

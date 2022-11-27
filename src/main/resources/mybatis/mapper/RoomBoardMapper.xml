@@ -23,7 +23,7 @@
          #{roomBoardTitle},
          #{roomBoardContent},
          SYSDATE,
-         #{memberCode},
+         #{roomBoardMemberCode},
          #{shareholderRoomCode},
          #{likeCount}
         )
@@ -33,12 +33,12 @@
         UPDATE TBL_ROOMBOARD
            SET ROOMBOARD_TITLE = #{roomBoardTitle},
                ROOMBOARD_CONTENT = #{roomBoardContent}
-         WHERE ROOMBOARD_CODE = #{roomBoardCode} AND MEMBER_CODE = #{memberCode}
+         WHERE ROOMBOARD_CODE = #{roomBoardCode} AND MEMBER_CODE = #{roomBoardMemberCode}
     </update>
 
     <delete id="deleteRoomBoard">
         DELETE FROM TBL_ROOMBOARD
-         WHERE ROOMBOARD_CODE = #{roomBoardCode} AND MEMBER_CODE = #{memberCode}
+         WHERE ROOMBOARD_CODE = #{roomBoardCode} AND MEMBER_CODE = #{roomBoardMemberCode}
     </delete>
 
 <!--좋아요 쿼리문-->
@@ -82,13 +82,13 @@
     <update id="ChangePlusMemberTable">
         UPDATE TBL_MEMBER
            SET LIKE_COUNT = LIKE_COUNT + 1
-           WHERE MEMBER_CODE = #{memberCode}
+           WHERE MEMBER_CODE = #{roomBoardMemberCode}
     </update>
 
     <update id="ChangeMinusMemberTable">
         UPDATE TBL_MEMBER
            SET LIKE_COUNT = LIKE_COUNT - 1
-           WHERE MEMBER_CODE = #{memberCode}
+           WHERE MEMBER_CODE = #{roomBoardMemberCode}
     </update>
 
     <insert id="insertLikeCount" parameterType="LikeCountDTO">
@@ -96,7 +96,7 @@
         VALUES
         (
          #{roomboardCode},
-         #{memberCode},
+         #{roomBoardMemberCode},
          #{pushMemberCode},
          #{pushedYn}
         )
