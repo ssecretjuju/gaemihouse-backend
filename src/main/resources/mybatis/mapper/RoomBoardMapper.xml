@@ -7,7 +7,7 @@
     <select id="selectRoomBoardList" resultType="RoomBoardDTO">
         SELECT *
           FROM TBL_ROOMBOARD
-         ORDER BY ROOMBOARD_REGIST_DATE DESC;
+         ORDER BY ROOMBOARD_REGIST_DATE DESC
     </select>
 
     <select id="selectRoomBoardListByRoomCode" resultType="RoomBoardDTO">
