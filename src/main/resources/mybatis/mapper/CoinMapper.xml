@@ -12,26 +12,26 @@
     <select id="selectCoinListById" resultType="CoinDTO">
         SELECT *
         FROM TBL_COIN
-        WHERE MEMBER_CODE = #{memberCode}
+        WHERE MEMBER_ID = #{memberId}
     </select>
 
     <insert id="insertCoin" parameterType="CoinDTO">
         INSERT INTO TBL_COIN
         (
-            MEMBER_CODE,
+            MEMBER_ID,
             COIN_AMOUNT
         )
         VALUES
             (
-                #{memberCode},
+                #{memberId},
                 #{coinAmount}
             )
     </insert>
 
     <update id="updateCoin">
         UPDATE TBL_COIN
-        SET COIN_AMOUNT = #{coinAmount}
-        WHERE MEMBER_CODE = #{memberCode}
+        SET COIN_AMOUNT = COIN_AMOUNT + #{coinAmount}
+        WHERE MEMBER_ID = #{memberId}
     </update>
 
 

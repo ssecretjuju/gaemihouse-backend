@@ -17,30 +17,30 @@ package secretjuju.gaemihouse.coin.dto;
  */
 public class CoinDTO {
 
-    private int memberCode;
+    private String memberId;
     private int coinAmount;
 
     public CoinDTO() {};
 
-    public CoinDTO(int memberCode, int coinAmount) {
-        this.memberCode = memberCode;
+    public CoinDTO(String memberId, int coinAmount) {
+        this.memberId = memberId;
         this.coinAmount = coinAmount;
     }
 
     @Override
     public String toString() {
         return "CoinDTO{" +
-                "memberCode=" + memberCode +
+                "memberId=" + memberId +
                 ", coinAmount=" + coinAmount +
                 '}';
     }
 
-    public int getMemberCode() {
-        return memberCode;
+    public String getMemberId() {
+        return memberId;
     }
 
-    public void setMemberCode(int memberCode) {
-        this.memberCode = memberCode;
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
     }
 
     public int getCoinAmount() {
@@ -50,5 +50,4 @@ public class CoinDTO {
     public void setCoinAmount(int coinAmount) {
         this.coinAmount = coinAmount;
     }
-
 }
