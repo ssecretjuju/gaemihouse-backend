@@ -1,6 +1,7 @@
 package secretjuju.gaemihouse.roomboard.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import secretjuju.gaemihouse.member.service.MemberService;
 import secretjuju.gaemihouse.roomboard.dao.RoomBoardMapper;
 import secretjuju.gaemihouse.roomboard.dto.LikeCountDTO;
@@ -81,6 +82,7 @@ public class RoomBoardService {
         return (deleteRoomBoard > 0) ? "게시글 삭제 성공!" : "게시글 삭제 실패 ㅠ";
     }
 
+    @Transactional
     public Object updateLikeCount(LikeCountDTO likeCountDTO) {
 
         List<LikeCountDTO> checkLikeList = roomBoardMapper.CheckLikeList(likeCountDTO);
