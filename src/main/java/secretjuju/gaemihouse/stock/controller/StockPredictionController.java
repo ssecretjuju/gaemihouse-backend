@@ -36,7 +36,6 @@ public class StockPredictionController {
     @PostMapping("/stock-prediction/{stockName}")
     public ResponseEntity<ResponseDTO> getStockPredictionByStockName(@PathVariable String stockName) {
 
-        // if(exist in json? stockname) => 결과 반환 else 오류 반환
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
