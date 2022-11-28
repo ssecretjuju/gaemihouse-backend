@@ -41,6 +41,7 @@ public class RoomBoardService {
 
     public Object selectRoomBoardList() {
         List<RoomBoardDTO> roomBoardList = roomBoardMapper.selectRoomBoardList();
+
         List<Map<String, Object>> resultList = new ArrayList<>();
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
@@ -120,7 +121,9 @@ public class RoomBoardService {
             System.out.println( "ChangePlusMemberTable : " + ChangePlusMemberTable);
         }
 
-        return checkLikeList;
+        List<LikeCountDTO> likeCounts = roomBoardMapper.selectLikeCounts(likeCountDTO);
+
+        return likeCounts;
     }
 
 }

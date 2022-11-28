@@ -103,7 +103,10 @@
         )
     </insert>
 
-
-
+    <select id="selectLikeCounts" resultType="RoomBoardDTO">
+        SELECT *
+          FROM TBL_ROOMBOARD
+         WHERE ROOMBOARD_CODE = #{roomboardCode}
+    </select>
 
 </mapper>
