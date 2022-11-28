@@ -56,11 +56,13 @@ public class ShareholderRoomService {
 
     }
 
+    @Transactional
     public void updateRegistedNumber(ShareholderRoom shareholderRoom) {
 
         shareholderRoomRepository.save(shareholderRoom);
     }
 
+    @Transactional
     public void updateRoomYield(ShareholderRoom shareholderRoom) {
 
         shareholderRoomRepository.save(shareholderRoom);
