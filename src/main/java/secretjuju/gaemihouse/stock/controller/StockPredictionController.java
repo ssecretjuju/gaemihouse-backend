@@ -48,20 +48,6 @@ public class StockPredictionController {
         Map<String, String> url = new HashMap<>();
         url.put("url1", imageUrl1);
         url.put("url2", imageUrl2);
-//        try {
-//            URL url1 = new URL(imageUrl1);
-//            URL url2 = new URL(imageUrl2);
-//
-//            InputStream in1 = url1.openStream();
-//            InputStream in2 = url2.openStream();
-
-//            AWSCredentials credentials = new BasicAWSCredentials()
-//            AmazonS3 s3client = AmazonS3ClientBuilder
-//                                .standard()
-//                                .withCredentials(new AWSStaticCredentialsProvider(credentials))
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
 
         return ResponseEntity
                 .ok()
