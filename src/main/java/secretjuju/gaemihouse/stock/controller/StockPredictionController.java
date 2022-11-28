@@ -34,7 +34,7 @@ public class StockPredictionController {
     }
 
     @PostMapping("/stock-prediction/{stockName}")
-    public ResponseEntity<ResponseDTO> getStockPredictionByStockName(@PathVariable String stockName) {
+    public Map<String, String> getStockPredictionByStockName(@PathVariable String stockName) {
 
 
         HttpHeaders headers = new HttpHeaders();
@@ -48,9 +48,6 @@ public class StockPredictionController {
         url.put("url1", imageUrl1);
         url.put("url2", imageUrl2);
 
-        return ResponseEntity
-                .ok()
-                .headers(headers)
-                .body(new ResponseDTO(HttpStatus.OK, "successful", url));
+        return url;
     }
 }
