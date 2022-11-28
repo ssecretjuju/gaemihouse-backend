@@ -116,7 +116,7 @@ public class ShareholderRoomMemberController {
         ShareholderRoomMember shareholderRoomMember =
                 new ShareholderRoomMember(roomMemberCode, currentMemberYield, joinEvaluateProperty, memberId, roomTitle);
 
-        shareholderRoomService.updateShareholderRoom(shareholderRoomMember); // 1인당 1방이므로 방 정보까지 필요하지 않음.
+        shareholderRoomMemberService.updateShareholderRoom(shareholderRoomMember); // 1인당 1방이므로 방 정보까지 필요하지 않음.
 
         return ResponseEntity
                 .created(URI.create("/shareholder-room/current/evaluate-yield"))
