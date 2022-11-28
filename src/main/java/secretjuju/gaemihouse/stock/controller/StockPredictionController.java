@@ -20,7 +20,9 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class StockPredictionController {
@@ -41,27 +43,15 @@ public class StockPredictionController {
 
         List<StockPredictionDTO> stockPredictions = stockPredictionService.getStockPredictionByStockName(stockName);
 
-//        String imageUrl1 = stockPredictions.get(0).getStockPredictionImage1();
-//        String imageUrl2 = stockPredictions.get(0).getStockPredictionImage2();
-
-//        try {
-//            URL url1 = new URL(imageUrl1);
-//            URL url2 = new URL(imageUrl2);
-//
-//            InputStream in1 = url1.openStream();
-//            InputStream in2 = url2.openStream();
-
-//            AWSCredentials credentials = new BasicAWSCredentials()
-//            AmazonS3 s3client = AmazonS3ClientBuilder
-//                                .standard()
-//                                .withCredentials(new AWSStaticCredentialsProvider(credentials))
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
+        String imageUrl1 = stockPredictions.get(0).getStockPredictionImage1();
+        String imageUrl2 = stockPredictions.get(0).getStockPredictionImage2();
+        Map<String, String> url = new HashMap<>();
+        url.put("url1", imageUrl1);
+        url.put("url2", imageUrl2);
 
         return ResponseEntity
                 .ok()
                 .headers(headers)
-                .body(new ResponseDTO(HttpStatus.OK, "successful", stockPredictions.get(0).getStockPredictionImage1()));
+                .body(new ResponseDTO(HttpStatus.OK, "successful", url));
     }
 }
