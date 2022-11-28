@@ -27,11 +27,13 @@ public class ShareholderRoomController {
     private final KoreaInvestmentService koreanInvestmentService;
     private final ShareholderRoomService shareholderRoomService;
     private final ShareholderRoomMemberService shareholderRoomMemberService;
+    private final KoreaInvestmentService koreaInvestmentService;
 
-    public ShareholderRoomController(KoreaInvestmentService koreanInvestmentService, ShareholderRoomService shareholderRoomService, ShareholderRoomMemberService shareholderRoomMemberService) {
+    public ShareholderRoomController(KoreaInvestmentService koreanInvestmentService, ShareholderRoomService shareholderRoomService, ShareholderRoomMemberService shareholderRoomMemberService, KoreaInvestmentService koreaInvestmentService) {
         this.koreanInvestmentService = koreanInvestmentService;
         this.shareholderRoomService = shareholderRoomService;
         this.shareholderRoomMemberService = shareholderRoomMemberService;
+        this.koreaInvestmentService = koreaInvestmentService;
     }
 
     // Unity App 로드 시 요청 => 내부맵 위에 주주방 조회
@@ -164,9 +166,16 @@ public class ShareholderRoomController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
-
         double shareholderRoomYield =
                 shareholderRoomMemberService.findShareholderRoomYieldByRoomCode(roomTitle);
+
+        ShareholderRoom shareholderRoom = shareholderRoomService.findShareholderRoomEntity(roomTitle);
+        ShareholderRoom updateShareholderRoom =
+                new ShareholderRoom(shareholderRoom.getRoomCode(), shareholderRoom.getRoomTitle(),
+                        shareholderRoom.getRoomLimitedNumber(), shareholderRoom.getRoomRegistedNumber(),
+                        shareholderRoomYield, shareholderRoom.getMemberId());
+
+        shareholderRoomService.updateRoomYield(updateShareholderRoom);
 
         return ResponseEntity
                 .ok()
