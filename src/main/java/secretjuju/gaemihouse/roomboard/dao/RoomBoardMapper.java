@@ -1,7 +1,6 @@
 package secretjuju.gaemihouse.roomboard.dao;
 
 import org.apache.ibatis.annotations.Mapper;
-import secretjuju.gaemihouse.roomboard.controller.RoomBoardController;
 import secretjuju.gaemihouse.roomboard.dto.LikeCountDTO;
 import secretjuju.gaemihouse.roomboard.dto.RoomBoardDTO;
 
@@ -51,4 +50,6 @@ public interface RoomBoardMapper {
     int ChangeMinusMemberTable(LikeCountDTO likeCountDTO);
 
     int insertLikeCount(LikeCountDTO likeCountDTO);
+
+    List<LikeCountDTO> selectLikeCounts(LikeCountDTO likeCountDTO);
 }
