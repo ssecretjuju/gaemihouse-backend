@@ -4,9 +4,9 @@ server:
 spring:
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
-    url: ${{ secrets.DATASOURCE_URL }}
-    username: ${{ secrets.DATASOURCE_USERNAME }}
-    password: ${{ secrets.DATASOURCE_PASSWORD }}
+    url: jdbc:oracle:thin:@secretjuju.cobnraaxcbeh.ap-northeast-2.rds.amazonaws.com:1521/orcl
+    username: admin
+    password: 123ckdydwns!
   servlet:
     multipart:
       enabled: true
@@ -19,9 +19,6 @@ spring:
       enabled: true
   freemarker:
     cache: false
-  web:
-    resources:
-      static-locations: classpath:/productimgs/
   main:
     allow-circular-references: true
   jpa:
@@ -38,7 +35,7 @@ spring:
       matching-strategy: ant_path_matcher
 
 jwt:
-  secret: ${{ secrets.JWT_SECRET }}
+  secret: asdfjp298pafo1320efqw0udvnh0er0h412r08byfdq9dsvh02143908hfeqwn80fdqs0nfdqs0n412013rq0nqefn08dfas0das730732g86923
 
 
 mybatis:

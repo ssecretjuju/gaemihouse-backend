@@ -47,10 +47,6 @@ public class CoinService {
     }
 
     public Object updateCoin(CoinDTO coinDTO) {
-        int coinAmount = coinDTO.getCoinAmount();
-        coinAmount = coinAmount + coinDTO.getCoinAmount();
-
-        coinDTO.setCoinAmount(coinAmount);
 
         int updateCoin = coinMapper.updateCoin(coinDTO);
         return (updateCoin > 0) ? "코인 수정(취소) 성공!" : "코인 수정(취소) 실패 ㅜ";
