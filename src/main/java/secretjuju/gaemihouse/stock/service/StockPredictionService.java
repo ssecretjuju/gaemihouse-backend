@@ -45,6 +45,7 @@ public class StockPredictionService {
 //                "https://mblogthumb-phinf.pstatic.net/MjAxOTEwMTFfMjYw/MDAxNTcwNzg1ODM3NTY0.wmnNedC0zB5ummw6DSfYJeQEkiqILCyHRArLs7ZkSzgg.FfY1vXaDbLM3EdsvBHDV1EP0FVKo4jamY_yAJfs9gBIg.PNG.kkson50/sample_images_04.png?type=w800",
 //                "https://mblogthumb-phinf.pstatic.net/MjAxOTEwMTFfNjEg/MDAxNTcwNzg1ODM3Nzc0.zxDXm20VlPdQv8GQi9LWOdPwkqoBdiEmf8aBTWTsPF8g.FqMQTiF6ufydkQxrLBgET3kNYAyyKGJTWTyi1qd1-_Ag.PNG.kkson50/sample_images_01.png?type=w800",
 //                "https://mblogthumb-phinf.pstatic.net/MjAxOTEwMTFfODMg/MDAxNTcwNzg1ODM3NTUz.2m5sz7K4ATO7WZzXYGE-MmUQ1DYUOflq0IaGgitVZEIg.jYZnxxm0E275Jplbrw25aFCFPVXKcmai1zhf8rlYl3Eg.PNG.kkson50/sample_images_02.png?type=w800"}));
+        System.out.println(stockName);
         List<StockPrediction> stockPredictions = stockPredictionRepository.findAllByStockPredictionNameAndStockPredictionDateBetween(stockName, start, end);
         List<StockPredictionDTO> stockPredictionDTOS = new ArrayList<>();
         int i=0;
