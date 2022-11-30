@@ -37,7 +37,7 @@ public class CoinService {
     }
 
     public Object selectCoinListById(String memberId) {
-        List<CoinDTO> coinList = coinMapper.selectCoinListById(memberId);
+        CoinDTO coinList = coinMapper.selectCoinListById(memberId);
         return coinList;
     }
 
