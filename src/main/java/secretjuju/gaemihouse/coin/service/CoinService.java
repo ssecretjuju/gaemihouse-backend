@@ -49,6 +49,7 @@ public class CoinService {
     public Object updateCoin(CoinDTO coinDTO) {
 
         int updateCoin = coinMapper.updateCoin(coinDTO);
-        return (updateCoin > 0) ? "코인 수정(취소) 성공!" : "코인 수정(취소) 실패 ㅜ";
+        int coinAmount = coinMapper.selectCoinListById(coinDTO.getMemberId()).getCoinAmount();
+        return (updateCoin > 0) ? coinAmount : "코인 수정(취소) 실패 ㅜ";
     }
 }
