@@ -25,7 +25,7 @@ public interface CoinMapper {
     
     List<CoinDTO> selectCoinList();
 
-    List<CoinDTO> selectCoinListById(String memberId);
+    CoinDTO selectCoinListById(String memberId);
 
     int insertCoin(CoinDTO coinDTO);
 
